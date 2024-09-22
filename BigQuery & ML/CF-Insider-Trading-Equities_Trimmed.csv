@@ -1,0 +1,109 @@
+SYMBOL,COMPANY,NAME_OF_ACQUIRER_DISPOSER,CATEGORY_OF_PERSON,QTY_OF_SECURITIES_ACQUIRED_DISPLOSED,TRANSACTION_TYPE,TRANSACTION_DATE,MODE_OF_ACQUISITION 
+CREST,Crest Ventures Limited,Vikram Kotak,-,10000,Sell,04-Sep-2024,Market Sale
+SONATSOFTW,Sonata Software Limited,Sujit Mohanty,-,25000,Sell,02-Sep-2024,Market Sale
+PRAJIND,Praj Industries Limited,GHANSHYAM DESHPANDE,Employees/Designated Employees,3000,Sell,23-Jul-2024,Market Sale
+MASTEK,Mastek Limited,Mahesh Juttiyawar,Employees/Designated Employees,181,Buy,04-Sep-2024,ESOP
+MASTEK,Mastek Limited,Soutik Sarkar,Employees/Designated Employees,76,Buy,04-Sep-2024,ESOP
+MASTEK,Mastek Limited,Ritwik Batabyal,Employees/Designated Employees,308,Buy,04-Sep-2024,ESOP
+MASTEK,Mastek Limited,Hiral Chandrana,Employees/Designated Employees,7323,Buy,04-Sep-2024,ESOP
+MASTEK,Mastek Limited,Rajat Kedia,Employees/Designated Employees,178,Buy,04-Sep-2024,ESOP
+AADHARHFC,Aadhar Housing Finance Limited,Brijesh Kumar Goswami,-,3000,Sell,02-Sep-2024,Market Sale
+AADHARHFC,Aadhar Housing Finance Limited,Brijesh Kumar Goswami,-,1000,Sell,02-Sep-2024,Market Sale
+CHALET,Chalet Hotels Limited,Urvi Aradhya,Employees/Designated Employees,3000,Sell,04-Sep-2024,Market Sale
+CHALET,Chalet Hotels Limited,Urvi Aradhya,Employees/Designated Employees,1000,Sell,02-Sep-2024,Market Sale
+CHALET,Chalet Hotels Limited,Sanjay Sethi,Director,55000,Pledge,03-Sep-2024,Pledge Creation
+CHALET,Chalet Hotels Limited,Sanjay Sethi,Director,55000,Buy,01-Sep-2024,ESOP
+TEJASNET,Tejas Networks Limited,Subhashish Gosh,Employees/Designated Employees,400,Sell,30-Aug-2024,Market Sale
+TEJASNET,Tejas Networks Limited,Jimmi Chacko,Employees/Designated Employees,1500,Sell,03-Sep-2024,Market Sale
+TEJASNET,Tejas Networks Limited,Amit Kumar,Employees/Designated Employees,2632,Sell,30-Aug-2024,Market Sale
+TEJASNET,Tejas Networks Limited,N R Ravikrishnan,Key Managerial Personnel,1421,Buy,27-Aug-2024,ESOP
+TEJASNET,Tejas Networks Limited,Subhashish Gosh,Employees/Designated Employees,1000,Buy,27-Aug-2024,ESOP
+JSWENERGY,JSW Energy Limited,JSW Energy Employees Welfare Trust,Other,32551,Sell,30-Aug-2024,ESOP
+JSWENERGY,JSW Energy Limited,JSW Energy Employees Welfare Trust,Other,2128,Sell,29-Aug-2024,Market Sale
+JSWENERGY,JSW Energy Limited,JSW Energy Employees Welfare Trust,Other,2738,Sell,03-Sep-2024,Market Sale
+JSWENERGY,JSW Energy Limited,JSW Energy Employees Welfare Trust,Other,604,Sell,30-Aug-2024,Market Sale
+JSWENERGY,JSW Energy Limited,JSW Energy Employees Welfare Trust,Other,41209,Sell,02-Sep-2024,ESOP
+SINTERCOM,Sintercom India Limited,Jignesh Raval,Promoters,433035,Pledge,30-Aug-2024,Pledge Creation
+COOLCAPS,Cool Caps Industries Limited,Rishi Gourisaria,Promoter Group,12500,Sell,02-Sep-2024,Market Sale
+COOLCAPS,Cool Caps Industries Limited,Purv Flexipack Limited,Promoters,5000,Buy,03-Sep-2024,Market Purchase
+COOLCAPS,Cool Caps Industries Limited,RAJEEV TRADING & HOLDINGS PRIVATE LIMITED,Promoter Group,5000,Buy,02-Sep-2024,Market Purchase
+BHARATWIRE,Bharat Wire Ropes Limited,Venkateswararao Kandikuppa,Director,4566,Buy,30-Aug-2024,ESOP
+BHARATWIRE,Bharat Wire Ropes Limited,Rakesh Kumar Jain,Key Managerial Personnel,4566,Buy,30-Aug-2024,ESOP
+SAPPHIRE,Sapphire Foods India Limited,JAGATH SIRIWARDANA,Employees/Designated Employees,611,Sell,04-Sep-2024,Market Sale
+SAPPHIRE,Sapphire Foods India Limited,MOHAMED KAZIM,Employees/Designated Employees,847,Sell,04-Sep-2024,Market Sale
+SAPPHIRE,Sapphire Foods India Limited,PRASAD LIYANAGE,Employees/Designated Employees,793,Sell,04-Sep-2024,Market Sale
+SAPPHIRE,Sapphire Foods India Limited,MOHAMED NASAR,Employees/Designated Employees,709,Sell,04-Sep-2024,Market Sale
+SAPPHIRE,Sapphire Foods India Limited,NILANTHA KUMARA,Employees/Designated Employees,636,Sell,04-Sep-2024,Market Sale
+SAPPHIRE,Sapphire Foods India Limited,CHRISTOPHER BARNETT,Employees/Designated Employees,628,Sell,03-Sep-2024,Market Sale
+SAPPHIRE,Sapphire Foods India Limited,SHARMILA ARASARATNAM,Employees/Designated Employees,1706,Sell,04-Sep-2024,Market Sale
+SAPPHIRE,Sapphire Foods India Limited,DUMINDA KULATHILAKE,Employees/Designated Employees,1493,Sell,04-Sep-2024,Market Sale
+SAPPHIRE,Sapphire Foods India Limited,Vikrant Vohra,Employees/Designated Employees,1000,Sell,03-Sep-2024,Market Sale
+ROTO,Roto Pumps Limited,Rolly Gupta,Promoter Group,100000,Sell,02-Sep-2024,Market Sale
+ROTO,Roto Pumps Limited,Rajeeta Gupta,Promoter Group,100000,Sell,02-Sep-2024,Market Sale
+INDOAMIN,Indo Amines Limited,Core Chemicals LLP,Other,54000,Sell,02-Sep-2024,Market Sale
+BERGEPAINT,Berger Paints (I) Limited,Deeksha Gujral,Other,4000,Sell,04-Sep-2024,Market Sale
+JBCHEPHARM,JB Chemicals & Pharmaceuticals Limited,Amarendra Kumar,Employees/Designated Employees,3000,Pledge Revoke,03-Sep-2024,Revokation of Pledge
+JBCHEPHARM,JB Chemicals & Pharmaceuticals Limited,Amarendra Kumar,Employees/Designated Employees,3000,Sell,03-Sep-2024,Market Sale
+JBCHEPHARM,JB Chemicals & Pharmaceuticals Limited,Tissa Thomas Varkey,Employees/Designated Employees,3500,Pledge Revoke,30-Aug-2024,Revokation of Pledge
+JBCHEPHARM,JB Chemicals & Pharmaceuticals Limited,Manoj Chitnis,Employees/Designated Employees,5000,Sell,02-Sep-2024,Market Sale
+JBCHEPHARM,JB Chemicals & Pharmaceuticals Limited,Manoj Chitnis,Employees/Designated Employees,5000,Pledge Revoke,02-Sep-2024,Revokation of Pledge
+JBCHEPHARM,JB Chemicals & Pharmaceuticals Limited,Sanjeev Mishra,Employees/Designated Employees,565,Sell,13-Aug-2024,Market Sale
+JBCHEPHARM,JB Chemicals & Pharmaceuticals Limited,Tissa Thomas Varkey,Employees/Designated Employees,3500,Sell,30-Aug-2024,Market Sale
+LTTS,L&T Technology Services Limited,Amit Chadha,Director,1000,Sell,03-Sep-2024,Market Sale
+NAUKRI,Info Edge (India) Limited,Mohammad Alam,Employees/Designated Employees,23,Sell,04-Sep-2024,Market Sale
+NAUKRI,Info Edge (India) Limited,Abhinav Katiyar,Employees/Designated Employees,400,Sell,04-Sep-2024,Market Sale
+NAUKRI,Info Edge (India) Limited,Info Edge Employees Stock Option Plan Trust,Other,338,Sell,03-Sep-2024,ESOP
+NAUKRI,Info Edge (India) Limited,Ashish Gupta,Director,4000,Sell,03-Sep-2024,Market Sale
+TCLCONS,Tantia Constructions Limited,Shrish Tapuria,Director,150000,Sell,04-Sep-2024,Market Sale
+PIDILITIND,Pidilite Industries Limited,Neerav Parekh,Promoter Group,1278,Sell,03-Sep-2024,Market Sale
+PIDILITIND,Pidilite Industries Limited,Neerav Parekh,Promoter Group,15778,Sell,02-Sep-2024,Market Sale
+PIDILITIND,Pidilite Industries Limited,Harish Himatlal Parekh,Promoter Group,50000,Sell,02-Sep-2024,Market Sale
+PIDILITIND,Pidilite Industries Limited,Harish Himatlal Parekh,Promoter Group,100000,Sell,03-Sep-2024,Market Sale
+EMKAY,Emkay Global Financial Services Limited,Parag Morey,-,20640,Buy,08-Aug-2024,ESOP
+EMKAY,Emkay Global Financial Services Limited,Parag Morey,-,8250,Sell,08-Aug-2024,Market Sale
+EMKAY,Emkay Global Financial Services Limited,Parag Morey,-,3250,Sell,08-Aug-2024,Market Sale
+SYNGENE,Syngene International Limited,Ajit Manocha,Employees/Designated Employees,2587,Sell,04-Sep-2024,Market Sale
+WIPRO,Wipro Limited,Kiran M R,Employees/Designated Employees,2158,Sell,03-Sep-2024,Market Sale
+PRITIKA,Pritika Engineering Components Limited,Pritika Auto Industries Limited,-,308000,Sell,02-Sep-2024,Market Sale
+CONCORDBIO,Concord Biotech Limited,Devang Bhatt,-,3000,Sell,02-Sep-2024,Market Sale
+KRITIKA,Kritika Wires Limited,Alltime Suppliers Pvt Ltd,Promoter Group,159758,Sell,03-Sep-2024,Market Sale
+GOLDIAM,Goldiam International Limited,Rashesh Manhar Bhansali,Promoters,1000299,Sell,03-Sep-2024,Market Sale
+GEOJITFSL,Geojit Financial Services Limited,Ramanan K R,Employees/Designated Employees,9000,Buy,02-Sep-2024,Market Purchase
+NRBBEARING,NRB Bearing Limited,HARSHBEENA SAHNEY ZAVERI,Promoters,10410,Buy,02-Sep-2024,Market Purchase
+NRBBEARING,NRB Bearing Limited,HARSHBEENA SAHNEY ZAVERI,Promoters,13535,Buy,03-Sep-2024,Market Purchase
+DRREDDY,Dr. Reddy's Laboratories Limited,Bryan Dixon,-,150,Buy,29-Aug-2024,ESOP
+DRREDDY,Dr. Reddy's Laboratories Limited,Jeff Jorgenson,-,474,Buy,29-Aug-2024,ESOP
+DRREDDY,Dr. Reddy's Laboratories Limited,C Swaminathan,-,1250,Buy,29-Aug-2024,ESOP
+DRREDDY,Dr. Reddy's Laboratories Limited,Subba Inta,-,704,Buy,29-Aug-2024,ESOP
+DRREDDY,Dr. Reddy's Laboratories Limited,Sanjay Choubey,-,215,Buy,29-Aug-2024,ESOP
+DRREDDY,Dr. Reddy's Laboratories Limited,Juan Carlos Alvarez,-,145,Buy,29-Aug-2024,ESOP
+DRREDDY,Dr. Reddy's Laboratories Limited,Tricia Wetzel,-,594,Buy,29-Aug-2024,ESOP
+DRREDDY,Dr. Reddy's Laboratories Limited,Milan Kalawadia,-,814,Buy,29-Aug-2024,ESOP
+PANACEABIO,Panacea Biotec Limited,Sandeep Jain,Promoters,17955,Sell,30-Aug-2024,Market Sale
+MHRIL,Mahindra Holidays & Resorts India Limited,Anupam Srivastava,Other,2816,Buy,29-Aug-2024,ESOP
+MHRIL,Mahindra Holidays & Resorts India Limited,Rohit Malik,Employees/Designated Employees,4046,Buy,29-Aug-2024,ESOP
+MHRIL,Mahindra Holidays & Resorts India Limited,Salil Khare,Employees/Designated Employees,3110,Buy,29-Aug-2024,ESOP
+MHRIL,Mahindra Holidays & Resorts India Limited,Satendra Kumar Dwivedi,Employees/Designated Employees,6965,Buy,29-Aug-2024,ESOP
+COSMOFIRST,COSMO FIRST LIMITED,ANIL KUMAR JAIN,Director,41000,Buy,02-Sep-2024,ESOP
+JSWSTEEL,JSW Steel Limited,JSW Steel Employees Welfare Trust ?  ESOP Plan 2016 A/c,Other,14859,Sell,30-Aug-2024,Market Sale
+JSWSTEEL,JSW Steel Limited,JSW Steel Employees Welfare Trust ?  OPJ ESOP Plan 2021 A/c,Other,6620,Sell,29-Aug-2024,Market Sale
+JSWSTEEL,JSW Steel Limited,JSW Steel Employees Welfare Trust ?  JSWSL OPJ Samruddhi Plan 2021 A/c,Other,2308,Sell,29-Aug-2024,Market Sale
+JSWSTEEL,JSW Steel Limited,JSW Steel Employees Welfare Trust ?  OPJ ESOP Plan 2021 A/c,Other,69471,Sell,29-Aug-2024,Off Market
+JSWSTEEL,JSW Steel Limited,JSW Steel Employees Welfare Trust ?  JSWSL OPJ Samruddhi Plan 2021 A/c,Other,53998,Sell,29-Aug-2024,Off Market
+JSWSTEEL,JSW Steel Limited,JSW Steel Employees Welfare Trust ?  JSWSL OPJ Samruddhi Plan 2021 A/c,Other,15380,Sell,30-Aug-2024,Off Market
+JSWSTEEL,JSW Steel Limited,JSW Steel Employees Welfare Trust ?  JSWSL OPJ Samruddhi Plan 2021 A/c,Other,2586,Sell,30-Aug-2024,Market Sale
+JSWSTEEL,JSW Steel Limited,JSW Steel Employees Welfare Trust ?  OPJ ESOP Plan 2021 A/c,Other,2759,Sell,30-Aug-2024,Market Sale
+ASAHISONG,Asahi Songwon Colors Limited,Arjun Gokul Jaykrishna,Director,2326,Buy,03-Sep-2024,Market Purchase
+CARYSIL,CARYSIL LIMITED,Tejal Jagdish Naik,Immediate relative,3000,Sell,03-Sep-2024,Market Sale
+SURYODAY,Suryoday Small Finance Bank Limited,SAVITA SURENDRA PAI,Promoter Group,68493,Sell,02-Sep-2024,Market Sale
+SWSOLAR,Sterling and Wilson Renewable Energy Limited,Chandra Kishore Thakur,Key Managerial Personnel,5000,Sell,02-Sep-2024,Market Sale
+ECLERX,eClerx Services Limited,Eclerx Employee Welfare Trust,Other,20950,Sell,02-Sep-2024,Market Sale
+AJANTPHARM,Ajanta Pharma Limited,J K TRIPATHI,Other,100,Sell,21-Aug-2024,Market Sale
+AJANTPHARM,Ajanta Pharma Limited,J K TRIPATHI,Other,500,Buy,07-Aug-2024,ESOP
+AJANTPHARM,Ajanta Pharma Limited,J K TRIPATHI,Other,100,Sell,30-Aug-2024,Market Sale
+AJANTPHARM,Ajanta Pharma Limited,J K TRIPATHI,Other,200,Sell,05-Aug-2024,Market Sale
+SHRENIK,Shrenik Limited,Shrenik Sudhir Vimawala,Promoters,847455,Sell,28-Aug-2024,Market Sale
+ROHLTD,Royal Orchid Hotels Limited,Sunita Baljee,Key Managerial Personnel,100000,Buy,02-Sep-2024,Inter-se-Transfer
+LTTS,L&T Technology Services Limited,Pawan Kumar Jaitly,Employees/Designated Employees,1200,Sell,28-Aug-2024,Market Sale
+LTTS,L&T Technology Services Limited,Ramesh Babu S,Employees/Designated Employees,300,Sell,29-Aug-2024,Market Sale
+USHAMART,Usha Martin Limited,Stuti Raghav Agarwalla,Promoter Group,28000,Buy,02-Sep-2024,Market Purchase
