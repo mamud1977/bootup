@@ -22,6 +22,8 @@ CREATE OR REPLACE STORAGE INTEGRATION s3_int
 
 DESC INTEGRATION s3_int;
 
+
+
 -- Record the following values for trust relationship 
 STORAGE_AWS_IAM_USER_ARN = arn:aws:iam::442042540193:user/kfcr0000-s
 STORAGE_AWS_ROLE_ARN = arn:aws:iam::682033475666:role/role-for-snowflake-users
@@ -36,6 +38,13 @@ CREATE OR REPLACE STAGE my_s3_stage
 -- upload some files
 
 list @my_s3_stage
+
+  
+CREATE STAGE my_s3_stage_direct
+  URL='s3://data-for-all-work/'
+  CREDENTIALS=(AWS_KEY_ID='' AWS_SECRET_KEY='');
+
+list @my_s3_stage_direct
 
 Create or replace table rainfall 
 (
