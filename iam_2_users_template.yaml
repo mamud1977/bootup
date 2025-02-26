@@ -1,0 +1,83 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS CloudFormation template for Creating IAM Users
+
+Parameters:
+  AdminUserPassword:
+    Description: Enter the password for the User with Administrator privilege
+    Type: String
+    Default: Password123$
+  DeveloperUser1Password:
+    Description: Enter the password for the User with Developer privilege
+    Type: String
+    Default: Password123$
+  RegularUserPassword:
+    Description: Enter the password for the User with User privilege or Readonly
+    Type: String
+    Default: Password123$
+
+Resources:
+  adminuser1:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: adminuser1
+      LoginProfile:
+        Password: !Ref AdminUserPassword
+        PasswordResetRequired: false
+      Path: /
+      Groups:
+        - AdminGroup
+        - DeveloperGroup
+        - BusinessUserGroup
+        - RegularUserGroup
+
+  developer1:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: developer1
+      LoginProfile:
+        Password: !Ref DeveloperUser1Password
+        PasswordResetRequired: false
+      Path: /
+      Groups:
+        - DeveloperGroup
+        - BusinessUserGroup
+        - RegularUserGroup
+
+  businessuser1:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: businessuser1
+      LoginProfile:
+        Password: !Ref RegularUserPassword
+        PasswordResetRequired: false
+      Path: /
+      Groups:
+        - BusinessUserGroup
+
+  regularuser1:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: regularuser1
+      LoginProfile:
+        Password: !Ref RegularUserPassword
+        PasswordResetRequired: false
+      Path: /
+      Groups:
+        - RegularUserGroup
+
+Outputs:
+  adminuser1:
+    Description: adminuser1
+    Value: !GetAtt adminuser1.Arn
+  
+  developer1:
+    Description: developer1
+    Value: !GetAtt developer1.Arn
+
+  businessuser1:
+    Description: businessuser1
+    Value: !GetAtt businessuser1.Arn
+
+  regularuser1:
+    Description: regularuser1
+    Value: !GetAtt regularuser1.Arn
