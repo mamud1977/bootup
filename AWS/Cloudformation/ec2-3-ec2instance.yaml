@@ -16,73 +16,6 @@ Parameters:
     ConstraintDescription: must be the name of an existing EC2 KeyPair.
 
 Resources:
-    #### Security Groups ##################################
-
-  SecurityGroupB:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Security group for the instances in public subnet
-      GroupName: InstancePublicAccess,
-      VpcId:  !ImportValue MyVPCId
-      SecurityGroupIngress:
-      - IpProtocol: tcp
-        FromPort: 22
-        ToPort: 22
-        CidrIp: 0.0.0.0/0
-      - IpProtocol: tcp
-        FromPort: 80
-        ToPort: 80
-        CidrIp: 0.0.0.0/0
-      # - IpProtocol: tcp
-      #   FromPort: 80
-      #   ToPort: 80
-      #   CidrIp: 0.0.0.0/0
-      # - IpProtocol: tcp
-      #   FromPort: 443
-      #   ToPort: 443
-        # CidrIp: 0.0.0.0/0
-      # - IpProtocol: icmp
-      #   FromPort: 8
-      #   ToPort: -1
-      #   CidrIp: 0.0.0.0/0
-      - IpProtocol: tcp
-        FromPort: 22
-        ToPort: 22
-        CidrIpv6: ::/0
-      - IpProtocol: tcp
-        FromPort: 80
-        ToPort: 80
-        CidrIpv6: ::/0
-
-      SecurityGroupEgress:
-      - IpProtocol: tcp
-        FromPort: 22
-        ToPort: 22
-        CidrIp: 0.0.0.0/0
-      - IpProtocol: tcp
-        FromPort: 80
-        ToPort: 80
-        CidrIp: 0.0.0.0/0
-      # - IpProtocol: tcp
-      #   FromPort: 443
-      #   ToPort: 443
-      #   CidrIp: 0.0.0.0/0
-      # - IpProtocol: icmp
-      #   FromPort: 8
-      #   ToPort: -1
-      #   CidrIp: 0.0.0.0/0
-      # - IpProtocol: icmp
-      #   FromPort: -1
-      #   ToPort: -1
-      #   CidrIpv6: ::/0
-      - IpProtocol: tcp
-        FromPort: 22
-        ToPort: 22
-        CidrIpv6: ::/0
-      - IpProtocol: tcp
-        FromPort: 80
-        ToPort: 80
-        CidrIpv6: ::/0
 
 #  #### EC2 Instances ###################################
 
@@ -95,25 +28,10 @@ Resources:
       InstanceType: !Ref InstanceType
       KeyName: !Ref KeyName
       ImageId: ami-08b5b3a93ed654d19
-      SubnetId: !ImportValue SubnetBId
+      SubnetId: !ImportValue SubnetB
       SecurityGroupIds:
-      - !Ref SecurityGroupB
-    
-
-  # MyEC2InstanceB2:
-  #   Type: AWS::EC2::Instance
-  #   Properties:
-  #     Tags:
-  #     - Key: Name
-  #       Value: MyEC2InstanceB2
-  #     InstanceType: !Ref InstanceType
-  #     KeyName: !Ref KeyName
-  #     ImageId: ami-08b5b3a93ed654d19
-  #     SubnetId: !ImportValue SubnetBId
-  #     SecurityGroupIds:
-  #     - !Ref SecurityGroupB
-
-
+      - !ImportValue  SgWebaccess
+   
   MyEC2InstanceC1:
     Type: AWS::EC2::Instance
     Properties:
@@ -123,7 +41,7 @@ Resources:
       InstanceType: !Ref InstanceType
       KeyName: !Ref KeyName
       ImageId: ami-08b5b3a93ed654d19
-      SubnetId: !ImportValue SubnetCId
+      SubnetId: !ImportValue SubnetC
 
 Outputs:
   MyEC2InstanceB1:
@@ -131,12 +49,6 @@ Outputs:
     Value: !Ref MyEC2InstanceB1
     Export:
       Name: MyEC2InstanceB1
-
-  # MyEC2InstanceB2:
-  #   Description: Instance MyEC2InstanceB1
-  #   Value: !Ref MyEC2InstanceB1
-  #   Export:
-  #     Name: MyEC2InstanceB2
 
   MyEC2InstanceC1:
     Description: Instance MyEC2InstanceC1
