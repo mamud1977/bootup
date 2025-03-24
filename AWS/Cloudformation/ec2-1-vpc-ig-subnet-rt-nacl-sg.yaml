@@ -1,14 +1,19 @@
 Parameters:
-  SubnetIpBlocks:
-    Description: "Comma-delimited list of three CIDR blocks"
+  MyVPCCIDR:
+    Description: CIDR for this VPC
+    Type: String
+    Default: 10.10.0.0/16
+  
+  SubnetCIDR:
+    Description: "Comma-delimited list of Subnet CIDR blocks"
     Type: CommaDelimitedList
-    Default: "10.10.0.0/28, 10.10.1.0/28"
+    Default: "10.10.0.0/28, 10.10.1.0/28, 10.10.2.0/28"
 
 Resources:
   MyVPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: "10.10.0.0/16"  # Replace with your desired CIDR block
+      CidrBlock: !Ref MyVPCCIDR
       EnableDnsSupport: true
       EnableDnsHostnames: true
       Tags:
@@ -45,7 +50,7 @@ Resources:
       AvailabilityZone: !Sub "${AWS::Region}b"
       AssignIpv6AddressOnCreation: True
       Ipv6CidrBlock: !Select [1, !Cidr [!Select [0, !GetAtt 'MyVPC.Ipv6CidrBlocks'], 256, 64]]
-      CidrBlock: !Select [0, !Ref SubnetIpBlocks] # the select function allows us to select across a list
+      CidrBlock: !Select [0, !Ref SubnetCIDR] # the select function allows us to select across a list
       MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
@@ -60,12 +65,11 @@ Resources:
       AvailabilityZone: !Sub "${AWS::Region}c"
       AssignIpv6AddressOnCreation: True
       Ipv6CidrBlock: !Select [2, !Cidr [!Select [0, !GetAtt 'MyVPC.Ipv6CidrBlocks'], 256, 64]]
-      CidrBlock: !Select [1, !Ref SubnetIpBlocks] # the select function allows us to select across a list
+      CidrBlock: !Select [1, !Ref SubnetCIDR] # the select function allows us to select across a list
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
           Value: SubnetC
-
 
 
 ### Route Table ######################################
@@ -131,10 +135,10 @@ Resources:
     Properties:
       NetworkAclId: !Ref NetworkAclA
       RuleNumber: 1000
-      Protocol: -1
+      Protocol: tcp
       PortRange:
-        From: 0
-        To: 65535
+        From: 22
+        To: 22
       CidrBlock: 0.0.0.0/0
       RuleAction: allow
       Egress: false # Inbound rule
@@ -145,10 +149,10 @@ Resources:
     Properties:
       NetworkAclId: !Ref NetworkAclA
       RuleNumber: 1001
-      Protocol: -1
+      Protocol: tcp
       PortRange:
-        From: 0
-        To: 65535
+        From: 22
+        To: 22
       Ipv6CidrBlock: ::/0
       RuleAction: allow
       Egress: false # Inbound rule
@@ -158,10 +162,10 @@ Resources:
     Properties:
       NetworkAclId: !Ref NetworkAclA
       RuleNumber: 1001
-      Protocol: -1
+      Protocol: tcp
       PortRange:
-        From: 0
-        To: 65535
+        From: 22
+        To: 22
       CidrBlock: 0.0.0.0/0
       RuleAction: allow
       Egress: true # Outbound rule    
@@ -171,17 +175,13 @@ Resources:
     Properties:
       NetworkAclId: !Ref NetworkAclA
       RuleNumber: 1002
-      Protocol: -1
+      Protocol: tcp
       PortRange:
-        From: 0
-        To: 65535
+        From: 22
+        To: 22
       Ipv6CidrBlock: ::/0
       RuleAction: allow
-      Egress: true # Inbound rule
-
- 
-
-
+      Egress: true # Outbound rule    
 
   #### SubnetB - NetworkAcl Association #################
 
@@ -191,27 +191,101 @@ Resources:
       NetworkAclId: !Ref NetworkAclA
       SubnetId: !Ref SubnetB
 
+  #### Security Groups ##################################
+
+  SgWebaccess:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for the instances in public subnet
+      GroupName: InstancePublicAccess,
+      VpcId:  !ImportValue MyVPCId
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 443
+        ToPort: 443
+        CidrIp: 0.0.0.0/0
+      # - IpProtocol: tcp
+      #   FromPort: 443
+      #   ToPort: 443
+        # CidrIp: 0.0.0.0/0
+      # - IpProtocol: icmp
+      #   FromPort: 8
+      #   ToPort: -1
+      #   CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIpv6: ::/0
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIpv6: ::/0
+
+      SecurityGroupEgress:
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 443
+        ToPort: 443
+        CidrIp: 0.0.0.0/0
+      # - IpProtocol: icmp
+      #   FromPort: 8
+      #   ToPort: -1
+      #   CidrIp: 0.0.0.0/0
+      # - IpProtocol: icmp
+      #   FromPort: -1
+      #   ToPort: -1
+      #   CidrIpv6: ::/0
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIpv6: ::/0
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIpv6: ::/0
 
 Outputs:
   MyVPCCIDR:
     Description: "VPC CIDR Block"
     Value: !GetAtt MyVPC.CidrBlock
   
-  MyVPCId:
-    Description: VPC ID
+  MyVPC:
+    Description: MyVPC
     Value: !Ref MyVPC
     Export:
-      Name: MyVPCId
+      Name: MyVPC
 
-  SubnetBId:
+  SubnetB:
     Description: Subnet ID of SubnetB
     Value: !Ref SubnetB
     Export:
-      Name: SubnetBId
+      Name: SubnetB
           
-  SubnetCId:
+  SubnetC:
     Description: Subnet ID of SubnetC
     Value: !Ref SubnetC
     Export:
-      Name: SubnetCId
+      Name: SubnetC
+
+  SgWebaccess:
+    Description: Security group with no ingress rule
+    Value: !Ref SgWebaccess
+    Export:
+      Name:SgWebaccess
+
 
