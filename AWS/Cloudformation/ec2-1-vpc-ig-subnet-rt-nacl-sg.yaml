@@ -135,7 +135,7 @@ Resources:
     Properties:
       NetworkAclId: !Ref NetworkAclA
       RuleNumber: 1000
-      Protocol: tcp
+      Protocol: 6  # TCP protocol
       PortRange:
         From: 22
         To: 22
@@ -149,7 +149,7 @@ Resources:
     Properties:
       NetworkAclId: !Ref NetworkAclA
       RuleNumber: 1001
-      Protocol: tcp
+      Protocol: 6  # TCP protocol
       PortRange:
         From: 22
         To: 22
@@ -162,7 +162,7 @@ Resources:
     Properties:
       NetworkAclId: !Ref NetworkAclA
       RuleNumber: 1001
-      Protocol: tcp
+      Protocol: 6  # TCP protocol
       PortRange:
         From: 22
         To: 22
@@ -175,7 +175,7 @@ Resources:
     Properties:
       NetworkAclId: !Ref NetworkAclA
       RuleNumber: 1002
-      Protocol: tcp
+      Protocol: 6  # TCP protocol
       PortRange:
         From: 22
         To: 22
@@ -196,9 +196,12 @@ Resources:
   SgWebaccess:
     Type: AWS::EC2::SecurityGroup
     Properties:
+      Tags:
+      - Key: Name
+        Value: SgWebaccess
       GroupDescription: Security group for the instances in public subnet
       GroupName: InstancePublicAccess,
-      VpcId:  !ImportValue MyVPCId
+      VpcId:  !Ref MyVPC
       SecurityGroupIngress:
       - IpProtocol: tcp
         FromPort: 22
@@ -286,6 +289,6 @@ Outputs:
     Description: Security group with no ingress rule
     Value: !Ref SgWebaccess
     Export:
-      Name:SgWebaccess
+      Name: SgWebaccess
 
 
