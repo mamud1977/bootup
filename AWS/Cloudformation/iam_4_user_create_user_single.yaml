@@ -1,0 +1,59 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: IAM user accounts
+
+Parameters:
+  NewUserName:
+    Description: Enter new user's name
+    Type: String
+    Default: developer2  # <---- Enter your data
+
+  NewUserPassword:
+    Description: Enter new user's password
+    Type: String
+    Default: Password123$ # <---- Enter your data
+
+
+Resources:
+  NewUser:
+      Type: AWS::IAM::User
+      Properties:
+        UserName: !Ref NewUserName
+        Tags:
+        - Key: Developer
+          Value: 'SpecialDuty'
+        LoginProfile:
+          Password: !Ref NewUserPassword
+          PasswordResetRequired: false
+        Path: /
+        Policies: # list of inline policy documents that are embedded in the user
+        - PolicyName: inlineS3AccessPolicyviaRole
+          PolicyDocument: 
+            Version: '2012-10-17'
+            Statement:
+              Effect: Allow
+              Action: sts:AssumeRole
+              Resource: arn:aws:iam::418295706200:role/AssumeS3Role
+
+
+
+
+
+
+
+  accesskeyFORNewUser:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      Status: Active
+      UserName: !Ref NewUser
+
+
+
+Outputs:
+  ExportNewUser:
+    Value: !Ref NewUser
+    Export:
+      Name: ExportNewUser
+
+  AccessKeyForNewUser:
+    Description: Access Key details
+    Value: !Join [" ",['Access key Id:', !Ref accesskeyFORNewUser, 'Secret Access Key:', !GetAtt accesskeyFORNewUser.SecretAccessKey  ]] 

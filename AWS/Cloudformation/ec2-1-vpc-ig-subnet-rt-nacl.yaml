@@ -1,0 +1,217 @@
+Parameters:
+  SubnetIpBlocks:
+    Description: "Comma-delimited list of three CIDR blocks"
+    Type: CommaDelimitedList
+    Default: "10.10.0.0/28, 10.10.1.0/28"
+
+Resources:
+  MyVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.10.0.0/16"  # Replace with your desired CIDR block
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: MyVPC
+
+  VpcCidrBlockIpv6:
+    Type: 'AWS::EC2::VPCCidrBlock'
+    Properties:
+      VpcId: !Ref MyVPC
+      AmazonProvidedIpv6CidrBlock: true
+
+### Internet Gateway  ###############################
+
+  MyInternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: MyInternetGateway
+
+  AttachInternetGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref MyInternetGateway
+      VpcId: !Ref MyVPC 
+
+#### Public Subnet B ###################################
+
+  SubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyVPC
+      AvailabilityZone: !Sub "${AWS::Region}b"
+      AssignIpv6AddressOnCreation: True
+      Ipv6CidrBlock: !Select [1, !Cidr [!Select [0, !GetAtt 'MyVPC.Ipv6CidrBlocks'], 256, 64]]
+      CidrBlock: !Select [0, !Ref SubnetIpBlocks] # the select function allows us to select across a list
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: SubnetB
+
+ #### Private Subnet C ###################################
+
+  SubnetC:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyVPC
+      AvailabilityZone: !Sub "${AWS::Region}c"
+      AssignIpv6AddressOnCreation: True
+      Ipv6CidrBlock: !Select [2, !Cidr [!Select [0, !GetAtt 'MyVPC.Ipv6CidrBlocks'], 256, 64]]
+      CidrBlock: !Select [1, !Ref SubnetIpBlocks] # the select function allows us to select across a list
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: SubnetC
+
+
+
+### Route Table ######################################
+
+  MyRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      Tags:
+      - Key: Name
+        Value: MyRouteTable
+      VpcId: !Ref MyVPC 
+
+  MySubnetRoute:
+    DependsOn: MyInternetGateway
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref MyRouteTable
+      GatewayId: !Ref MyInternetGateway
+      DestinationCidrBlock: 0.0.0.0/0
+
+  MySubnetRouteIpv6:
+    DependsOn: MyInternetGateway
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref MyRouteTable
+      GatewayId: !Ref MyInternetGateway
+      DestinationIpv6CidrBlock: ::/0  
+
+  #### SubnetB - Route Table Association #################
+
+  SubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref MyRouteTable
+      SubnetId: !Ref SubnetB
+
+  ## Network ACL  ###############################
+
+  NetworkAclA:
+    Type: AWS::EC2::NetworkAcl
+    Properties:
+      Tags:
+      - Key: Name
+        Value: NetworkAclA
+      VpcId: !Ref MyVPC 
+  
+  NetworkAclAInboundEntry50:
+    Type: AWS::EC2::NetworkAclEntry
+    Properties:
+      NetworkAclId: !Ref NetworkAclA
+      RuleNumber: 50
+      Protocol: -1
+      PortRange:
+        From: 0
+        To: 65535
+      CidrBlock: 192.170.160.0/32
+      RuleAction: allow
+      Egress: false # Inbound rule
+  
+  
+  NetworkAclAInboundEntry1000:
+    Type: AWS::EC2::NetworkAclEntry
+    Properties:
+      NetworkAclId: !Ref NetworkAclA
+      RuleNumber: 1000
+      Protocol: -1
+      PortRange:
+        From: 0
+        To: 65535
+      CidrBlock: 0.0.0.0/0
+      RuleAction: allow
+      Egress: false # Inbound rule
+      
+      
+  NetworkAclAInboundEntry1001:
+    Type: AWS::EC2::NetworkAclEntry
+    Properties:
+      NetworkAclId: !Ref NetworkAclA
+      RuleNumber: 1001
+      Protocol: -1
+      PortRange:
+        From: 0
+        To: 65535
+      Ipv6CidrBlock: ::/0
+      RuleAction: allow
+      Egress: false # Inbound rule
+
+  NetworkAclAOutboundEntry1001:
+    Type: AWS::EC2::NetworkAclEntry
+    Properties:
+      NetworkAclId: !Ref NetworkAclA
+      RuleNumber: 1001
+      Protocol: -1
+      PortRange:
+        From: 0
+        To: 65535
+      CidrBlock: 0.0.0.0/0
+      RuleAction: allow
+      Egress: true # Outbound rule    
+       
+  NetworkAclAOutboundEntry1002:
+    Type: AWS::EC2::NetworkAclEntry
+    Properties:
+      NetworkAclId: !Ref NetworkAclA
+      RuleNumber: 1002
+      Protocol: -1
+      PortRange:
+        From: 0
+        To: 65535
+      Ipv6CidrBlock: ::/0
+      RuleAction: allow
+      Egress: true # Inbound rule
+
+ 
+
+
+
+  #### SubnetB - NetworkAcl Association #################
+
+  SubnetNetworkAclAAssociation:
+    Type: AWS::EC2::SubnetNetworkAclAssociation
+    Properties:
+      NetworkAclId: !Ref NetworkAclA
+      SubnetId: !Ref SubnetB
+
+
+Outputs:
+  MyVPCCIDR:
+    Description: "VPC CIDR Block"
+    Value: !GetAtt MyVPC.CidrBlock
+  
+  MyVPCId:
+    Description: VPC ID
+    Value: !Ref MyVPC
+    Export:
+      Name: MyVPCId
+
+  SubnetBId:
+    Description: Subnet ID of SubnetB
+    Value: !Ref SubnetB
+    Export:
+      Name: SubnetBId
+          
+  SubnetCId:
+    Description: Subnet ID of SubnetC
+    Value: !Ref SubnetC
+    Export:
+      Name: SubnetCId
+

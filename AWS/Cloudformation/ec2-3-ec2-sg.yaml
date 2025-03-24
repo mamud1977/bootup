@@ -1,0 +1,145 @@
+Parameters:
+  InstanceType:
+    Description: WebServer EC2 instance type (has default, AllowedValues)
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t1.micro
+      - t2.nano
+      - t2.micro
+      - t2.small
+    ConstraintDescription: must be a valid EC2 instance type.
+
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instances. Linked to AWS Parameter
+    Type: AWS::EC2::KeyPair::KeyName
+    ConstraintDescription: must be the name of an existing EC2 KeyPair.
+
+Resources:
+    #### Security Groups ##################################
+
+  SecurityGroupB:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for the instances in public subnet
+      GroupName: InstancePublicAccess,
+      VpcId:  !ImportValue MyVPCId
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+      # - IpProtocol: tcp
+      #   FromPort: 80
+      #   ToPort: 80
+      #   CidrIp: 0.0.0.0/0
+      # - IpProtocol: tcp
+      #   FromPort: 443
+      #   ToPort: 443
+        # CidrIp: 0.0.0.0/0
+      # - IpProtocol: icmp
+      #   FromPort: 8
+      #   ToPort: -1
+      #   CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIpv6: ::/0
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIpv6: ::/0
+
+      SecurityGroupEgress:
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+      # - IpProtocol: tcp
+      #   FromPort: 443
+      #   ToPort: 443
+      #   CidrIp: 0.0.0.0/0
+      # - IpProtocol: icmp
+      #   FromPort: 8
+      #   ToPort: -1
+      #   CidrIp: 0.0.0.0/0
+      # - IpProtocol: icmp
+      #   FromPort: -1
+      #   ToPort: -1
+      #   CidrIpv6: ::/0
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIpv6: ::/0
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIpv6: ::/0
+
+#  #### EC2 Instances ###################################
+
+  MyEC2InstanceB1:
+    Type: AWS::EC2::Instance
+    Properties:
+      Tags:
+      - Key: Name
+        Value: MyEC2InstanceB1
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      ImageId: ami-08b5b3a93ed654d19
+      SubnetId: !ImportValue SubnetBId
+      SecurityGroupIds:
+      - !Ref SecurityGroupB
+    
+
+  # MyEC2InstanceB2:
+  #   Type: AWS::EC2::Instance
+  #   Properties:
+  #     Tags:
+  #     - Key: Name
+  #       Value: MyEC2InstanceB2
+  #     InstanceType: !Ref InstanceType
+  #     KeyName: !Ref KeyName
+  #     ImageId: ami-08b5b3a93ed654d19
+  #     SubnetId: !ImportValue SubnetBId
+  #     SecurityGroupIds:
+  #     - !Ref SecurityGroupB
+
+
+  MyEC2InstanceC1:
+    Type: AWS::EC2::Instance
+    Properties:
+      Tags:
+      - Key: Name
+        Value: MyEC2InstanceC1
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      ImageId: ami-08b5b3a93ed654d19
+      SubnetId: !ImportValue SubnetCId
+
+Outputs:
+  MyEC2InstanceB1:
+    Description: Instance MyEC2InstanceB1
+    Value: !Ref MyEC2InstanceB1
+    Export:
+      Name: MyEC2InstanceB1
+
+  # MyEC2InstanceB2:
+  #   Description: Instance MyEC2InstanceB1
+  #   Value: !Ref MyEC2InstanceB1
+  #   Export:
+  #     Name: MyEC2InstanceB2
+
+  MyEC2InstanceC1:
+    Description: Instance MyEC2InstanceC1
+    Value: !Ref MyEC2InstanceC1
+    Export:
+      Name: MyEC2InstanceC1

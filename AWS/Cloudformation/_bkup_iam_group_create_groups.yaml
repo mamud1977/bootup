@@ -1,0 +1,139 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS CloudFormation template for Creating IAM Groups 
+
+
+
+  
+  DeveloperGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: DeveloperGroup
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+        - arn:aws:iam::aws:policy/AmazonCloudFormationFullAccess
+      Policies:  # list of inline policy documents that are embedded in the group
+        
+        - PolicyName: inlineCloudWatchLogsPolicy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Sid: AllowedActionWithCloudWatch
+                Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream*
+                  - logs:PutLogEvents
+                Resource: '*'
+
+        - PolicyName: inlineViewOwnUserInfo # give a unique name to this policy
+          PolicyDocument: # JSON policy document
+            Version: '2012-10-17'
+            Statement:
+            - Sid: ViewOwnUserInfo
+              Effect: Allow
+              Action:
+              - iam:GetUserPolicy
+              - iam:ListGroupsForUser
+              - iam:ListAttachedUserPolicies
+              - iam:ListUserPolicies
+              - iam:GetUser
+              Resource:
+              - arn:aws:iam::*:user/${aws:username}
+            
+            - Sid: NavigateInConsole
+              Effect: Allow
+              Action:
+              - iam:GetGroupPolicy
+              - iam:GetPolicyVersion
+              - iam:GetPolicy
+              - iam:ListAttachedGroupPolicies
+              - iam:ListGroupPolicies
+              - iam:ListPolicyVersions
+              - iam:ListPolicies
+              - iam:ListUsers
+              Resource: "*"
+
+        - PolicyName: S3-operations
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream*
+                  - logs:PutLogEvents
+                Resource: '*'
+
+
+        - PolicyName: Cloudformation-operations
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: Allow
+              Action:
+              - sqs:*
+              - cloudformation:CreateStack
+              - cloudformation:DescribeStacks
+              - cloudformation:DescribeStackEvents
+              - cloudformation:DescribeStackResources
+              - cloudformation:GetTemplate
+              - cloudformation:ValidateTemplate
+              - cloudformation:CreateUploadBucket
+              - cloudformation:GetTemplateSummary 
+              Resource: "*"
+
+  BusinessUserGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: BusinessUserGroup
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+      Policies:
+        - PolicyName: inlineCloudWatchLogsPolicy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream*
+                  - logs:PutLogEvents
+                Resource: '*'
+  
+  RegularUserGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: RegularUserGroup
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+      Policies:
+        - PolicyName: inlineCloudWatchLogsPolicy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream*
+                  - logs:PutLogEvents
+                Resource: '*'
+  
+Outputs:
+  AdminGroup:
+    Description: Admin Group
+    Value: !GetAtt AdminGroup.Arn
+
+  DeveloperGroup:
+    Description: Developer Group
+    Value: !GetAtt DeveloperGroup.Arn
+
+  BusinessUserGroup:
+    Description: Business User Group
+    Value: !GetAtt BusinessUserGroup.Arn
+    
+  RegularUserGroup:
+    Description: Regular User Group
+    Value: !GetAtt RegularUserGroup.Arn

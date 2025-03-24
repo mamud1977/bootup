@@ -1,0 +1,73 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: IAM managed policies for developers
+
+Resources:
+  PoliciesOnDeveloper:
+    Type: "AWS::IAM::Policy"
+    Properties:
+      PolicyName: "PoliciesOnDeveloper"
+      PolicyDocument:
+        Statement:
+        - Effect: Allow
+          Action:
+          - sqs:*
+          - cloudformation:*
+          - s3:*
+          - s3-object-lambda:*
+          Resource: "*"
+        
+        - Effect: Allow
+          Action:
+          - sns:ListTopics
+          Resource: "*"
+
+        - Effect: Allow
+          Action: iam:*
+          Resource: "*"
+        
+        - Effect: Allow
+          Action: ec2:*
+          Resource: "*"
+        
+        - Effect: Allow
+          Action: 
+          - ec2-instance-connect:*
+          - ec2:CreateInstanceConnectEndpoint
+          - ec2:CreateNetworkInterface
+          - ec2:CreateTags
+          - iam:CreateServiceLinkedRole
+          Resource: "*"
+
+        - Effect: Allow
+          Action: 
+          - cloudwatch:DescribeAlarms
+          - cloudwatch:ListMetrics
+          - cloudwatch:DescribeAlarmsForMetric
+          Resource: "*"
+
+      Groups:
+        - 'DeveloperGroup'
+
+  # BucketAccessPolicy:
+  #   Type: "AWS::IAM::Policy"
+  #   Properties:
+  #     PolicyName: "WebDataBucketPolicy"
+  #     PolicyDocument:
+  #       Statement:
+  #         - Sid: WebDataBucketPolicy
+  #           Effect: Allow
+  #           Action: s3:*
+  #           Resource: !Join 
+  #             - ''
+  #             - - 'arn:aws:s3:::'
+  #               - !Ref WebDataBucket
+  #               - /*
+  #           Condition:
+  #             StringEquals:
+  #               aws:PrincipalTag/Developer: "SpecialDuty"
+  #               aws:ResourceTag/Lifetime: Permanent
+
+
+
+
+

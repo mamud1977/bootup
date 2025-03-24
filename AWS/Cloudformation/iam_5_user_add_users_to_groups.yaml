@@ -1,0 +1,32 @@
+## =================== VERSION ===================
+AWSTemplateFormatVersion: '2010-09-09'
+
+## =================== DESCRIPTION ===================
+Description: >-
+  AWS CloudFormation sample template. 
+  Adds single or multiple users to the group.
+  AWS doc: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+
+## =================== RESOURCES ===================
+Resources:
+  UserToDeveloperGroup:
+    Type: 'AWS::IAM::UserToGroupAddition'
+    Properties:
+      GroupName: DeveloperGroup
+      Users: 
+        - admin1
+        - developer1
+
+  UserToCustomerGroup:
+    Type: 'AWS::IAM::UserToGroupAddition'
+    Properties:
+      GroupName: CustomerGroup
+      Users: 
+        - customer1
+
+
+## =================== OUTPUT ===================
+Outputs:
+  outputName:
+    Description: Name of users to a group addition
+    Value: ''

@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS CloudFormation template for Creating IAM Users
+
+Parameters:
+ 
+  Developer1Password:
+    Description: Enter the password for the User with Developer privilege
+    Type: String
+    Default: Password123$
+
+  Customer1Password:
+    Description: Enter the password for the User with User privilege or Readonly
+    Type: String
+    Default: Password123$
+
+  Serial:
+    Type: Number
+    Description: Increment this to rotate credentials
+    Default: 1
+
+Resources:
+  developer1:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: developer1
+      LoginProfile:
+        Password: !Ref Developer1Password
+        PasswordResetRequired: false
+
+  accesskeyFORdeveloper1:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      Status: Active
+      UserName: !Ref developer1
+  
+  customer1:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: customer1
+      LoginProfile:
+        Password: !Ref Customer1Password
+        PasswordResetRequired: false
+      Path: /
+
+Outputs:
+  Developer1:
+    Description: developer1 User
+    Value: !GetAtt developer1.Arn
+
+  AccessKeyForDeveloper1:
+    Description: Access Key for developer1
+    Value: !Join [" ",['Access key Id:', !Ref accesskeyFORdeveloper1, 'Secret Access Key:', !GetAtt accesskeyFORdeveloper1.SecretAccessKey  ]] 
+
+  Customer1:
+    Description: customer1 User
+    Value: !GetAtt customer1.Arn
