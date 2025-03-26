@@ -45,6 +45,34 @@ Resources:
           - cloudwatch:DescribeAlarmsForMetric
           Resource: "*"
 
+        - Effect: Allow
+          Action: 
+          - elasticloadbalancing:DescribeTargetGroups
+          - elasticloadbalancing:CreateTargetGroup
+          - elasticloadbalancing:DescribeLoadBalancers
+          - elasticloadbalancing:CreateLoadBalancer
+          - elasticloadbalancing:AddTags
+          - elasticloadbalancing:DescribeListeners
+          - elasticloadbalancing:CreateListener
+          - elasticloadbalancing:DeleteListener
+          Resource: "*"
+
+        - Effect: Allow
+          Action: 
+          - autoscaling:*
+          Resource: "*"
+
+        - Effect: Allow
+          Action: 
+          - q:PassRequest
+          - q:SendMessage
+          - q:StartConversation
+          - q:GetConversation
+          - q:ListConversations
+          - q:*
+          Resource: "*"
+
+
       Groups:
         - 'DeveloperGroup'
 
