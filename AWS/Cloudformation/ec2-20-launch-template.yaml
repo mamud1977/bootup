@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: This template deploys a Launch Template for an Apache web server into the public subnet. 
+
+Parameters:
+  KeyName:
+    Description: Key Pair Name
+    Type: AWS::EC2::KeyPair::KeyName
+    Default: "key"
+  
+  MySecurityGroupId:
+    Type: AWS::EC2::SecurityGroup::Id
+    Description: Security Group ID
+
+  MyInstanceType:
+    Description: Instance Type
+    Type: String
+    AllowedValues:
+      - t1.micro
+      - t2.nano
+      - t2.micro
+      - t2.small
+    Default: t2.micro
+
+  MyImageId:
+    Type: AWS::EC2::Image::Id
+    Description: AMI ID
+    # Default: ami-08b5b3a93ed654d19 # Amazon Linux
+    Default: ami-084568db4383264d4 # Ubuntu
+    ConstraintDescription: Must be a valid AMI for the region.
+  
+  LaunchTemplateName:
+    Type: String
+    Description: Launch Template Name
+    Default: my-launch-template
+
+Resources:
+  MyLaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties:
+      LaunchTemplateName: MyLaunchTemplate
+      LaunchTemplateData:
+        ImageId: !Ref MyImageId
+        InstanceType: !Ref MyInstanceType
+        KeyName: !Ref KeyName
+        SecurityGroupIds:
+          - !Ref MySecurityGroupId
+        MetadataOptions:
+            HttpEndpoint: enabled
+            #HttpProtocolIpv6: enabled
+            HttpPutResponseHopLimit: 5
+            HttpTokens: optional
+            InstanceMetadataTags: enabled
+        UserData: 
+          Fn::Base64: |
+            #!/bin/bash
+            mkdir /home/ec2-user/test
+            echo "Hello from Austin, TX on March 26, 2025!" > /home/ec2-user/1.txt
+
+Outputs:
+  MyLaunchTemplate:
+    Description: My EC2 Launch Template
+    Value: !Ref MyLaunchTemplate
+    Export:
+      Name: MyLaunchTemplate
