@@ -1,0 +1,52 @@
+Parameters:
+  DeploymentBucketName:
+    Description: My S3 Bucket Name
+    Type: String
+    Default: deployment-bucket-786x
+
+  BucketVersioning:
+    Description: Versioning configuration for the bucket
+    Type: String
+    AllowedValues:
+    - Suspended
+    - Enabled
+    Default: Suspended
+
+Resources:
+  DeploymentBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref DeploymentBucketName
+      Tags:
+      - Key: Name
+        Value: !Sub '${AWS::StackName}-DeploymentBucket'
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      
+      VersioningConfiguration:
+        Status: !Ref BucketVersioning
+
+  DeploymentBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref DeploymentBucket
+      PolicyDocument:
+        Statement:
+          - Sid: Statement-1
+            Effect: Allow
+            Principal: '*'
+            Action: s3:GetObject
+            Resource: !Sub '${DeploymentBucket.Arn}/*'
+
+Outputs:
+  DeploymentBucketARN:
+    Description: Deployment Bucket ARN
+    Value: !GetAtt DeploymentBucket.Arn
+    Export:
+      Name: DeploymentBucketARN
+
+
+  
