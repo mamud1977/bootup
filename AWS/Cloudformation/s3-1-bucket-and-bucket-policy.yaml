@@ -1,0 +1,42 @@
+Parameters:
+  MyS3BucketName:
+    Description: My S3 Bucket Name
+    Type: String
+    Default: events-123x
+
+Resources:
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref MyS3BucketName
+      
+      Tags:
+      - Key: Name
+        Value: !Sub '${AWS::StackName}-MyS3Bucket'
+      
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      
+     
+  # MyS3BucketPolicy:
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties:
+  #     Bucket: !Ref MyS3Bucket
+  #     PolicyDocument:
+  #       Statement:
+  #         - Sid: Statement-1
+  #           Effect: Allow
+  #           Principal: '*'
+  #           Action: s3:GetObject
+  #           Resource: !Sub '${MyS3Bucket.Arn}/*'
+      
+
+Outputs:
+  MyS3Bucket:
+     Description: The S3 Bucket Arn
+     Value: !Sub '${MyS3Bucket.Arn}'
+     Export: {Name: !Sub '${AWS::StackName}-MyS3Bucket'}
+      

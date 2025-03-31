@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  MainBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: main-bucket-0kjt879gl
+      LoggingConfiguration:
+        DestinationBucketName: !Ref LoggingBucket
+        LogFilePrefix: testing-logs
+  
+  LoggingBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: logging-bucket-578ouu
+  
+  S3BucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      Bucket: !Ref LoggingBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Action:
+              - 's3:PutObject'
+            Effect: Allow
+            Principal:
+              Service: logging.s3.amazonaws.com
+            Resource: !Join 
+              - ''
+              - - 'arn:aws:s3:::'
+                - !Ref LoggingBucket
+                - /*
+            Condition:
+              ArnLike:
+                'aws:SourceArn': !GetAtt 
+                  - MainBucket
+                  - Arn
+              StringEquals:
+                'aws:SourceAccount': !Sub '${AWS::AccountId}'
+Outputs:
+  BucketName:
+    Value: !Ref MainBucket
+    Description: Name of the sample Amazon S3 bucket with a logging configuration.
+
