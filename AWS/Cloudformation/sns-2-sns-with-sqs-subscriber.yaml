@@ -1,0 +1,46 @@
+Parameters:
+  EmailAdrs:
+    Description: Enter Your Email Address.
+    Type: String
+    Default: "mail2mamud@gmail.com"
+    
+Resources:
+  MySNStopic:
+    Type: 'AWS::SNS::Topic'
+    Properties:
+      TopicName: MySNSTopic
+      Subscription:
+      # - Protocol: email
+      #   Endpoint: !Ref EmailAdrs
+      - Protocol: sqs
+        Endpoint: arn:aws:sqs:us-east-1:418295706200:dev-StandardQueue1
+
+
+  # SQSSubscription:
+  #   Type: 'AWS::SNS::Subscription'
+  #   Properties:
+  #     TopicArn: !Ref MySNStopic #You will need to provide the SNS Topic Arn here
+  #     Endpoint: arn:aws:sqs:us-east-1:418295706200:dev-StandardQueue1
+  #     Protocol: sqs
+  #     RawMessageDelivery: 'true'
+
+  # EMAILSubscription:
+  #   Type: "AWS::SNS::Subscription"
+  #   Properties:
+  #     Endpoint: "your_email@example.com" # Replace with the email address
+  #     Protocol: "email" # Or "sqs", "http", etc.
+  #     TopicArn: arn:aws:sqs:us-east-1:418295706200:dev-StandardQueue1 # Reference the topic ARN
+
+
+
+      
+
+
+
+          
+
+
+
+
+
+
