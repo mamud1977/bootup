@@ -13,34 +13,38 @@ Resources:
             Action: "sts:AssumeRole"
       Path: "/"
       Policies:
-        - PolicyName: "LambdaCloudWatchLogs"
+        - PolicyName: "CloudWatchLogs"
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
               - Effect: "Allow"
                 Action:
-                  - "logs:CreateLogGroup"
-                  - "logs:CreateLogStream"
-                  - "logs:PutLogEvents"
+                - "logs:CreateLogGroup"
+                - "logs:CreateLogStream"
+                - "logs:PutLogEvents"
                 Resource: "arn:aws:logs:*:*:*"
-        - PolicyName: "AWSLambdaSQSQueueExecutionRole"
+        - PolicyName: "SQSQueue"
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
               - Effect: Allow
                 Action:
-                  - sqs:ReceiveMessage
-                  - sqs:DeleteMessage
-                  - sqs:GetQueueAttributes
-                  - logs:CreateLogGroup
-                  - logs:CreateLogStream
-                  - logs:PutLogEvents
+                - sqs:ReceiveMessage
+                - sqs:DeleteMessage
+                - sqs:GetQueueAttributes
+                - logs:CreateLogGroup
+                - logs:CreateLogStream
+                - logs:PutLogEvents
                 Resource: "*"
 
               - Effect: Allow
                 Action:
                 - dynamodb:*
                 Resource: "*"
+
+
+
+
 
 
 Outputs:
