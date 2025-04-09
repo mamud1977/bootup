@@ -1,0 +1,58 @@
+{
+    "dev-event-organizers": [
+        {
+            "PutRequest": {
+                "Item": {
+                    "OrgId": {
+                        "S": "1"
+                    },
+                    "OrgName": {
+                        "S": "Bonhooghly Yuvak Sangha"
+                    },
+                    "AddressLine": {
+                        "S": "1A, Sarada Dev Road"
+                    },
+                    "Pin": {
+                        "N": "700018"
+                    },
+                    "Contact Person": {
+                        "S": "Manu Adhikari"
+                    },
+                    "PhoneNo1": {
+                        "S": "9878889090"
+                    },
+                    "emailId": {
+                        "S": "by123@gmail.com"
+                    }                                     
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "OrgId": {
+                        "S": "2"
+                    },
+                    "OrgName": {
+                        "S": "Balaka Sangha"
+                    },
+                    "AddressLine": {
+                        "S": "Sonarpur Road"
+                    },
+                    "Pin": {
+                        "N": "700150"
+                    },
+                    "Contact Person": {
+                        "S": "Amit Ganguli"
+                    },
+                    "PhoneNo1": {
+                        "S": "4221238989"
+                    },
+                    "emailId": {
+                        "S": "balaka@gmail.com"
+                    }                                     
+                }
+            }
+        }    
+    ]
+}
