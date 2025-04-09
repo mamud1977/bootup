@@ -1,0 +1,42 @@
+org: linkevents
+app: lambda-1-serverless1
+service: lambda-1-serverless1
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  timeout: 10
+  memorySize: 512
+  
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - "lambda:*"
+          Resource: "*"
+
+
+
+functions:
+  hello-short-timeout:
+    description: Long timeout function
+    handler: handler.hello
+    timeout: 5
+    memorySize: 128
+
+  hello-long-timeout:
+    description: Short timeout function
+    handler: handler.hello
+    timeout: 7
+    memorySize: 256
+
+  hello-boto3:
+    description: boto3 client invoke
+    handler: handler.list_lambdas
+    timeout: 7
+    memorySize: 256
+
+
