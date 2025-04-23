@@ -165,6 +165,28 @@ Resources:
           - kinesis:DescribeStreamSummary
           Resource: "*"  
 
+        - Effect: Allow
+          Action:
+          - apigateway:*
+          Resource: arn:aws:apigateway:*::/*
+
+        - Effect: Allow
+          Action:
+          - ecs:*
+          Resource: "*"  
+
+        - Effect: Allow
+          Action:
+          - codepipeline:*
+          - codeconnections:*
+          - codestar-connections:*
+          Resource: "*"  
+
+        - Effect: Allow
+          Action:
+          - states:*
+          Resource: "*"  
+
 
 
       Groups:

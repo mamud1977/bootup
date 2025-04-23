@@ -1,0 +1,108 @@
+
+Resources:
+
+  # Created connection will be in Pending status. 
+  # # We have to make it in Available status from console manually.
+  # MyGitHubConnection:
+  #   Type: "AWS::CodeStarConnections::Connection"
+  #   Properties:
+  #     ConnectionName: "GitHubConnection"
+  #     ProviderType: "GitHub"
+
+
+  ArtifactBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: 'artifact-bucket-kxd9jl'
+
+
+
+  PipelineRole:
+      Type: 'AWS::IAM::Role'
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service: codepipeline.amazonaws.com
+              Action: sts:AssumeRole
+        Policies:
+          - PolicyName: CodePipelinePolicy
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - 's3:*'
+                  Resource:
+                    - !GetAtt ArtifactBucket.Arn
+                    - !Sub '${ArtifactBucket.Arn}/*'
+                - Effect: Allow
+                  Action:
+                    - 'codebuild:StartBuild'
+                    - 'codebuild:BatchGetBuilds'
+                  Resource: '*'
+                - Effect: Allow
+                  Action:
+                    - 'cloudformation:*'
+                  Resource: '*'
+                - Effect: Allow
+                  Action:
+                    - codestar-connections:UseConnection
+                  Resource: '*'
+
+
+  Pipeline:
+    Type: 'AWS::CodePipeline::Pipeline'
+    Properties:
+      Name: 'GitHubChangeDeploymentPipeline'
+      RoleArn: !GetAtt PipelineRole.Arn
+      ArtifactStore:
+        Type: S3
+        Location: !Ref ArtifactBucket
+      Stages:
+        - Name: Source
+          Actions:
+            - Name: GitHubSource
+              ActionTypeId:
+                Category: Source
+                Owner: AWS
+                Provider: CodeStarSourceConnection
+                Version: 1
+              Configuration:
+                ConnectionArn: "arn:aws:codeconnections:us-east-1:418295706200:connection/86a6ba4b-13ee-45ce-b973-c37cd3284b48"
+                FullRepositoryId: mamud1977/bootup
+                BranchName: branch1
+
+              OutputArtifacts:
+                - Name: SourceArtifact
+              RunOrder: 1
+        - Name: Deploy
+          Actions:
+            - Name: CloudFormationDeploy
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Provider: CloudFormation
+                Version: 1
+              Configuration:
+                ActionMode: CREATE_UPDATE
+                RoleArn: !GetAtt PipelineRole.Arn
+                StackName: 'MyCloudFormationStack' # Replace with your stack name
+                TemplatePath: 'SourceArtifact::newrsource.yaml' # Template within the repo
+                Capabilities:
+                  - CAPABILITY_IAM
+                ParameterOverrides:
+                  SomeParameter: 'some-value' # Add your parameters
+              InputArtifacts:
+                - Name: SourceArtifact
+              RunOrder: 1
+
+
+Outputs:
+
+  PipelineRoleArn:
+    Description: PipelineRole Arn
+    Value: !GetAtt PipelineRole.Arn
+

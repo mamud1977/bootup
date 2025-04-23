@@ -1,0 +1,32 @@
+Description: |
+  Lambda function
+
+Parameters:
+  DeploymentBucketName:
+    Description: My S3 Bucket Name
+    Type: String
+    Default: deployment-bucket-786x
+
+
+Resources:
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: lambda-sqs-consumer1
+      Handler: sqs-consumer.lambda_handler
+      Role: !ImportValue LambdaExecutionRoleARN
+      Runtime: python3.11
+      Code:
+        S3Bucket: !Ref DeploymentBucketName
+        S3Key: sqs-consumer.py.zip
+      Timeout: 30
+      MemorySize: 128
+
+  MyLambdaSQSEventSourceMapping:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      EventSourceArn: arn:aws:sqs:us-east-1:418295706200:dev-StandardQueue1
+      FunctionName: !GetAtt LambdaFunction.Arn
+      Enabled: true
+      BatchSize: 1 # Number of records to pass to the Lambda function in a single invocation
+      # Add other EventSourceMaLambdaFunction
