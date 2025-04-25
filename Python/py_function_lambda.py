@@ -20,3 +20,12 @@ print('-------------------------------')
 list_comprehension = [lambda arg=x: arg * 10 for x in range(1, 5)]
 for i in list_comprehension:
     print(i())
+
+
+is_empty = lambda x: not x 
+print(is_empty(None))        # Output: True
+print(is_empty(""))          # Output: True
+print(is_empty([]))          # Output: True
+print(is_empty(0))           # Output: True
+print(is_empty("hello"))     # Output: False
+print(is_empty([1, 2, 3]))   # Output: False

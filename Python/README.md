@@ -1,4 +1,8 @@
-
+wsl
+cd /mnt/c/MyWork/
+cd /mnt/c/MyWork/gitlocal/bootup/Python/
+cd /mnt/c/MyWork/gitlocal/bootup/Python/Flask
+---------------------------------
 Virtual Environment:
 
 python3 -m venv .venv
@@ -7,7 +11,7 @@ deactivate
 
 ---------------------------------
 pip list
-pip install -r /mnt/c/MyWork/githublocal/bootup/Python/requirements.txt
+pip install -r /mnt/c/MyWork/gitlocal/bootup/Python/requirements.txt
 pip uninstall Flask
 pip freeze > requirements.txt
 
