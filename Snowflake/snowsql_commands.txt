@@ -1,0 +1,25 @@
+snowsql -v
+
+snowsql -a bs93985.us-east-2.aws -u mamud1
+
+snowsql -a bs93985.us-east-2.aws -u mamud1 -d garden_plants -s veggies;
+
+use WAREHOUSE XSMALL_WH;
+show DATABASES;
+use GARDEN_PLANTS;
+use SCHEMA VEGGIES;
+
+-- table stage
+LIST @%vegetable_details; 
+
+-- user stage
+LIST @~;
+rm @~/worksheet_data/16fded26-ea55-4dcd-944f-5851f61419d3;
+
+put file://C:/Users/Mamud/Desktop/*.txt @~ ;
+put file://C:/Users/Mamud/Desktop/plant_details_w_pipe.csv @~ ;
+
+rm uploads/dataloader/06b8031c22fd90f4373c6647f46f839c
+
+
+
