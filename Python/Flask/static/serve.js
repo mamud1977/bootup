@@ -1,0 +1,1 @@
+document.write("Hello!...This is a Javascript static file.")
