@@ -1,0 +1,23 @@
+Description: |
+  Lambda function
+
+Parameters:
+  DeploymentBucketName:
+    Description: My S3 Bucket Name
+    Type: String
+    Default: deployment-bucket-786x
+
+
+Resources:
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: HelloWorldFunction
+      Handler: index.lambda_handler
+      Role: !ImportValue LambdaExecutionRoleARN
+      Runtime: python3.11
+      Code:
+        S3Bucket: !Ref DeploymentBucketName
+        S3Key: index.py.zip
+      Timeout: 3
+      MemorySize: 128
