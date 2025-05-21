@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  first-lambda-app
+
+  Sample SAM Template for first-lambda-app
+
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: hello_world/
+      Handler: lambda_functions.cold_start_basics
+      Runtime: python3.12
+      Timeout: 60
+      Environment:
+        Variables:
+          Envt: dev
+          RestAPIUrl: http://dummyurl
+          DbName: mydb 
+
+
