@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>
+        <script src="/static/serve.js" charset="utf-8"></script>
+    </h1>
+    <img src="/static/abrar.jpg" alt="Abrar" width="20%" height="auto" />
+    <img src="/static/ishrat.jpg" alt="Ishrat" width="20%" height="auto" />
+    
+    <!-- <video width="320" height="240" controls>
+        <source src="/static/houseton.mp4" type="video/mp4" />
+    </video>
+
+    <audio controls>
+        <source src="/static/houseton.mp4" />
+    </audio> -->
+
+    <body>
+        <div class="center">
+            <h1> Uploading and Returning Files With a Database in Flask  </h1>
+            <form method="POST" action="/jscript" enctype="multipart/form-data">
+                <input class="ok" type="file" name="file">
+                <button class="op">Submit</button>
+            </form>
+        </div>
+         
+    </body>
+
+{% endblock %}

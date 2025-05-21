@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  orders-api
+
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  CreateOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: orders_api/
+      Handler: create.lambda_handler
+      Runtime: python3.12
+      Events:
+        CreateOrders:
+          Type: Api
+          Properties:
+            Path: /orders
+            Method: POST
+
+

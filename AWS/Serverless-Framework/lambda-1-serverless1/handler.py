@@ -3,8 +3,6 @@ import time
 import boto3
 
 
-
-
 def hello(event, context):
     print("Hello World")
     time.sleep(1)

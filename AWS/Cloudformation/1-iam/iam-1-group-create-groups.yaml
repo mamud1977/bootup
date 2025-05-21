@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: IAM Groups ( Developer and User groups) 
+
+Resources:
+ 
+  DeveloperGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: DeveloperGroup
+      Path: /
+  
+  UserGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: UserGroup
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+  
+Outputs:
+
+  DeveloperGroup:
+    Description: Developer Group
+    Value: !GetAtt DeveloperGroup.Arn
+
+  CustomerGroup:
+    Description: User Group
+    Value: !GetAtt UserGroup.Arn
+    
+
+

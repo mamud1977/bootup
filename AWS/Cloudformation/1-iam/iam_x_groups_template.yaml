@@ -1,0 +1,76 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS CloudFormation template for Creating IAM Groups 
+
+Resources:
+  DeveloperGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: DeveloperGroup
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+      Policies:
+        - PolicyName: inlineCloudWatchLogsPolicy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream*
+                  - logs:PutLogEvents
+                Resource: '*'
+  BusinessUserGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: BusinessUserGroup
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+      Policies:
+        - PolicyName: inlineCloudWatchLogsPolicy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream*
+                  - logs:PutLogEvents
+                Resource: '*'
+  
+  RegularUserGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: RegularUserGroup
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+      Policies:
+        - PolicyName: inlineCloudWatchLogsPolicy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream*
+                  - logs:PutLogEvents
+                Resource: '*'
+  
+Outputs:
+  AdminGroup:
+    Description: Admin Group
+    Value: !GetAtt AdminGroup.Arn
+
+  DeveloperGroup:
+    Description: Developer Group
+    Value: !GetAtt DeveloperGroup.Arn
+
+  BusinessUserGroup:
+    Description: Business User Group
+    Value: !GetAtt BusinessUserGroup.Arn
+    
+  RegularUserGroup:
+    Description: Regular User Group
+    Value: !GetAtt RegularUserGroup.Arn

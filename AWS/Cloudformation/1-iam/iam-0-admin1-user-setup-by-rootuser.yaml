@@ -1,0 +1,71 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS CloudFormation template for Creating IAM Admin Users
+
+Parameters:
+  AdminUserName:
+    Description: Admin user name
+    Type: String
+    Default: admin1
+  AdminUserPassword:
+    Description: Admin user password
+    Type: String
+    Default: Password123$
+  
+Resources:
+  
+  AdminGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: AdminGroup
+
+  AdminGroupPolicies:
+    Type: "AWS::IAM::Policy"
+    Properties:
+      PolicyName: "AdminGroupPolicies"
+      PolicyDocument:
+        Statement:
+        - Effect: Allow
+          Action:
+          - billing:*
+          Resource: "*"        
+        - Effect: Allow
+          Action:
+          - sns:*
+          Resource: "*"
+        - Effect: Allow
+          Action: iam:*
+          Resource: "*"
+        - Effect: Allow
+          Action: cloudformation:*
+          Resource: "*"
+        - Effect: Allow
+          Action: sqs:*
+          Resource: "*"
+        - Effect: Allow
+          Action: s3:*
+          Resource: "*"
+        - Effect: Allow
+          Action: s3-object-lambda:*
+          Resource: "*"
+        - Effect: Allow
+          Action: logs:*
+          Resource: "*"
+      Groups:
+        - !Ref AdminGroup
+
+  AdminUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: !Ref AdminUserName
+      LoginProfile:
+        Password: !Ref AdminUserPassword
+        PasswordResetRequired: false
+      Path: /
+      Groups:
+        - !Ref AdminGroup
+
+Outputs:
+  Admin1:
+    Description: AdminUser User
+    Value: !GetAtt AdminUser.Arn
+

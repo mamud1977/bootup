@@ -1,0 +1,10 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Create a bucket and access via ABAC
+Resources:
+  
+  WebDataBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      Tags:
+      - Key: Lifetime
+        Value: 'Permanent' 
