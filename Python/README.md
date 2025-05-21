@@ -1,10 +1,13 @@
 wsl
-cd /mnt/c/MyWork/
+cd 
 cd /mnt/c/MyWork/gitlocal/bootup/Python/
 cd /mnt/c/MyWork/gitlocal/bootup/Python/Flask
+cd /mnt/c/MyWork/gitlocal/bootup/Apache/PySpark
+
 ---------------------------------
 Virtual Environment:
 
+cd /mnt/c/MyWork/
 python3 -m venv .venv
 source .venv/bin/activate
 deactivate
