@@ -1,0 +1,33 @@
+Resources:
+  MyTargetGroups:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: MyTargetGroups
+      Port: 80
+      Protocol: HTTP
+      VpcId: !ImportValue  MyVPC
+  
+  MyLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: MyALB
+      Scheme: internet-facing
+      Subnets:
+        - !ImportValue  SubnetA
+        - !ImportValue  SubnetB
+      SecurityGroups:
+        - !ImportValue  SGwebaccess
+      Tags:
+        - Key: Name
+          Value: MyLB
+  
+
+  MyListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref MyTargetGroups
+      LoadBalancerArn: !Ref MyLoadBalancer
+      Port: 80
+      Protocol: HTTP
