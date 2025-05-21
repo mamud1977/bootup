@@ -14,21 +14,17 @@ Resources:
           - cloudformation:*
           - s3:*
           - s3-object-lambda:*
-          Resource: "*"
-        
+          Resource: "*"        
         - Effect: Allow
           Action:
           - sns:ListTopics
           Resource: "*"
-
         - Effect: Allow
           Action: iam:*
-          Resource: "*"
-        
+          Resource: "*"        
         - Effect: Allow
           Action: ec2:*
-          Resource: "*"
-        
+          Resource: "*"        
         - Effect: Allow
           Action: 
           - ec2-instance-connect:*
@@ -37,7 +33,6 @@ Resources:
           - ec2:CreateTags
           - iam:CreateServiceLinkedRole
           Resource: "*"
-
         - Effect: Allow
           Action: 
           - cloudwatch:DescribeAlarms
@@ -45,7 +40,6 @@ Resources:
           - cloudwatch:DescribeAlarmsForMetric
           - cloudwatch:GetMetricData
           Resource: "*"
-
         - Effect: Allow
           Action: 
           - elasticloadbalancing:DescribeTargetGroups
@@ -57,12 +51,10 @@ Resources:
           - elasticloadbalancing:CreateListener
           - elasticloadbalancing:DeleteListener
           Resource: "*"
-
         - Effect: Allow
           Action: 
           - autoscaling:*
           Resource: "*"
-
         - Effect: Allow
           Action: 
           - q:PassRequest
@@ -72,37 +64,26 @@ Resources:
           - q:ListConversations
           - q:*
           Resource: "*"
-
         - Effect: Allow
           Action: 
           - access-analyzer:*
           Resource: "*"
-
         - Effect: Allow
           Action: 
-          - SNS:*
+          - sns:*
           Resource: "*"
-
         - Effect: Allow
           Action: 
           - cloudshell:*
-          Resource: "*"
-        
+          Resource: "*"        
         - Effect: Allow
           Action: 
           - lambda:*
-          Resource: "*"
-        
+          Resource: "*"        
         - Effect: Allow
           Action: 
           - logs:*
           Resource: "*"
-
-        - Effect: Allow
-          Action: 
-          - logs:*
-          Resource: "*"
-
         - Effect: Allow
           Action:
           - dynamodb:*
@@ -169,23 +150,28 @@ Resources:
           Action:
           - apigateway:*
           Resource: arn:aws:apigateway:*::/*
-
         - Effect: Allow
           Action:
           - ecs:*
           Resource: "*"  
-
         - Effect: Allow
           Action:
           - codepipeline:*
           - codeconnections:*
           - codestar-connections:*
           Resource: "*"  
-
         - Effect: Allow
           Action:
           - states:*
           Resource: "*"  
+        - Effect: Allow
+          Action:
+          - cloudformation:DescribeStacks
+          - cloudformation:ListStacks
+          - cloudformation:CreateStack
+          Resource: "*"  
+
+
 
 
       Groups:
