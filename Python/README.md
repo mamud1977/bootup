@@ -1,18 +1,23 @@
 wsl
-cd 
-cd /mnt/c/MyWork/gitlocal/bootup/Python/
-cd /mnt/c/MyWork/gitlocal/bootup/Python/Flask
-cd /mnt/c/MyWork/gitlocal/bootup/Apache/PySpark
-
----------------------------------
+=======================================
 Virtual Environment:
+-----------------------
 
 cd /mnt/c/MyWork/
 python3 -m venv .venv
 source .venv/bin/activate
 deactivate
 
----------------------------------
+=======================================
+
+cd 
+cd /mnt/c/MyWork/gitlocal/bootup/Azure/
+cd /mnt/c/MyWork/gitlocal/bootup/Python/
+cd /mnt/c/MyWork/gitlocal/bootup/Python/Flask
+cd /mnt/c/MyWork/gitlocal/bootup/Apache/PySpark
+
+=======================================
+
 pip list
 pip install -r /mnt/c/MyWork/gitlocal/bootup/Python/requirements.txt
 pip uninstall Flask
