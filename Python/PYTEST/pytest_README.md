@@ -8,6 +8,8 @@ Executing specific file:
 Execute tests by substring matching
 /TestAutomation$ pytest -k <substring> -v
 /TestAutomation$ pytest pytest_sample1.py -k answer2 -v 
+/TestAutomation$ pytest -k test_divisible_by_3 -v 
+
 
 Execute tests based on markers:
 /TestAutomation$ pytest -m <marker_name> -v
