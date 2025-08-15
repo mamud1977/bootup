@@ -1,0 +1,48 @@
+{
+  "resource": "/{proxy+}",
+  "path": "/my/path",
+  "httpMethod": "GET",
+  "headers": {
+    "header1": "value1",
+    "header2": "value1",
+    "header3": "value1,value2"
+  },
+  "multiValueHeaders": {
+    "header1": ["value1"],
+    "header2": ["value1"],
+    "header3": ["value1", "value2"]
+  },
+  "queryStringParameters": {
+    "parameter1": "value1",
+    "parameter2": "value1",
+    "parameter3": "value1,value2"
+  },
+  "multiValueQueryStringParameters": {
+    "parameter1": ["value1"],
+    "parameter2": ["value1"],
+    "parameter3": ["value1", "value2"]
+  },
+  "pathParameters": {},
+  "stageVariables": {},
+  "requestContext": {
+    "accountId": "123456789012",
+    "resourceId": "abc123def456ghi789jkl012",
+    "stage": "dev",
+    "requestId": "abcdef1234567890abcdef1234567890",
+    "requestTime": "01/Jan/2020:12:34:56 +0000",
+    "requestTimeEpoch": 1577836696000,
+    "identity": {
+      "cognitoAuthenticationType": "cognito",
+      "cognitoAuthenticationProvider": null,
+      "userArn": "arn:aws:cognito-idp:us-east-1:123456789012:user/john.doe@example.com",
+      "user": "john.doe@example.com",
+      "sourceIp": "192.168.0.1",
+      "userAgent": "curl/7.64.1"
+    },
+    "resourcePath": "/{proxy+}",
+    "httpMethod": "GET",
+    "apiId": "abcdef1234567890"
+  },
+  "body": null,
+  "isBase64Encoded": false
+}
