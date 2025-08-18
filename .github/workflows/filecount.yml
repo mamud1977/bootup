@@ -18,7 +18,7 @@ jobs:
         run: |
           # The "find" command will search for all files (-type f) in "my-folder".
           # The result is piped to "wc -l" which counts the lines, giving the total.
-          FILE_COUNT=$(find /Terraform -type f | wc -l)
+          FILE_COUNT=$(find Terraform -type f | wc -l)
           
           # This command sets an output variable named "file_count"
           # that can be used by subsequent steps in the same job.
