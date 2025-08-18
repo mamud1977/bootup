@@ -12,6 +12,6 @@ jobs:
       - name: Echo a simple message
         run: echo "Hello from GitHub Actions!"
 
-      - name: Echo an environment variable
-        run: echo "The current branch is ${{ github.ref }}"
+      # - name: Echo an environment variable
+      #   run: echo "The current branch is ${{ github.ref }}"
 
