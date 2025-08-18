@@ -1,0 +1,30 @@
+name: Count Files in Folder
+
+on:
+  push:
+    branches:
+      - branch1 # Change to your branch name if different
+
+jobs:
+  count-files:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Count files in the "my-folder" directory
+      id: file_counter
+      run: |
+        # Use find with the -type f flag to count only files, not directories
+        # The -type f flag ensures that it only looks for files.
+        # wc -l counts the number of lines (each file path is a new line).
+        # We store the result in a variable.
+        FILE_COUNT=$(find my-folder -type f | wc -l)
+        
+        # Use a workflow command to set an output variable
+        echo "file_count=$FILE_COUNT" >> $GITHUB_OUTPUT
+
+    - name: Print the number of files
+      run: |
+        echo "The 'my-folder' directory has ${{ steps.file_counter.outputs.file_count }} files."
