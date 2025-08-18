@@ -8,7 +8,7 @@ variable "snowflake_role" {
 }
 
 variable "database_name" {
-  default = "DEMO_DB"
+  default = "DEMO_DB2"
 }
 variable "warehouse_name" {
   default = "DEMO_WH"
