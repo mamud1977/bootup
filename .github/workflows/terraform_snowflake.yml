@@ -1,0 +1,25 @@
+name: Count Files in Folder
+
+on:
+  push:
+    branches:
+      - main # Adjust this to your main branch name if different
+
+jobs:
+  count_files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Use the latest stable version of checkout
+
+      - name: Count files in specific folder
+        id: file_count # Assign an ID to this step to access its output
+        run: |
+          FOLDER_PATH="your/specific/folder" # Replace with the actual path to your folder
+          NUM_FILES=$(find "$FOLDER_PATH" -type f | wc -l)
+          echo "Number of files in $FOLDER_PATH: $NUM_FILES"
+          echo "num_files=$NUM_FILES" >> "$GITHUB_OUTPUT"
+
+      - name: Use the file count
+        run: |
+          echo "The calculated number of files is: ${{ steps.file_count.outputs.num_files }}"
