@@ -1,21 +1,17 @@
-name: Count Files in Folder
+name: CI/CD Pipeline - Count Files in Folder
 
 on:
   push:
     branches:
-      - branch1 # Adjust this to your main branch name if different
+      - branch1
 
 jobs:
-  count_files:
+  echo-job:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./Terraform/snowflake
     steps:
-      - name: Count files in specific folder
-        id: file_count # Assign an ID to this step to access its output
-        run: |
-          FOLDER_PATH="/Terraform/snowflake" # Replace with the actual path to your folder
-          NUM_FILES=$(find "$FOLDER_PATH" -type f | wc -l)
-          echo "Number of files in $FOLDER_PATH: $NUM_FILES"
-          echo "num_files=$NUM_FILES" >> "$GITHUB_OUTPUT"
+      - name: Echo a simple message
+        run: echo "Hello from GitHub Actions!"
+
+      - name: Echo an environment variable
+        run: echo "The current branch is ${{ github.ref }}"
+
