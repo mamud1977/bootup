@@ -1,14 +1,8 @@
 
-variable "snowflake_account" {
-  default = "eu74078.west-us-2.azure"
-}
-
+variable "snowflake_account" {}
 variable "snowflake_user" {}
 variable "snowflake_password" {}
-
-variable "snowflake_role" {
-  default = "accountadmin"
-}
+variable "snowflake_role" {}
 
 variable "database_name" {
   default = "DEMO_DB2"
