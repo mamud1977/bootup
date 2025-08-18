@@ -3,6 +3,9 @@ variable "snowflake_account" {
   default = "eu74078.west-us-2.azure"
 }
 
+variable "snowflake_user" {}
+variable "snowflake_password" {}
+
 variable "snowflake_role" {
   default = "accountadmin"
 }

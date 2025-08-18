@@ -8,8 +8,10 @@ terraform {
 }
 
 provider "snowflake" {
-  account = var.snowflake_account
-  role    = var.snowflake_role
+  account  = var.snowflake_account
+  user     = var.snowflake_user
+  password = var.snowflake_password
+  role     = var.snowflake_role
 }
 
 resource "snowflake_database" "demo_db" {
