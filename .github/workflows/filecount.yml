@@ -1,4 +1,4 @@
-name: Count Files in Folder
+name: Count
 
 on:
   push:
@@ -27,4 +27,5 @@ jobs:
 
     - name: Print the number of files
       run: |
+
         echo "The 'my-folder' directory has ${{ steps.file_counter.outputs.file_count }} files."
