@@ -1,6 +1,6 @@
 
 variable "snowflake_account" {
-  default = "eu74078.west-us-2.azure"  
+  default = "eu74078.west-us-2.azure"
 }
 
 variable "snowflake_role" {
