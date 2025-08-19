@@ -45,4 +45,11 @@ GitHub Commands:
 
 git clone --single-branch --branch branch1 https://github.com/mamud1977/bootup.git
 
+git add .  OR  
+git add <filename>
+
+git commit -m "Your descriptive commit message here"
+
+git push
+
 
