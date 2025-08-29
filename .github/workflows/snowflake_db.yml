@@ -37,8 +37,8 @@ jobs:
         run: |
           echo "Checking if secrets are available in the environment..."
           # The ::add-mask:: command redacts the value in the logs, but proves it's there.
-          echo "${{ secrets.SNOWFLAKE_ACCOUNT }}"
-          echo "${{ secrets.SNOWFLAKE_USER }}"
+          echo "SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}"
+          echo "SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}"
           echo "::add-mask::${{ secrets.SNOWFLAKE_PASSWORD }}"
           echo "::add-mask::${{ secrets.SNOWFLAKE_ROLE }}"
           echo "Debug complete."
@@ -63,4 +63,5 @@ jobs:
       # Uncomment the following block to enable auto-apply
       - name: Terraform Apply
         run: terraform apply -auto-approve
+
 
