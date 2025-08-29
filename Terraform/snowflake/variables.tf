@@ -5,7 +5,7 @@ variable "snowflake_password" {}
 variable "snowflake_role" {}
 
 variable "database_name" {
-  default = "DEMO_DB5"
+  default = "DEMO_DB6"
 }
 variable "warehouse_name" {
   default = "DEMO_WH"
@@ -19,3 +19,4 @@ variable "user_name" {
 variable "user_password" {
   default = "DEMO_USER123$"
 }
+
