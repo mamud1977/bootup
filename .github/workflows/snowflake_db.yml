@@ -48,8 +48,12 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan -var="TF_VAR_SNOWFLAKE_ACCOUNT=${{ secrets.SNOWFLAKE_ACCOUNT }}" -var="TF_VAR_SNOWFLAKE_USER=${{ secrets.SNOWFLAKE_USER }}" -var="TF_VAR_SNOWFLAKE_PASSWORD=${{ secrets.SNOWFLAKE_PASSWORD }}" -var="TF_VAR_SNOWFLAKE_ROLE=${{ secrets.SNOWFLAKE_ROLE }}"
-
+        run: terraform plan 
+        env:
+          TF_VAR_SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          TF_VAR_SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+          TF_VAR_SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+          TF_VAR_SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
 
       # Uncomment the following block to enable auto-apply
       - name: Terraform Apply
