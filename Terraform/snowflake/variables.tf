@@ -20,3 +20,4 @@ variable "user_password" {
   default = "DEMO_USER123$"
 }
 
+
