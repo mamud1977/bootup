@@ -43,7 +43,7 @@ Steps to generate GitHub token:
 
 GitHub Commands:
 
-git clone --single-branch --branch branch1 https://github.com/mamud1977/bootup.git
+git clone --single-branch --brancIh branch1 https://github.com/mamud1977/bootup.git
 
 git add .  OR  
 git add <filename>
