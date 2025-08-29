@@ -38,4 +38,3 @@ resource "snowflake_role_grants" "assign_role_to_user" {
   users     = [snowflake_user.demo_user.name]
 }
 
-
