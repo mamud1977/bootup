@@ -13,13 +13,6 @@ jobs:
     name: Terraform Plan & Apply
     runs-on: ubuntu-latest
 
-    env:
-        SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-        SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
-        SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
-        SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
-
-
     defaults:
       run:
         working-directory: Terraform/snowflake
@@ -41,8 +34,8 @@ jobs:
           echo "TESTVAR: ${{ vars.TESTVAR}}"
           echo "SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}"
           echo "SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}"
-          echo "::add-mask::${{ secrets.SNOWFLAKE_PASSWORD }}"
-          echo "::add-mask::${{ secrets.SNOWFLAKE_ROLE }}"
+          echo "SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}"
+          echo "SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}"
           echo "Debug complete."
 
       - name: Terraform Init
@@ -55,11 +48,7 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan \
-              -var="SNOWFLAKE_ACCOUNT=${{ secrets.SNOWFLAKE_ACCOUNT }}" \
-              -var="SNOWFLAKE_USER=${{ secrets.SNOWFLAKE_USER }}" \
-              -var="SNOWFLAKE_PASSWORD=${{ secrets.SNOWFLAKE_PASSWORD }}" \
-              -var="SNOWFLAKE_ROLE=${{ secrets.SNOWFLAKE_ROLE }}"
+        run: terraform plan -var="TF_VAR_SNOWFLAKE_ACCOUNT=${{ secrets.SNOWFLAKE_ACCOUNT }}" -var="TF_VAR_SNOWFLAKE_USER=${{ secrets.SNOWFLAKE_USER }}" -var="TF_VAR_SNOWFLAKE_PASSWORD=${{ secrets.SNOWFLAKE_PASSWORD }}" -var="TF_VAR_SNOWFLAKE_ROLE=${{ secrets.SNOWFLAKE_ROLE }}"
 
 
       # Uncomment the following block to enable auto-apply
