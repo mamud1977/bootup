@@ -40,3 +40,4 @@ resource "snowflake_role_grants" "assign_role_to_user" {
 
 
 
+
