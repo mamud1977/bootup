@@ -45,6 +45,15 @@ jobs:
           if [ -z "${SNOWFLAKE_ROLE}" ]; then echo "❌ SNOWFLAKE_ROLE is not set"; else echo "✅ SNOWFLAKE_ROLE is set"; fi
           if [ -z "${SNOWFLAKE_PRIVATE_KEY_PATH}" ]; then echo "❌ SNOWFLAKE_PRIVATE_KEY_PATH is not set"; else echo "✅ SNOWFLAKE_PRIVATE_KEY_PATH is set"; fi
 
+      - name: Create terraform.tfvars from secrets
+        run: |
+          cat <<EOF > terraform.tfvars
+          snowflake_account = "${{ secrets.SNOWFLAKE_ACCOUNT }}"
+          snowflake_username = "${{ secrets.SNOWFLAKE_USERNAME }}"
+          snowflake_role     = "${{ secrets.SNOWFLAKE_ROLE }}"
+          private_key_path   = "${{ env.SNOWFLAKE_PRIVATE_KEY_PATH }}"
+          EOF
+
       - name: Terraform Init
         run: terraform init
 
