@@ -26,6 +26,3 @@ resource "snowflake_database" "example_db" {
 }
 
 
-
-
-
