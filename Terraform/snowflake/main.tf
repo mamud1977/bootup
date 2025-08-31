@@ -10,6 +10,7 @@ terraform {
 # Snowflake Provider Configuration : 
 #This block tells Terraform how to connect to your Snowflake instance.
 
+
 provider "snowflake" {
   account  = var.snowflake_account
   user = var.snowflake_username
