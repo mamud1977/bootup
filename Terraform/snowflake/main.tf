@@ -25,3 +25,4 @@ resource "snowflake_database" "example_db" {
   data_retention_time_in_days = 1
 }
 
+
