@@ -1,24 +1,20 @@
-
-variable "snowflake_account" {}
-variable "snowflake_user" {}
-variable "snowflake_password" {}
-variable "snowflake_role" {}
-
-variable "database_name" {
-  default = "DEMO_DB6"
-}
-variable "warehouse_name" {
-  default = "DEMO_WH"
-}
-variable "role_name" {
-  default = "DEMO_ROLE"
-}
-variable "user_name" {
-  default = "DEMO_USER"
-}
-variable "user_password" {
-  default = "DEMO_USER123$"
+variable "snowflake_account" {
+  description = "The Snowflake account identifier."
+  type        = string
 }
 
+variable "snowflake_username" {
+  description = "The Snowflake user for Terraform to authenticate as."
+  type        = string
+}
 
+variable "snowflake_role" {
+  description = "The role for Terraform to use."
+  type        = string
+}
 
+variable "snowflake_private_key_path" {
+  description = "Path to the Snowflake private key file. Set via environment variable in CI/CD."
+  type        = string
+  sensitive   = true
+}

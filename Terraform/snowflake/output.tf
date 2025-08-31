@@ -1,8 +1,3 @@
-output "database_name" {
-  value = snowflake_database.demo_db.name
+output "snowflake_user" {
+  value = var.snowflake_username
 }
-
-output "warehouse_name" {
-  value = snowflake_warehouse.demo_wh.name
-}
-

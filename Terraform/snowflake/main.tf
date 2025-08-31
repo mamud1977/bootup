@@ -7,37 +7,20 @@ terraform {
   }
 }
 
-provider "snowflake" {}
+# Snowflake Provider Configuration : 
+#This block tells Terraform how to connect to your Snowflake instance.
 
-resource "snowflake_database" "demo_db" {
-  name    = var.database_name
-  comment = "Terraform-managed database"
+provider "snowflake" {
+  account  = var.snowflake_account
+  user = var.snowflake_username
+  role     = var.snowflake_role
+  authenticator = "JWT"
+  private_key = file(var.snowflake_private_key_path)
 }
 
-resource "snowflake_warehouse" "demo_wh" {
-  name           = var.warehouse_name
-  warehouse_size = "XSMALL"
-  auto_suspend   = 300
-  comment        = "Terraform-managed warehouse"
+resource "snowflake_database" "example_db" {
+  name            = "MY_TERRAFORM_DB"
+  comment         = "Database created via Terraform"
+  data_retention_time_in_days = 1
 }
-
-resource "snowflake_role" "demo_role" {
-  name    = var.role_name
-  comment = "Custom role managed by Terraform"
-}
-
-resource "snowflake_user" "demo_user" {
-  name         = var.user_name
-  password     = var.user_password
-  default_role = snowflake_role.demo_role.name
-  comment      = "User managed by Terraform"
-}
-
-resource "snowflake_role_grants" "assign_role_to_user" {
-  role_name = snowflake_role.demo_role.name
-  users     = [snowflake_user.demo_user.name]
-}
-
-
-
 
