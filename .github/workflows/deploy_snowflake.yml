@@ -15,13 +15,7 @@ jobs:
     name: Terraform Apply
     runs-on: ubuntu-latest
 
-    env:
-      TF_VAR_SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-      TF_VAR_SNOWFLAKE_USERNAME: ${{ secrets.SNOWFLAKE_USERNAME }}
-      TF_VAR_SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
-      #TF_VAR_SNOWFLAKE_PRIVATE_KEY_PATH: "./snowflake_key.p8"
-      TF_VAR_SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
-
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -39,16 +33,6 @@ jobs:
           if [ -z "${SNOWFLAKE_PRIVATE_KEY}" ]; then echo "❌ SNOWFLAKE_PRIVATE_KEY_PATH is not set"; else echo "✅ SNOWFLAKE_PRIVATE_KEY_PATH is set"; fi
 
 
-      - name: Create terraform.tfvars from secrets
-        run: |
-          cat <<EOF > terraform.tfvars
-          snowflake_account   = "${{ secrets.SNOWFLAKE_ACCOUNT }}"
-          snowflake_username  = "${{ secrets.SNOWFLAKE_USERNAME }}"
-          snowflake_role      = "${{ secrets.SNOWFLAKE_ROLE }}"
-          private_key         = "${{ env.SNOWFLAKE_PRIVATE_KEY }}"
-          EOF
-          chmod 600 terraform.tfvars
-
       - name: Terraform Init
         run: terraform init
 
@@ -58,7 +42,6 @@ jobs:
           TF_VAR_SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
           TF_VAR_SNOWFLAKE_USERNAME: ${{ secrets.SNOWFLAKE_USERNAME }}
           TF_VAR_SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
-          #TF_VAR_SNOWFLAKE_PRIVATE_KEY_PATH: "./snowflake_key.p8"
           TF_VAR_SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
 
       - name: Terraform Apply
