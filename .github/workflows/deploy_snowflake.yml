@@ -29,10 +29,10 @@ jobs:
 
       - name: Check if secrets are set
         run: |
-          if [ -z "${SNOWFLAKE_ACCOUNT}" ]; then echo "❌ SNOWFLAKE_ACCOUNT is not set"; else echo "✅ SNOWFLAKE_ACCOUNT is set"; fi
-          if [ -z "${SNOWFLAKE_USERNAME}" ]; then echo "❌ SNOWFLAKE_USERNAME is not set"; else echo "✅ SNOWFLAKE_USERNAME is set"; fi
-          if [ -z "${SNOWFLAKE_ROLE}" ]; then echo "❌ SNOWFLAKE_ROLE is not set"; else echo "✅ SNOWFLAKE_ROLE is set"; fi
-          if [ -z "${SNOWFLAKE_PRIVATE_KEY}" ]; then echo "❌ SNOWFLAKE_PRIVATE_KEY_PATH is not set"; else echo "✅ SNOWFLAKE_PRIVATE_KEY_PATH is set"; fi
+          if [ -z "${snowflake_account}" ]; then echo "❌ SNOWFLAKE_ACCOUNT is not set"; else echo "✅ SNOWFLAKE_ACCOUNT is set"; fi
+          if [ -z "${snowflake_username}" ]; then echo "❌ SNOWFLAKE_USERNAME is not set"; else echo "✅ SNOWFLAKE_USERNAME is set"; fi
+          if [ -z "${snowflake_role}" ]; then echo "❌ SNOWFLAKE_ROLE is not set"; else echo "✅ SNOWFLAKE_ROLE is set"; fi
+          if [ -z "${snowflake_private_key}" ]; then echo "❌ SNOWFLAKE_PRIVATE_KEY_PATH is not set"; else echo "✅ SNOWFLAKE_PRIVATE_KEY_PATH is set"; fi
 
       - name: Terraform Init
         run: terraform init
@@ -40,10 +40,10 @@ jobs:
       - name: Terraform Plan
         run: terraform plan
         env:
-          TF_VAR_SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-          TF_VAR_SNOWFLAKE_USERNAME: ${{ secrets.SNOWFLAKE_USERNAME }}
-          TF_VAR_SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
-          TF_VAR_SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+          TF_VAR_SNOWFLAKE_ACCOUNT: ${{ secrets.snowflake_account }}
+          TF_VAR_SNOWFLAKE_USERNAME: ${{ secrets.snowflake_username }}
+          TF_VAR_SNOWFLAKE_ROLE: ${{ secrets.snowflake_role }}
+          TF_VAR_SNOWFLAKE_PRIVATE_KEY: ${{ secrets.snowflake_private_key }}
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -var-file="terraform.tfvars"
