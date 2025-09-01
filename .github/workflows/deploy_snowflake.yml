@@ -39,7 +39,8 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan 
+        run: terraform plan
+        working-directory: ./Terraform/snowflake 
         env:
           TF_VAR_SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
           TF_VAR_SNOWFLAKE_USERNAME: ${{ secrets.SNOWFLAKE_USERNAME }}
