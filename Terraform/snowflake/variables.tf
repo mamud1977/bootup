@@ -1,6 +1,7 @@
 variable "snowflake_account" {
   description = "The Snowflake account identifier."
   type        = string
+  default     = "nknjudu-pv34592"
 }
 
 variable "snowflake_username" {
