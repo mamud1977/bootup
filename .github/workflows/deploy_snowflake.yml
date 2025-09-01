@@ -15,6 +15,12 @@ jobs:
     name: Terraform Apply
     runs-on: ubuntu-latest
 
+    env:
+      TF_VAR_snowflake_account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      TF_VAR_snowflake_username: ${{ secrets.SNOWFLAKE_USERNAME }}
+      TF_VAR_snowflake_role: ${{ secrets.SNOWFLAKE_ROLE }}
+      TF_VAR_snowflake_private_key: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
