@@ -18,7 +18,10 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
+
+      - name: List files in repository
+        run: ls -la ${{ github.workspace }}
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
@@ -31,7 +34,6 @@ jobs:
           if [ -z "${SNOWFLAKE_USERNAME}" ]; then echo "❌ SNOWFLAKE_USERNAME is not set"; else echo "✅ SNOWFLAKE_USERNAME is set"; fi
           if [ -z "${SNOWFLAKE_ROLE}" ]; then echo "❌ SNOWFLAKE_ROLE is not set"; else echo "✅ SNOWFLAKE_ROLE is set"; fi
           if [ -z "${SNOWFLAKE_PRIVATE_KEY}" ]; then echo "❌ SNOWFLAKE_PRIVATE_KEY_PATH is not set"; else echo "✅ SNOWFLAKE_PRIVATE_KEY_PATH is set"; fi
-
 
       - name: Terraform Init
         run: terraform init
