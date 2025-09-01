@@ -15,6 +15,7 @@ cd /mnt/c/MyWork/gitlocal/bootup/Azure/
 cd /mnt/c/MyWork/gitlocal/bootup/Python/
 cd /mnt/c/MyWork/gitlocal/bootup/Python/Flask
 cd /mnt/c/MyWork/gitlocal/bootup/Apache/PySpark
+cd /mnt/c/MyWork/gitlocal/bootup/Terraform/snowflake
 
 =======================================
 

@@ -17,7 +17,4 @@ When running Terraform locally in VS Code, you can set environment variables in 
 export TF_VAR_some_api_key="your_vscode_api_key"
 export TF_VAR_database_password="your_vscode_db_password"
 
-export TF_VAR_snowflake_account = ""
-export TF_VAR_snowflake_user = ""
-export TF_VAR_snowflake_password = ""
-export TF_VAR_snowflake_role = ""
+

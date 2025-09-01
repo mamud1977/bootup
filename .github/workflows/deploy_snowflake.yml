@@ -16,10 +16,11 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-      SNOWFLAKE_USERNAME: ${{ secrets.SNOWFLAKE_USERNAME }}
-      SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
-      SNOWFLAKE_PRIVATE_KEY_PATH: "./snowflake_key.p8"
+      TF_VAR_SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      TF_VAR_SNOWFLAKE_USERNAME: ${{ secrets.SNOWFLAKE_USERNAME }}
+      TF_VAR_SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+      #TF_VAR_SNOWFLAKE_PRIVATE_KEY_PATH: "./snowflake_key.p8"
+      TF_VAR_SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
 
     steps:
       - name: Checkout repository
@@ -30,35 +31,35 @@ jobs:
         with:
           terraform_version: 1.6.6
 
-      - name: Install OpenSSL
-        run: sudo apt-get install -y openssl
-
-      - name: Decode and save private key
-        run: |
-          echo "${{ secrets.SNOWFLAKE_PRIVATE_KEY_BASE64 }}" | base64 -d > snowflake_key.p8
-          chmod 600 snowflake_key.p8
-
       - name: Check if secrets are set
         run: |
           if [ -z "${SNOWFLAKE_ACCOUNT}" ]; then echo "❌ SNOWFLAKE_ACCOUNT is not set"; else echo "✅ SNOWFLAKE_ACCOUNT is set"; fi
           if [ -z "${SNOWFLAKE_USERNAME}" ]; then echo "❌ SNOWFLAKE_USERNAME is not set"; else echo "✅ SNOWFLAKE_USERNAME is set"; fi
           if [ -z "${SNOWFLAKE_ROLE}" ]; then echo "❌ SNOWFLAKE_ROLE is not set"; else echo "✅ SNOWFLAKE_ROLE is set"; fi
-          if [ -z "${SNOWFLAKE_PRIVATE_KEY_PATH}" ]; then echo "❌ SNOWFLAKE_PRIVATE_KEY_PATH is not set"; else echo "✅ SNOWFLAKE_PRIVATE_KEY_PATH is set"; fi
+          if [ -z "${SNOWFLAKE_PRIVATE_KEY}" ]; then echo "❌ SNOWFLAKE_PRIVATE_KEY_PATH is not set"; else echo "✅ SNOWFLAKE_PRIVATE_KEY_PATH is set"; fi
+
 
       - name: Create terraform.tfvars from secrets
         run: |
           cat <<EOF > terraform.tfvars
-          snowflake_account = "${{ secrets.SNOWFLAKE_ACCOUNT }}"
-          snowflake_username = "${{ secrets.SNOWFLAKE_USERNAME }}"
-          snowflake_role     = "${{ secrets.SNOWFLAKE_ROLE }}"
-          private_key_path   = "${{ env.SNOWFLAKE_PRIVATE_KEY_PATH }}"
+          snowflake_account   = "${{ secrets.SNOWFLAKE_ACCOUNT }}"
+          snowflake_username  = "${{ secrets.SNOWFLAKE_USERNAME }}"
+          snowflake_role      = "${{ secrets.SNOWFLAKE_ROLE }}"
+          private_key         = "${{ env.SNOWFLAKE_PRIVATE_KEY }}"
           EOF
+          chmod 600 terraform.tfvars
 
       - name: Terraform Init
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan -var-file="terraform.tfvars"
+        run: terraform plan 
+        env:
+          TF_VAR_SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          TF_VAR_SNOWFLAKE_USERNAME: ${{ secrets.SNOWFLAKE_USERNAME }}
+          TF_VAR_SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+          #TF_VAR_SNOWFLAKE_PRIVATE_KEY_PATH: "./snowflake_key.p8"
+          TF_VAR_SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -var-file="terraform.tfvars"

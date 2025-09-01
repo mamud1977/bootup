@@ -1,7 +1,6 @@
 .env
 .terraform/
 terraform.tfstate
-terraform.tfvars
 .private
 .public
 rsa_key

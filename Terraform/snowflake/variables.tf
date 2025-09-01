@@ -13,7 +13,7 @@ variable "snowflake_role" {
   type        = string
 }
 
-variable "snowflake_private_key_path" {
+variable "snowflake_private_key" {
   description = "Path to the Snowflake private key file. Set via environment variable in CI/CD."
   type        = string
   sensitive   = true
