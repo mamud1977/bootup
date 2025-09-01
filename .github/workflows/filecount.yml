@@ -5,6 +5,10 @@ on:
     branches:
       - branch1  # Or the branch you want to monitor
 
+defaults:
+  run:
+    working-directory: ./Terraform/snowflake
+
 jobs:
   count-files:
     runs-on: ubuntu-latest
