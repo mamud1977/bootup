@@ -15,6 +15,26 @@ jobs:
     name: Terraform Apply
     runs-on: ubuntu-latest
 
+Yes, you can set the working directory at a global level in a GitHub Actions workflow. This is a great way to avoid repeating the working-directory option for every single step.
+
+You can set a default working directory for an entire job or for the entire workflow.
+
+Workflow-Level Default
+To set the working directory for all jobs in your workflow, use the defaults.run keyword at the top level of your workflow file.
+
+YAML
+
+name: Terraform CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+defaults:
+  run:
+    working-directory: ./Terraform/snowflake
+    
     
     steps:
       - name: Checkout repository
@@ -40,7 +60,6 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan
-        working-directory: ./Terraform/snowflake 
         env:
           TF_VAR_SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
           TF_VAR_SNOWFLAKE_USERNAME: ${{ secrets.SNOWFLAKE_USERNAME }}
