@@ -12,11 +12,10 @@ terraform {
 
 
 provider "snowflake" {
-  account  = var.snowflake_account
-  user = var.snowflake_username
-  role     = var.snowflake_role
+  account   = var.snowflake_account
+  user      = var.snowflake_username
+  role      = var.snowflake_role
   authenticator = "JWT"
-  #private_key = file(var.snowflake_private_key_path)
   private_key = var.snowflake_private_key
 }
 
@@ -25,5 +24,7 @@ resource "snowflake_database" "example_db" {
   comment         = "Database created via Terraform"
   data_retention_time_in_days = 1
 }
+
+
 
 
