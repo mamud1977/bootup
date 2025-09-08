@@ -1,4 +1,4 @@
-name: Deploy Snowflake Infrastructure
+name: Deploy Azure Web App
 
 on:
   push:
