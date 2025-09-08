@@ -42,10 +42,10 @@ jobs:
       - name: Terraform Plan
         run: terraform plan
         env:   
-          TF_VAR_snowflake_account: ${{ secrets.snowflake_account }}
-          TF_VAR_snowflake_username: ${{ secrets.snowflake_username }}
-          TF_VAR_snowflake_role: ${{ secrets.snowflake_role }}
-          TF_VAR_snowflake_private_key: ${{ secrets.snowflake_private_key }}
+          subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          tenant_id:       ${{ secrets.ARM_TENANT_ID }}
+          client_id:       ${{ secrets.ARM_CLIENT_ID }}
+          client_secret:   ${{ secrets.ARM_CLIENT_SECRET }}
           
       - name: Terraform Apply
         run: terraform apply -auto-approve
