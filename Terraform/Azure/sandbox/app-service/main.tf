@@ -21,6 +21,7 @@ resource "azurerm_resource_group" "rg" {
   location = var.resource_group_location
 }
 
+
 resource "azurerm_service_plan" "app_service_plan" {
   name                = "webapp-free-plan"
   location            = azurerm_resource_group.rg.location
