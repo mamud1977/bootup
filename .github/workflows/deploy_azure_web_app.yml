@@ -46,6 +46,7 @@ jobs:
           tenant_id:       ${{ secrets.ARM_TENANT_ID }}
           client_id:       ${{ secrets.ARM_CLIENT_ID }}
           client_secret:   ${{ secrets.ARM_CLIENT_SECRET }}
+       
           
       - name: Terraform Apply
         run: terraform apply -auto-approve
