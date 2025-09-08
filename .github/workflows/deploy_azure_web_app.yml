@@ -5,6 +5,8 @@ on:
     branches:
       - main
       - branch1
+    paths:
+      - 'Terraform/Azure/sandbox/app-service/**'
 
 defaults:
   run:
