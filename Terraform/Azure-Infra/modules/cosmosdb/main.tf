@@ -10,7 +10,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   }
 
   geo_location {
-    location          = var.location
+    location          = var.resource_group_location
     failover_priority = 0
   }
 
