@@ -15,6 +15,7 @@ variable "resource_group_location" {
   type        = string
 }
 
+
 variable "storage_account_name_1" {
   description = "Azure Storage Account Name"
   type        = string
