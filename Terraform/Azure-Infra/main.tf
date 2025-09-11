@@ -1,3 +1,5 @@
+# main.tf
+
 terraform {
   required_providers {
     azurerm = {
@@ -20,13 +22,24 @@ provider "azurerm" {
   features {}
 }
 
+resource "random_string" "storage_suffix" {
+  length  = 6
+  upper   = false
+  special = false
+}
+
+locals {
+  resource_group_name_1   = "${var.resource_group_name_1}-${var.env}"
+  storage_account_name_1  = "${var.storage_account_name_1}${var.env}${random_string.storage_suffix.result}"
+}
+
 resource "azurerm_resource_group" "resource_group" {
-  name     = var.resource_group_name_1
+  name     = local.resource_group_name_1
   location = var.resource_group_location
 }
 
 resource "azurerm_storage_account" "storage_account_name_1" {
-  name                     = var.storage_account_name_1
+  name                     = local.storage_account_name_1
   resource_group_name      = azurerm_resource_group.resource_group.name
   location                 = azurerm_resource_group.resource_group.location
   account_kind             = "StorageV2"
