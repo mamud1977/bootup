@@ -25,7 +25,7 @@ variable "storage_container_name_1" {
   type        = string
 }
 
-variable "cosmosdb_account_name " {
+variable "cosmosdb_account_name" {
   description = "Name of the cosmosdb account"
   type        = string
 }
