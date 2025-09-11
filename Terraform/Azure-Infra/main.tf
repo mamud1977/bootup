@@ -50,6 +50,8 @@ resource "azurerm_storage_account" "storage_account_name_1" {
   account_replication_type = "LRS"
   access_tier              = "Hot"
 
+  depends_on = [azurerm_resource_group.resource_group]
+
   blob_properties {
     delete_retention_policy {
       days = 1 # Soft delete retention
@@ -79,5 +81,7 @@ module "cosmosdb" {
   resource_group_name     = local.resource_group_name
   resource_group_location = local.resource_group_location
   cosmosdb_account_name   = local.cosmosdb_account_name
+
+  depends_on = [azurerm_resource_group.resource_group]
 }
 
