@@ -9,5 +9,5 @@ storage_account_name_1      = "stgacct"
 
 storage_container_name_1    = "mycontainer"
 
-cosmosdb_account_name       = "my-cosmosdb"
+cosmosdb_account_name       = "mycosmosdb"
 

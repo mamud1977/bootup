@@ -33,7 +33,7 @@ locals {
   storage_account_name_1    = "${var.storage_account_name_1}${var.env}${random_string.storage_suffix.result}"
   storage_container_name_1  = "${var.storage_account_name_1}-${var.env}"
 
-  cosmosdb_account_name     = "${var.cosmosdb_account_name}-${var.env}"
+  cosmosdb_account_name     = "${var.cosmosdb_account_name}-${var.env}-${random_string.storage_suffix.result}"
 }
 
 resource "azurerm_resource_group" "resource_group" {
