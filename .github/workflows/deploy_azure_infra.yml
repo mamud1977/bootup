@@ -30,7 +30,6 @@ jobs:
       - name: Debug Azure Auth Details
         run: env | grep ARM_
 
-
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
         with:
