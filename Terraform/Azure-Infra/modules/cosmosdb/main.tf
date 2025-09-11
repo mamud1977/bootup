@@ -1,6 +1,6 @@
 resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   name                = var.cosmosdb_account_name
-  location            = var.location
+  location            = var.resource_group_location
   resource_group_name = var.resource_group_name
   offer_type          = var.offer_type
   kind                = var.kind
