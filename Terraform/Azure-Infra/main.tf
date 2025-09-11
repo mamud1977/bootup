@@ -75,7 +75,7 @@ resource "azurerm_storage_container" "my_container" {
 }
 
 module "cosmosdb" {
-  source                  = "./modules/cosmosdb"
+  source                  = "./modules/cosmos-db"
   resource_group_name     = local.resource_group_name
   resource_group_location = local.resource_group_location
   cosmosdb_account_name   = local.cosmosdb_account_name
