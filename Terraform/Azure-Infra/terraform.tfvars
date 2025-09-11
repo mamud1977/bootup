@@ -7,4 +7,7 @@ resource_group_location = "Central India"
 
 storage_account_name_1 = "stgacct"
 
+storage_container_name_1 = "mycontainer"
+
+
 

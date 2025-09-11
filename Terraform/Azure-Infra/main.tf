@@ -31,6 +31,7 @@ resource "random_string" "storage_suffix" {
 locals {
   resource_group_name_1   = "${var.resource_group_name_1}-${var.env}"
   storage_account_name_1  = "${var.storage_account_name_1}${var.env}${random_string.storage_suffix.result}"
+  storage_container_name_1= "${var.storage_account_name_1}-${var.env}"
 }
 
 resource "azurerm_resource_group" "resource_group" {
@@ -65,3 +66,8 @@ resource "azurerm_storage_account" "storage_account_name_1" {
   }
 }
 
+resource "azurerm_storage_container" "my_container" {
+  name                  = local.storage_container_name_1
+  storage_account_name  = azurerm_storage_account.storage_account_name_1.name                        
+  container_access_type = "private"
+}
