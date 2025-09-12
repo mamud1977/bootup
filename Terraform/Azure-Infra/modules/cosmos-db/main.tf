@@ -19,3 +19,4 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
     name = "EnableServerless" # Optional: remove if not needed
   }
 }
+
