@@ -42,6 +42,7 @@ resource "azurerm_resource_group" "resource_group" {
   location = local.resource_group_location
 }
 
+
 resource "azurerm_storage_account" "storage_account_name_1" {
   name                     = local.storage_account_name_1
   resource_group_name      = local.resource_group_name
