@@ -26,6 +26,7 @@ resource "random_string" "storage_suffix" {
   special = false
 }
 
+
 locals {
   resource_group_name       = "${var.resource_group_name_1}-${var.env}"
   resource_group_location   = "${var.resource_group_location}"
