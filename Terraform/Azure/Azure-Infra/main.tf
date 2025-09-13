@@ -35,6 +35,10 @@ locals {
   container_name            = "${var.env}-${var.container_name}"
   
   cosmosdb_account_name     = "${var.cosmosdb_account_name}-${var.env}-${random_string.storage_suffix.result}"
+
+  function_app_name       = "${var.env}-function_app"
+  plan_name               = "${var.env}-function-plan"
+
 }
 
 resource "azurerm_resource_group" "resource_group" {
