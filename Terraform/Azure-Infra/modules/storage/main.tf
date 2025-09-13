@@ -1,6 +1,10 @@
+locals {
+  storage_account_name = "${var.env}-${storage_account_name_1}"
+  container_name       = "${var.env}-${storage_container_name_1}"
+}
 
-resource "azurerm_storage_account" "storage_account_name_1" {
-  name                     = var.storage_account_name_1
+resource "azurerm_storage_account" "storage_account_name" {
+  name                     = local.storage_account_name
   resource_group_name      = var.resource_group_name
   location                 = var.resource_group_location
   account_kind             = "StorageV2"   # Standard & Premium(3)
@@ -30,7 +34,7 @@ resource "azurerm_storage_account" "storage_account_name_1" {
 }
 
 resource "azurerm_storage_container" "my_container" {
-  name                  = var.storage_container_name_1
-  storage_account_name  = var.storage_account_name_1                        
+  name                  = azurerm_storage_account.storage_account_name.name
+  storage_account_name  = local.container_name                        
   container_access_type = "private"
 }
