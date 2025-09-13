@@ -8,6 +8,7 @@ resource "azurerm_storage_account" "storage_account_name_1" {
   account_replication_type = "LRS"
   access_tier              = "Hot"
 
+
   depends_on = [azurerm_resource_group.resource_group]
 
   blob_properties {
