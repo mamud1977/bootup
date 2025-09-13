@@ -10,8 +10,8 @@ on:
 
 defaults:
   run:
-    working-directory: ./Terraform/Azure-Infra
-    
+    working-directory: ${{ github.workspace }}/Terraform/Azure-Infra/environments/dev
+
 jobs:
   terraform:
     name: Terraform Apply
