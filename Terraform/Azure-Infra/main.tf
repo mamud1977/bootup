@@ -31,9 +31,6 @@ locals {
   resource_group_name       = "${var.resource_group_name_1}-${var.env}"
   resource_group_location   = "${var.resource_group_location}"
   
-  storage_account_name_1    = "${var.storage_account_name_1}${var.env}${random_string.storage_suffix.result}"
-  storage_container_name_1  = "${var.storage_container_name_1}-${var.env}"
-
   cosmosdb_account_name     = "${var.cosmosdb_account_name}-${var.env}-${random_string.storage_suffix.result}"
 }
 
