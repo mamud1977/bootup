@@ -1,6 +1,6 @@
 locals {
-  storage_account_name = "${var.env}-${storage_account_name_1}"
-  container_name       = "${var.env}-${storage_container_name_1}"
+  storage_account_name = "${var.env}-${storage_account_name}"
+  container_name       = "${var.env}-${storage_container_name}"
 }
 
 resource "azurerm_storage_account" "storage_account_name" {
