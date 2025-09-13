@@ -6,6 +6,8 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   offer_type          = var.offer_type
   kind                = var.kind
 
+  tags = var.tags
+
   consistency_policy {
     consistency_level       = "Session"
   }

@@ -2,6 +2,12 @@
 
 env                         = "dev"
 
+tags = {
+  environment = "dev"
+  owner       = "Mamud"
+  project     = "cloud-infra"
+}
+
 resource_group_name_1       = "rg"
 resource_group_location     = "Central India"
 

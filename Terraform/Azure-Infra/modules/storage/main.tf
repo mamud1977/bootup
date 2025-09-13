@@ -1,5 +1,7 @@
 # storage module -> main.tf
 
+
+
 resource "azurerm_storage_account" "storage_account" {
   name                     = var.storage_account_name
   resource_group_name      = var.resource_group_name
@@ -23,10 +25,7 @@ resource "azurerm_storage_account" "storage_account" {
     change_feed_enabled = true
   }
 
-  tags = {
-    environment = "Dev"
-    createdby   = "Mamud"
-  }
+  tags = var.tags
 }
 
 resource "azurerm_storage_management_policy" "cool_and_delete_snapshots" {
@@ -66,5 +65,7 @@ resource "azurerm_storage_container" "my_container" {
   name                    = var.container_name 
   storage_account_name    = azurerm_storage_account.storage_account.name               
   container_access_type   = "private"
+
+  tags = var.tags
 }
 

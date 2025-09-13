@@ -52,6 +52,7 @@ module "storage" {
   container_name          = local.container_name
 
   depends_on = [azurerm_resource_group.resource_group]
+  tags                    = var.tags
 
 }
 
@@ -63,6 +64,7 @@ module "cosmosdb" {
   cosmosdb_account_name   = local.cosmosdb_account_name
 
   depends_on = [azurerm_resource_group.resource_group]
+  tags                    = var.tags
 }
 
 
