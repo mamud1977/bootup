@@ -1,6 +1,6 @@
 # terraform.tfvars
 
-env                         = "sandbox"
+env                         = "dev"
 
 resource_group_name_1       = "rg"
 resource_group_location     = "Central India"
