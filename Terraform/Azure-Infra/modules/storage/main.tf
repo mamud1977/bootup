@@ -3,7 +3,7 @@ resource "azurerm_storage_account" "storage_account_name_1" {
   name                     = var.storage_account_name_1
   resource_group_name      = var.resource_group_name
   location                 = var.resource_group_location
-  account_kind             = "StorageV2"
+  account_kind             = "StorageV2"   # Standard & Premium(3)
   account_tier             = "Standard"
   account_replication_type = "LRS"
   access_tier              = "Hot"
@@ -31,6 +31,6 @@ resource "azurerm_storage_account" "storage_account_name_1" {
 
 resource "azurerm_storage_container" "my_container" {
   name                  = var.storage_container_name_1
-  storage_account_name  = azurerm_storage_account.storage_account_name_1.name                        
+  storage_account_name  = var.storage_account_name_1                        
   container_access_type = "private"
 }
