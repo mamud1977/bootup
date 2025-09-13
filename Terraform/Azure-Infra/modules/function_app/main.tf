@@ -11,6 +11,15 @@ resource "azurerm_app_service_plan" "plan" {
   }
 }
 
+resource "azurerm_service_plan" "plan" {
+  name                = var.plan_name
+  location            = var.resource_group_location
+  resource_group_name = var.resource_group_name
+  os_type             = "Linux"
+  sku_name            = "Y1" # Free tier (Consumption)
+  tags                = var.tags
+}
+
 resource "azurerm_linux_function_app" "func" {
   name                       = var.function_app_name
   location                   = var.resource_group_location
