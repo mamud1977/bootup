@@ -28,8 +28,11 @@ resource "random_string" "storage_suffix" {
 
 
 locals {
-  resource_group_name       = "${var.resource_group_name_1}-${var.env}"
+  resource_group_name       = "${var.env}-${var.resource_group_name_1}"
   resource_group_location   = "${var.resource_group_location}"
+
+  storage_account_name    = "${var.env}-${var.storage_account_name}"
+  container_name          = "${var.env}-${var.container_name}"
   
   cosmosdb_account_name     = "${var.cosmosdb_account_name}-${var.env}-${random_string.storage_suffix.result}"
 }
@@ -44,6 +47,9 @@ module "storage" {
   env                     = var.env
   resource_group_name     = local.resource_group_name
   resource_group_location = local.resource_group_location
+
+  storage_account_name    = local.storage_account_name
+  container_name          = local.container_name
 
   depends_on = [azurerm_resource_group.resource_group]
 }
