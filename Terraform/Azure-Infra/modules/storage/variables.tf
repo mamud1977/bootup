@@ -19,7 +19,7 @@ variable "storage_account_name" {
   type        = string
 }
 
-variable "storage_container_name" {
+variable "container_name" {
   description = "Name of the blob container"
   type        = string
 }

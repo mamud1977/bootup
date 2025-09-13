@@ -1,6 +1,6 @@
 locals {
   storage_account_name = "${var.env}-${storage_account_name}"
-  container_name       = "${var.env}-${storage_container_name}"
+  container_name       = "${var.env}-${container_name}"
 }
 
 resource "azurerm_storage_account" "storage_account_name" {
@@ -36,7 +36,7 @@ resource "azurerm_storage_account" "storage_account_name" {
 }
 
 resource "azurerm_storage_container" "my_container" {
-  name                  = azurerm_storage_account.storage_account_name.name
-  storage_account_name  = local.container_name                        
+  name                  = local.container_name
+  storage_account_name  = local.storage_account_name                   
   container_access_type = "private"
 }
