@@ -11,9 +11,6 @@ resource "azurerm_storage_account" "storage_account" {
   account_replication_type = "LRS"
   access_tier              = "Hot"
 
-
-  depends_on = [azurerm_resource_group.resource_group]
-
   blob_properties {
     delete_retention_policy {
       days = 1 # Soft delete retention
