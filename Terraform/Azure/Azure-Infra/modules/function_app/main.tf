@@ -21,6 +21,7 @@ resource "azurerm_linux_function_app" "func" {
   name                       = var.function_app_name
   location                   = var.resource_group_location
   resource_group_name        = var.resource_group_name
+  
   service_plan_id            = azurerm_service_plan.plan.id
   
   storage_account_name       = var.storage_account_name
@@ -36,7 +37,7 @@ resource "azurerm_linux_function_app" "func" {
 
   app_settings = {
     FUNCTIONS_WORKER_RUNTIME        = "python"
-    AzureWebJobsStorage             = data.azurerm_storage_account.primary_key.primary_connection_string
+    AzureWebJobsStorage             = var.storage_connection_string
     APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.insights.instrumentation_key
   }
 
@@ -48,7 +49,3 @@ resource "azurerm_linux_function_app" "func" {
   tags = var.tags
 }
 
-data "azurerm_storage_account" "primary_key" {
-  name                = var.storage_account_name
-  resource_group_name = var.resource_group_name
-}
