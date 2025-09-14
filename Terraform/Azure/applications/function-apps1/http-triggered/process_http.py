@@ -15,8 +15,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         print("Top matches:")
         logging.info(f"Top matches:")
         for match in matches:
+            m = (input_po_num, match)
             print(match)
-            logging.info(f"match:{match}")
+            logging.info(f"match:{m}")
 
         return func.HttpResponse("Request processed.", status_code=200)
     
