@@ -4,13 +4,13 @@
 
 resource "azurerm_storage_account" "storage_account" {
   name                     = var.storage_account_name
+
   resource_group_name      = var.resource_group_name
   location                 = var.resource_group_location
   
   account_tier             = "Standard"  # Standard or  Premium
   account_kind             = "StorageV2" # {Storage, StorageV2, BlobStorage}, {BlobStorage, BlockBlobStorage, FileStorage}
   account_replication_type = "LRS"
-  
   access_tier              = "Hot"
 
   blob_properties {

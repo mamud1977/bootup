@@ -75,9 +75,10 @@ module "function_app" {
   resource_group_location       = local.resource_group_location
   function_app_name             = local.function_app_name
   plan_name                     = local.plan_name
+
   storage_account_name          = module.storage.storage_account_name
-  storage_account_access_key    = module.storage.storage_account_access_key
   storage_connection_string     = module.storage.storage_connection_string
+  
   tags                          = var.tags
 
   depends_on                    = [azurerm_resource_group.resource_group]

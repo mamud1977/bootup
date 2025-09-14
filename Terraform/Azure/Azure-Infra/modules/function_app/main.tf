@@ -25,7 +25,7 @@ resource "azurerm_linux_function_app" "func" {
   service_plan_id            = azurerm_service_plan.plan.id
   
   storage_account_name       = var.storage_account_name
-  storage_account_access_key = var.storage_account_access_key
+  storage_connection_string = var.storage_storage_connection_stringaccount_access_key
 
   functions_extension_version = "~4"
 
