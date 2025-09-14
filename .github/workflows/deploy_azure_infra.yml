@@ -6,11 +6,11 @@ on:
       - main
       - branch1
     paths:
-      - 'Terraform/Azure/Azure-Infra/**'
+      - 'Terraform/Azure/infra/**'
 
 defaults:
   run:
-    working-directory: ./Terraform/Azure/Azure-Infra
+    working-directory: ./Terraform/Azure/infra
 
 jobs:
   terraform:
