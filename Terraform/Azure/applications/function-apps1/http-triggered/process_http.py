@@ -13,8 +13,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         #Find top 3 matches
         matches = process.extract(input_po_num, choices, limit=3)
         print("Top matches:")
+        logging.info(f"Top matches:")
         for match in matches:
             print(match)
+            logging.info(f"match:{match}")
 
         return func.HttpResponse("Request processed.", status_code=200)
     
