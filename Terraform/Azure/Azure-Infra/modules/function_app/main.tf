@@ -1,4 +1,4 @@
-# module function_app/main.tf 
+# modules/function_app/main.tf
 
 resource "azurerm_service_plan" "plan" {
   name                = var.plan_name
@@ -8,6 +8,14 @@ resource "azurerm_service_plan" "plan" {
   sku_name            = "Y1" # Free tier (Consumption)
   tags                = var.tags
 }
+
+resource "azurerm_application_insights" "insights" {
+  name                = "${var.function_app_name}-app-insight"
+  location            = var.resource_group_location
+  resource_group_name = var.resource_group_name
+  application_type    = "web"
+}
+
 
 resource "azurerm_linux_function_app" "func" {
   name                       = var.function_app_name
@@ -23,6 +31,13 @@ resource "azurerm_linux_function_app" "func" {
       python_version = "3.10"
     }
   }
+
+  app_settings = {
+    FUNCTIONS_WORKER_RUNTIME        = "python"
+    AzureWebJobsStorage             = data.azurerm_storage_account.primary_key.primary_connection_string
+    APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.insights.instrumentation_key
+  }
+
 
   identity {
     type = "SystemAssigned"
