@@ -28,16 +28,16 @@ resource "random_string" "storage_suffix" {
 
 
 locals {
-  resource_group_name       = "${var.env}-${var.resource_group_name_1}"
-  resource_group_location   = "${var.resource_group_location}"
+  resource_group_name     = "${var.resource_group_name_1}-${var.env}"
+  resource_group_location = "${var.resource_group_location}"
 
-  storage_account_name      = "${var.env}${var.storage_account_name}"
-  container_name            = "${var.env}-${var.container_name}"
+  storage_account_name    = "${var.storage_account_name}${var.env}"
+  container_name          = "${var.container_name}-${var.env}"
   
-  cosmosdb_account_name     = "${var.cosmosdb_account_name}-${var.env}-${random_string.storage_suffix.result}"
+  cosmosdb_account_name   = "${var.cosmosdb_account_name}-${var.env}-${random_string.storage_suffix.result}"
 
-  function_app_name       = "Function-App"
-  plan_name               = "${var.env}-function-plan"
+  function_app_name       = "Function-App-${var.env}-${random_string.storage_suffix.result}"
+  plan_name               = "$function-plan-{var.env}"
 
 }
 
