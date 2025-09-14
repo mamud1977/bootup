@@ -27,7 +27,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Debug Azure Auth Details
+      - name: Azure Auth Details
         run: env | grep ARM_
 
       - name: Set up Terraform
