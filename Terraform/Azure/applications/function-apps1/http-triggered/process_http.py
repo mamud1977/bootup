@@ -17,3 +17,5 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     return func.HttpResponse("Request processed.", status_code=200)
 
+
+
