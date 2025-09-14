@@ -49,12 +49,14 @@ jobs:
         echo "Searching for function.zip recursively:"
         find . -name "function.zip"
 
-    - name: Deploy to Azure Function App
-      uses: Azure/functions-action@v1
+    - name: Login to Azure
+      uses: azure/login@v1
       with:
-        app-name        : ${{ env.FUNCTIONAPP_NAME }}
-        package         : ${{ env.FUNCTIONAPP_PATH }}/function.zip
-        publish-profile : ${{ env.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-
-        
+    - name: Deploy to Azure Function App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.FUNCTIONAPP_NAME }}
+        package: ${{ env.FUNCTIONAPP_PATH }}/function.zip
+        slot-name: 'production'
