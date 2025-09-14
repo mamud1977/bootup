@@ -1,8 +1,5 @@
 # modules/function_app/main.tf
 
-locals = {
-
-}
 
 resource "azurerm_service_plan" "plan" {
   name                = var.plan_name
