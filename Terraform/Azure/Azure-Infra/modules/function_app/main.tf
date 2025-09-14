@@ -1,6 +1,5 @@
 # module function_app/main.tf 
 
-
 resource "azurerm_service_plan" "plan" {
   name                = var.plan_name
   location            = var.resource_group_location
