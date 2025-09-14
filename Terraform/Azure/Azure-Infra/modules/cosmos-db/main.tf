@@ -8,6 +8,8 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
 
   tags = var.tags
 
+  enable_automatic_failover = false
+
   consistency_policy {
     consistency_level       = "Session"
   }
