@@ -73,7 +73,7 @@ module "function_app" {
   source                  = "./modules/function_app"
   resource_group_name     = local.resource_group_name
   resource_group_location = local.resource_group_location
-  function_app_name       = "${var.env}-func-storage-trigger"
+  function_app_name       = local.function_app_name
   plan_name               = "${var.env}-func-plan"
   storage_account_name    = module.storage.storage_account_name
   tags                    = var.tags
