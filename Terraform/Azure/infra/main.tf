@@ -46,6 +46,14 @@ resource "azurerm_resource_group" "resource_group" {
   location = local.resource_group_location
 }
 
+resource "azurerm_log_analytics_workspace" "example" {
+  name                = "log-analytics-${var.env}"
+  location            = local.resource_group_location
+  resource_group_name = local.resource_group_name
+  sku                 = "PerGB2018"
+  retention_in_days   = 1
+}
+
 module "storage" {
   source                  = "./modules/storage"
   resource_group_name     = local.resource_group_name
@@ -81,6 +89,8 @@ module "function_app" {
   storage_account_access_key    = module.storage.primary_access_key
   
   tags                          = var.tags
+
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
 
   depends_on                    = [azurerm_resource_group.resource_group]
 }
