@@ -41,6 +41,13 @@ jobs:
     - name: Zip function app
       run: zip -r function.zip .
 
+    - name: Verify zip location
+      run: |
+        echo "Listing contents of current directory:"
+        ls -la
+        echo "Searching for function.zip recursively:"
+        find . -name "function.zip"
+
     - name: Deploy to Azure Function App
       uses: Azure/functions-action@v1
       with:
