@@ -81,3 +81,4 @@ module "function_app" {
   depends_on = [azurerm_resource_group.resource_group]
 }
 
+
