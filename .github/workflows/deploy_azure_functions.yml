@@ -45,6 +45,6 @@ jobs:
       uses: Azure/functions-action@v1
       with:
         app-name: ${{ env.FUNCTIONAPP_NAME }}
-        package: function.zip
+        package: ./function.zip
         publish-profile: ${{ env.AZURE_CREDENTIALS }}
 
