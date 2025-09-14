@@ -36,7 +36,7 @@ locals {
   
   cosmosdb_account_name     = "${var.cosmosdb_account_name}-${var.env}-${random_string.storage_suffix.result}"
 
-  function_app_name       = "Function_app"
+  function_app_name       = "Function-App"
   plan_name               = "${var.env}-function-plan"
 
 }
