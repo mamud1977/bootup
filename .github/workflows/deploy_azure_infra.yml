@@ -6,7 +6,7 @@ on:
       - main
       - branch1
     paths:
-      - 'Terraform/Azure-Infra/**'
+      - 'Terraform/Azure/Azure-Infra/**'
 
 defaults:
   run:
