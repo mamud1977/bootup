@@ -78,7 +78,7 @@ module "function_app" {
 
   storage_account_name          = module.storage.storage_account_name
   storage_connection_string     = module.storage.storage_connection_string
-  
+  storage_account_access_key    = module.storage_account_access_key
   tags                          = var.tags
 
   depends_on                    = [azurerm_resource_group.resource_group]
