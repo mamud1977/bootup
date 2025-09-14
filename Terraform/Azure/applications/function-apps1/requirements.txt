@@ -1,1 +1,2 @@
 azure-functions
+rapidfuzz==3.6.1
