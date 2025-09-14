@@ -10,7 +10,6 @@ variable "tags" {
   description = "Standard tags to apply to all resources"
 }
 
-
 variable "resource_group_name_1" {
   description = "Azure Resource Group Name"
   type        = string

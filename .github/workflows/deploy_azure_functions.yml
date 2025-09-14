@@ -10,7 +10,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./Terraform/Azure/applications
+    working-directory: ./Terraform/Azure/applications/function-apps1
 
 jobs:
   build-and-deploy:
