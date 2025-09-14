@@ -56,3 +56,5 @@ jobs:
         package         : ${{ env.FUNCTIONAPP_PATH }}/function.zip
         publish-profile : ${{ env.AZURE_CREDENTIALS }}
 
+
+        
