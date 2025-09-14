@@ -10,7 +10,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./Terraform/Azure-Infra
+    working-directory: ./Terraform/Azure/Azure-Infra
 
 jobs:
   terraform:
