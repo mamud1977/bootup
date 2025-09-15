@@ -7,8 +7,6 @@ on:
       - branch1
     paths:
       - 'Terraform/Azure/infra/**'
-    paths-ignore:
-      - 'Terraform/Azure/infra/apim/**'
 
 defaults:
   run:
