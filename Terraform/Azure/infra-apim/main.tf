@@ -32,7 +32,7 @@ data "terraform_remote_state" "infra" {
 
 # APIM Resource
 resource "azurerm_api_management" "apim" {
-  name                = "apim-${data.terraform_remote_state.infra.outputs.env}-${data.terraform_remote_state.infra.outputs.random_string}"
+  name                = "apim-2-${data.terraform_remote_state.infra.outputs.env}-${data.terraform_remote_state.infra.outputs.random_string}"
   location            = data.terraform_remote_state.infra.outputs.resource_group_location
   resource_group_name = data.terraform_remote_state.infra.outputs.resource_group_name
   publisher_name      = "By Mamud"
