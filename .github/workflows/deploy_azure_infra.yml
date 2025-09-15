@@ -7,10 +7,8 @@ on:
       - branch1
     paths:
       - 'Terraform/Azure/infra/**'
-
-defaults:
-  run:
-    working-directory: ./Terraform/Azure/infra
+    paths-ignore:
+      - 'Terraform/Azure/infra/apim/**'
 
 jobs:
   terraform:
