@@ -45,3 +45,4 @@ resource "azurerm_api_management" "apim" {
 
   tags = data.terraform_remote_state.infra.outputs.tags
 }
+
