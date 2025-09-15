@@ -8,6 +8,10 @@ on:
     paths:
       - 'Terraform/Azure/infra/apim/**'
 
+defaults:
+  run:
+    working-directory: ./Terraform/Azure/infra/apim
+
 
 jobs:
   terraform:
