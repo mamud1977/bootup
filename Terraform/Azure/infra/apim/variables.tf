@@ -1,1 +1,0 @@
-# infra/apim/variables.tf
