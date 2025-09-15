@@ -75,11 +75,13 @@ module "cosmosdb" {
   source                  = "./modules/cosmos-db"
   resource_group_name     = local.resource_group_name
   resource_group_location = local.resource_group_location
+
   cosmosdb_account_name   = local.cosmosdb_account_name
   tags                    = var.tags
 
   depends_on = [azurerm_resource_group.resource_group]
 }
+
 
 module "function_app" {
   source                        = "./modules/function_app"
