@@ -94,7 +94,7 @@ module "function_app" {
   
   tags                          = var.tags
 
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.log_analytics.id
 
   depends_on                    = [
                                   azurerm_resource_group.resource_group,
