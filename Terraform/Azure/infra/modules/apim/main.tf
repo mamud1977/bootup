@@ -86,7 +86,7 @@ resource "azurerm_api_management_api_operation_policy" "http_triggered_policy" {
   <inbound>
     <base />
     <set-header name="x-functions-key" exists-action="override">
-      <value>{{function-key}}</value>
+      <value>{{function_key}}</value>
     </set-header>
     <rate-limit calls="100" renewal-period="60" />
     <set-backend-service base-url="https://function-app-dev-ijfviz.azurewebsites.net/api/http-triggered" />
