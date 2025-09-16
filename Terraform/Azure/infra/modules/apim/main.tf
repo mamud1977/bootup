@@ -50,3 +50,11 @@ resource "azurerm_api_management_product" "po_matcher_product" {
   subscriptions_limit   = 5     # Limits the number of subscriptions a user can create for this product.
 }
 
+##### 6. Link Your API to the Product
+
+resource "azurerm_api_management_product_api" "po_matcher_link" {
+  api_name            = azurerm_api_management_api.function_api.name
+  product_id          = azurerm_api_management_product.po_matcher_product.product_id
+  api_management_name = azurerm_api_management.apim.name
+  resource_group_name = var.resource_group_name
+}
