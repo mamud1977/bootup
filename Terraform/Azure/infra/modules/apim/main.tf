@@ -31,7 +31,7 @@ resource "azurerm_api_management_api" "function_api" {
 
   import {
     content_format = "swagger-link-json"
-    content_value  = "https://${var.function_app_hostname}/api/swagger.json"
+    content_value  = "${var.function_app_hostname}/api/swagger.json"
   }
 }
 
