@@ -43,7 +43,7 @@ resource "azurerm_api_management_api_operation" "match_po" {
   method              = "GET"
   url_template        = "/match"
   response {
-    status      = 200
+    status_code = 200
     description = "Successful match"
   }
 }
