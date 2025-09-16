@@ -49,7 +49,7 @@ resource "azurerm_api_management_api_operation" "http_triggered" {
   url_template        = "/http-triggered"
 
   request {
-    query_parameters {
+    query_parameter {
       name     = "po_number"
       required = false
       type     = "string"
