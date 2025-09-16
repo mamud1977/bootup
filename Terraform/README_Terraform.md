@@ -35,7 +35,14 @@ Open the page:  https://microsoft.com/devicelogin and enter the code INDVX9E3D
 
 (4)
 
+cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure/infra
+
 terraform init
-terraform plan -destroy
+terraform plan -destroy -out=tfplan
 terraform destroy
 terraform destroy -auto-approve
+
+
+########## AZ Commands
+
+az resource list --output table
