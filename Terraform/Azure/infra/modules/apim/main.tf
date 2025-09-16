@@ -28,10 +28,5 @@ resource "azurerm_api_management_api" "function_api" {
   display_name        = "HTTP Function API"
   path                = "function"
   protocols           = ["https"]
-
-  import {
-    content_format = "swagger-link-json"
-    content_value  = "${var.function_app_hostname}/api/swagger.json"
-  }
 }
 
