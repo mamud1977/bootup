@@ -20,7 +20,7 @@ resource "azurerm_application_insights" "insights" {
 }
 
 
-resource "azurerm_linux_function_app" "func" {
+resource "azurerm_linux_function_app" "function_app" {
   name                       = var.function_app_name
   location                   = var.resource_group_location
   resource_group_name        = var.resource_group_name
