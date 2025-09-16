@@ -3,7 +3,6 @@ output "function_app_hostname" {
 }
 
 output "function_key" {
-  value     = azurerm_linux_function_app.function_app.function_keys["default"]
+  value     = data.azurerm_function_app_host_keys.function_keys.default
   sensitive = true
 }
-
