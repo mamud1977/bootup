@@ -47,3 +47,28 @@ resource "azurerm_api_management_api_operation" "match_po" {
     description = "Successful match"
   }
 }
+
+###### Wire the Backend
+
+resource "azurerm_api_management_api_operation_policy" "match_po_policy" {
+  operation_id        = azurerm_api_management_api_operation.match_po.operation_id
+  api_name            = azurerm_api_management_api.function_api.name
+  api_management_name = azurerm_api_management.apim.name
+  resource_group_name = var.resource_group_name
+
+  xml_content = <<XML
+  <policies>
+  <inbound>
+    <base />
+    <set-backend-service base-url="https://${var.function_app_hostname}/api/match-po" />
+  </inbound>
+  <backend>
+    <base />
+  </backend>
+  <outbound>
+    <base />
+  </outbound>
+  </policies>
+  XML
+}
+
