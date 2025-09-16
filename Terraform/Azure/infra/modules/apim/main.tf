@@ -1,6 +1,10 @@
-# modules/apim/main.tf
+#####  modules/apim/main.tf
 
-########### 1. Create an APIM
+#####  1. Create an Azure function App
+
+#####  2. Deploy one or many funtions
+
+#####  3. Create an APIM
 
 resource "azurerm_api_management" "apim" {
   name                = var.apim_name
@@ -20,7 +24,7 @@ resource "azurerm_api_management" "apim" {
 }
 
 
-########### 2. Creating the APIM API resource
+#####  4. Creating the APIM API resource
 
 resource "azurerm_api_management_api" "function_api" {
   name                = "hhtp-triggered-function-api-${var.env}"
@@ -32,5 +36,17 @@ resource "azurerm_api_management_api" "function_api" {
   protocols           = ["https"]
 }
 
-########### Define operation
+##### 5. Create an APIM Product - a logical container for one or more APIs, with access rules
+resource "azurerm_api_management_product" "po_matcher_product" {
+  product_id          = "po-matcher-product"
+  api_management_name = azurerm_api_management.apim.name
+  resource_group_name = var.resource_group_name
+
+  display_name        = "PO Matcher Product"
+  description         = "Secure access to PO matching API"
+  subscription_required = true  # Enforces access control: users must have a valid subscription key to call APIs in this product.
+  approval_required     = false # Users can self-subscribe without manual approval.
+  published             = true  # Makes the product visible in the developer portal.
+  subscriptions_limit   = 5     # Limits the number of subscriptions a user can create for this product.
+}
 
