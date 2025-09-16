@@ -3,6 +3,7 @@
 .terraform.*
 terraform.tfstate
 terraform.tfstate.*
+*.tfvars
 .private
 .public
 rsa_key
