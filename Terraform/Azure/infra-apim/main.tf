@@ -76,3 +76,4 @@ resource "azurerm_api_management" "apim" {
   tags = local.tags
 }
 
+
