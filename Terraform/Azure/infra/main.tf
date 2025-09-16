@@ -117,7 +117,7 @@ module "apim" {
   tags                    = var.tags
   env                     = var.env
   function_app_hostname   = module.function_app.function_app_hostname
-
+  function_key            = module.function_app.function_key
   depends_on = [azurerm_resource_group.resource_group]
 }
 
