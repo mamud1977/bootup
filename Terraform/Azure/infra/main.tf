@@ -94,6 +94,7 @@ module "function_app" {
   storage_account_access_key    = module.storage.primary_access_key
   
   tags                          = var.tags
+  env                           = var.env
 
   log_analytics_workspace_id = azurerm_log_analytics_workspace.log_analytics.id
 

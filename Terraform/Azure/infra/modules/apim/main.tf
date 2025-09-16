@@ -16,3 +16,21 @@ resource "azurerm_api_management" "apim" {
 
   tags = var.tags
 }
+
+
+####### Create an API in APIM
+
+resource "azurerm_api_management_api" "function_api" {
+  name                = "func-api-${var.env}"
+  resource_group_name = var.resource_group_name
+  api_management_name = azurerm_api_management.apim.name
+  revision            = "1"
+  display_name        = "HTTP Function API"
+  path                = "function"
+  protocols           = ["https"]
+
+  import {
+    content_format = "swagger-link-json"
+    content_value  = "<swagger-url-or-function-openapi-spec>"
+  }
+}
