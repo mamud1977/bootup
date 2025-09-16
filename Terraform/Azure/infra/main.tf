@@ -94,7 +94,7 @@ module "function_app" {
   storage_account_access_key    = module.storage.primary_access_key
   
   tags                          = var.tags
-  env                           = var.env
+  
 
   log_analytics_workspace_id = azurerm_log_analytics_workspace.log_analytics.id
 
@@ -115,6 +115,7 @@ module "apim" {
   sku_name                = "Developer_1"  # Use Standard_1 or Premium_1 for production
 
   tags                    = var.tags
+  env                     = var.env
 
   depends_on = [azurerm_resource_group.resource_group]
 }
