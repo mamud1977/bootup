@@ -1,5 +1,7 @@
 # modules/apim/main.tf
 
+####### Create an APIM
+
 resource "azurerm_api_management" "apim" {
   name                = var.apim_name
 
@@ -18,7 +20,7 @@ resource "azurerm_api_management" "apim" {
 }
 
 
-####### Create an API in APIM
+####### Create an API
 
 resource "azurerm_api_management_api" "function_api" {
   name                = "func-api-${var.env}"
@@ -30,3 +32,18 @@ resource "azurerm_api_management_api" "function_api" {
   protocols           = ["https"]
 }
 
+####### Define operation
+
+resource "azurerm_api_management_api_operation" "match_po" {
+  operation_id        = "match-po"
+  api_name            = azurerm_api_management_api.function_api.name
+  api_management_name = azurerm_api_management.apim.name
+  resource_group_name = var.resource_group_name
+  display_name        = "Match PO Number"
+  method              = "GET"
+  url_template        = "/match"
+  response {
+    status      = 200
+    description = "Successful match"
+  }
+}
