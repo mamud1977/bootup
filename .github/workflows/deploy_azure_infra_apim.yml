@@ -39,6 +39,12 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
+      - name: Inject secrets into dev.tfvars
+        run: |
+          echo 'function_key  = "${{ secrets.FUNCTION_KEY }}"' >> dev.tfvars
+          echo 'client_secret = "${{ secrets.CLIENT_SECRET }}"' >> dev.tfvars
+          echo 'storage_key   = "${{ secrets.STORAGE_KEY }}"' >> dev.tfvars
+
       - name: Terraform Plan
         run: terraform plan -var-file="dev.tfvars" -out=tfplan
       
