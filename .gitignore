@@ -9,3 +9,4 @@ rsa_key
 rsa_key.pub
 *.pvt
 .venv
+.vscode
