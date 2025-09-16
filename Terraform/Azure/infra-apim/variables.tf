@@ -16,4 +16,4 @@ variable "function_key" {
   sensitive = true
 }
 
-variable "identity {}
+variable "identity" {}
