@@ -39,11 +39,6 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Inject secrets into dev.tfvars
-        run: |
-          echo "" >> dev.tfvars
-          echo "APIM_NAME=\"${{ secrets.APIM_NAME}}\""" >> dev.tfvars
-
       - name: Contents of dev.tfvars
         run: cat dev.tfvars
 
