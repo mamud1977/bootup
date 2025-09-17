@@ -11,6 +11,7 @@ resource "azurerm_log_analytics_workspace" "log_analytics" {
 }
 
 resource "azurerm_application_insights" "app_insights" {
+  name                = "app_insights-${var.env}"
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
   application_type    = "web"
