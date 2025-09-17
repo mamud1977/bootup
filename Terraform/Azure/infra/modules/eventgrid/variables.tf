@@ -4,6 +4,6 @@ variable "function_app_id" {}
 variable "function_name" {
   description = "Name of azure function"
   type        = string
-  default     = "blob_triggered"
+  default     = "blob-triggered"
 }
 variable "labels" {}
