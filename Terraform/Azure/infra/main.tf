@@ -33,6 +33,7 @@ resource "random_string" "storage_suffix" {
 
 
 locals {
+  env                     = var.env
   resource_group_name     = "${var.resource_group_name_1}-${var.env}"
   resource_group_location = "${var.resource_group_location}"
 
@@ -49,12 +50,13 @@ resource "azurerm_resource_group" "resource_group" {
   location = local.resource_group_location
 }
 
-resource "azurerm_log_analytics_workspace" "log_analytics" {
-  name                = "log-analytics-${var.env}"
-  location            = local.resource_group_location
-  resource_group_name = local.resource_group_name
-  sku                 = "PerGB2018"
-  retention_in_days   = 30
+
+module "monitoring" {
+  source                  = "./modules/monitoring"
+  env                     = local.env
+  resource_group_name     = local.resource_group_name
+  resource_group_location = local.resource_group_location
+  tags                    = var.tags
 
   depends_on = [azurerm_resource_group.resource_group]
 }
@@ -71,23 +73,28 @@ module "storage" {
   depends_on = [azurerm_resource_group.resource_group]
 }
 
+function_url = module.a.function_app_url
+
 module "function_app" {
-  source                        = "./modules/function_app"
-  resource_group_name           = local.resource_group_name
-  resource_group_location       = local.resource_group_location
-  function_app_name             = local.function_app_name
-  plan_name                     = local.plan_name
-
-  storage_account_name          = module.storage.storage_account_name
-  storage_connection_string     = module.storage.storage_connection_string
-  storage_account_access_key    = module.storage.primary_access_key
+  source                     = "./modules/function_app"
+  resource_group_name        = local.resource_group_name
+  resource_group_location    = local.resource_group_location
   
-  tags                          = var.tags
-  
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.log_analytics.id
+  function_app_name          = local.function_app_name
+  plan_name                  = local.plan_name
 
+  storage_account_name       = module.storage.storage_account_name
+  storage_connection_string  = module.storage.storage_connection_string
+  storage_account_access_key = module.storage.primary_access_key
+  
+  tags                       = var.tags
+  
+  application_insights_id    = module.monitoring.app_insights.application_insights_id
+  instrumentation_key        = module.monitoring.app_insights.instrumentation_key
+  
   depends_on                    = [
                                   azurerm_resource_group.resource_group,
-                                  azurerm_log_analytics_workspace.log_analytics]
+                                  azurerm_application_insights.app_insights
+                                  ]
 }
 

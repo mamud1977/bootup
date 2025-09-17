@@ -10,12 +10,50 @@ resource "azurerm_service_plan" "plan" {
   tags                = var.tags
 }
 
-resource "azurerm_application_insights" "insights" {
-  name                = "${var.function_app_name}-app-insight"
-  location            = var.resource_group_location
-  resource_group_name = var.resource_group_name
-  application_type    = "web"
 
-  workspace_id        = var.log_analytics_workspace_id
+
+  source                        = "./modules/function_app"
+  resource_group_name           = local.resource_group_name
+  resource_group_location       = local.resource_group_location
+  
+  function_app_name             = local.function_app_name
+  plan_name                     = local.plan_name
+
+  storage_account_name          = module.storage.storage_account_name
+  storage_connection_string     = module.storage.storage_connection_string
+  storage_account_access_key    = module.storage.primary_access_key
+
+
+resource "azurerm_linux_function_app" "function" {
+  name                       = var.function_app_name
+  resource_group_name        = var.resource_group_name
+  location                   = var.resource_group_location
+  
+  service_plan_id            = azurerm_service_plan.plan.id
+  storage_account_name       = var.storage_account_name
+  storage_account_access_key = var.storage_account_access_key
+  application_insights_id    = var.application_insights_id
+
+  site_config {
+    application_stack {
+      python_version = "3.10"
+    }
+  }
+
+  app_settings = {
+    FUNCTIONS_WORKER_RUNTIME = "python"
+    APPINSIGHTS_INSTRUMENTATIONKEY = var.instrumentation_key
+    AzureWebJobsStorage = azurerm_storage_account.storage.primary_connection_string
+    FUNCTION_KEY = var.function_key
+    ENV = var.env
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  tags = var.tags
 }
+
+
 

@@ -8,7 +8,5 @@ variable "storage_connection_string" {}
 variable "tags" {
   type = map(string)
 }
-variable "log_analytics_workspace_id" {
-  description = "ID of the Log Analytics workspace to link with Application Insights"
-  type        = string
-}
+variable "application_insights_id" {}
+variable "instrumentation_key" {}
