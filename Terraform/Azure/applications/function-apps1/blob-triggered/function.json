@@ -1,0 +1,14 @@
+{
+  "bindings": [
+    {
+      "name": "myblob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "sample-container/{name}",
+      "connection": "AzureWebJobsStorage"
+    }
+  ],
+  "scriptFile": "process_blob.py",
+  "entryPoint": "main"
+}
+

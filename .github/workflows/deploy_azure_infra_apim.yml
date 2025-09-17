@@ -6,11 +6,11 @@ on:
       - main
       - branch1
     paths:
-      - 'Terraform/Azure/infra-apim/**'
+      - 'Terraform/Azure/infra-APIM/**'
 
 defaults:
   run:
-    working-directory: ./Terraform/Azure/infra-apim
+    working-directory: ./Terraform/Azure/infra-APIM
 
 
 jobs:
