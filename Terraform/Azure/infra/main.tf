@@ -103,27 +103,3 @@ module "function_app" {
                                   azurerm_log_analytics_workspace.log_analytics]
 }
 
-
-module "apim" {
-  source                  = "./modules/apim"
-  resource_group_name     = local.resource_group_name
-  resource_group_location = local.resource_group_location
-
-  apim_name               = "apim-${var.env}-${random_string.storage_suffix.result}"
-  publisher_name          = "ByMamud"
-  publisher_email         = "mamud1977@outlook.com"
-  sku_name                = "Developer_1"  # Use Standard_1 or Premium_1 for production
-
-  tags                    = var.tags
-  env                     = var.env
-  function_app_hostname   = module.function_app.function_app_hostname
-  function_key            = module.function_app.function_key
-  depends_on = [azurerm_resource_group.resource_group]
-}
-
-
-
-
-
-
-
