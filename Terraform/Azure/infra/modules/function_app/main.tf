@@ -10,20 +10,6 @@ resource "azurerm_service_plan" "plan" {
   tags                = var.tags
 }
 
-
-
-  source                        = "./modules/function_app"
-  resource_group_name           = local.resource_group_name
-  resource_group_location       = local.resource_group_location
-  
-  function_app_name             = local.function_app_name
-  plan_name                     = local.plan_name
-
-  storage_account_name          = module.storage.storage_account_name
-  storage_connection_string     = module.storage.storage_connection_string
-  storage_account_access_key    = module.storage.primary_access_key
-
-
 resource "azurerm_linux_function_app" "function" {
   name                       = var.function_app_name
   resource_group_name        = var.resource_group_name

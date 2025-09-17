@@ -1,8 +1,4 @@
-  source                  = "./modules/monitoring"
-  env                     = local.env
-  resource_group_name     = local.resource_group_name
-  resource_group_location = local.resource_group_location
-  tags                    = var.tags
+# module monitoring/main.tf
 
 resource "azurerm_log_analytics_workspace" "log_analytics" {
   name                = "log-analytics-${var.env}"
