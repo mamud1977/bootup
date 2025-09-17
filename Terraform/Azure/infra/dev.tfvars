@@ -1,6 +1,6 @@
 # terraform.tfvars
 
-env                         = "dev"
+env = "dev"
 
 tags = {
   environment = "dev"
@@ -9,7 +9,7 @@ tags = {
 }
 
 resource_group_name_1       = "rg"
-resource_group_location     = "Central India"
+resource_group_location     = "East US"
 
 storage_account_name        = "storageacct1"
 container_name              = "container1"

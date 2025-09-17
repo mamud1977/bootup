@@ -30,7 +30,6 @@ variable "container_name" {
   type        = string
 }
 
-
 variable "cosmosdb_account_name" {
   description = "Name of the cosmosdb account"
   type        = string

@@ -3,6 +3,7 @@
 .terraform.*
 terraform.tfstate
 terraform.tfstate.*
+tfplan
 .private
 .public
 rsa_key
