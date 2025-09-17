@@ -24,3 +24,4 @@ resource "azurerm_eventgrid_event_subscription" "blob_created_trigger" {
   labels = var.labels
 
 }
+
