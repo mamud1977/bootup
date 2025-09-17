@@ -29,8 +29,3 @@ variable "container_name" {
   description = "Name of the blob container"
   type        = string
 }
-
-variable "cosmosdb_account_name" {
-  description = "Name of the cosmosdb account"
-  type        = string
-}
