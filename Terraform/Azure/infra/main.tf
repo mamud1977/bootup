@@ -87,8 +87,8 @@ module "function_app" {
   
   tags                       = var.tags
   
-  application_insights_id    = module.monitoring.app_insights.application_insights_id
-  instrumentation_key        = module.monitoring.app_insights.instrumentation_key
+  application_insights_id    = module.monitoring.application_insights_id
+  instrumentation_key        = module.monitoring.instrumentation_key
   
   depends_on                    = [
                                   azurerm_resource_group.resource_group,
