@@ -32,3 +32,8 @@ resource "azurerm_storage_container" "my_container" {
   container_access_type   = "private"
 }
 
+resource "azurerm_storage_container" "parquet_files" {
+  name                  = "parquet-files"
+  storage_account_name  = azurerm_storage_account.storage_account.name
+  container_access_type = "private"
+}
