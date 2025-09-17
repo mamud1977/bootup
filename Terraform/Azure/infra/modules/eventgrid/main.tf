@@ -5,17 +5,17 @@ resource "azurerm_eventgrid_event_subscription" "blob_created_trigger" {
   event_delivery_schema = "EventGridSchema"
   included_event_types  = ["Microsoft.Storage.BlobCreated"]
 
-  destination {
-    endpoint_type = "AzureFunction"
-    resource_id   = var.function_app_id
+  azure_function_endpoint {
+    function_id = var.function_app_id
   }
 
   advanced_filter {
-    key      = "data.url"
-    operator = "StringEndsWith"
-    values   = [".parquet"]
+    string_ends_with {
+      key    = "data.url"
+      values = [".parquet"]
+    }
   }
-
+  
   retry_policy {
     max_delivery_attempts = 5
     event_time_to_live    = 1440
