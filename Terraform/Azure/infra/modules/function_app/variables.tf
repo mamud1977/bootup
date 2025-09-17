@@ -1,3 +1,4 @@
+variable "env" {}
 variable "resource_group_name" {}
 variable "resource_group_location" {}
 variable "function_app_name" {}

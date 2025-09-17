@@ -75,6 +75,7 @@ module "storage" {
 
 module "function_app" {
   source                     = "./modules/function_app"
+  env                        = local.env
   resource_group_name        = local.resource_group_name
   resource_group_location    = local.resource_group_location
   
