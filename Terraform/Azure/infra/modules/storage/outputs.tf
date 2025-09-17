@@ -13,7 +13,7 @@ output "primary_access_key" {
   sensitive = true
 }
 
-output "storage_connection_string" {
+output "primary_connection_string" {
   value = azurerm_storage_account.storage_account.primary_connection_string
 }
 

@@ -82,7 +82,7 @@ module "function_app" {
   plan_name                  = local.plan_name
 
   storage_account_name       = module.storage.storage_account_name
-  storage_connection_string  = module.storage.storage_connection_string
+  storage_connection_string  = module.storage.primary_connection_string
   storage_account_access_key = module.storage.primary_access_key
   
   tags                       = var.tags
