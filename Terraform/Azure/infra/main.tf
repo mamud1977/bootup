@@ -87,7 +87,7 @@ module "function_app" {
   storage_account_access_key = module.storage.primary_access_key
   
   tags                       = var.tags
-  
+ 
   application_insights_id    = module.monitoring.application_insights_id
   instrumentation_key        = module.monitoring.instrumentation_key
   
