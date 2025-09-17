@@ -73,8 +73,6 @@ module "storage" {
   depends_on = [azurerm_resource_group.resource_group]
 }
 
-function_url = module.a.function_app_url
-
 module "function_app" {
   source                     = "./modules/function_app"
   resource_group_name        = local.resource_group_name
