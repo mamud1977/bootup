@@ -4,7 +4,7 @@
       "name": "myblob",
       "type": "blobTrigger",
       "direction": "in",
-      "path": "sample-container/{name}",
+      "path": "parquet-files/{name}",
       "connection": "AzureWebJobsStorage"
     }
   ],
