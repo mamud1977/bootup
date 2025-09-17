@@ -44,8 +44,8 @@ jobs:
           echo "" >> dev.tfvars
           echo "APIM_NAME=\"${{ secrets.APIM_NAME}}\""" >> dev.tfvars
 
-      - name: List all environment variables
-        run: printenv
+      - name: Contents of dev.tfvars
+        run: cat dev.tfvars
 
       - name: Terraform Plan
         run: terraform plan -var-file="dev.tfvars" -out=tfplan
