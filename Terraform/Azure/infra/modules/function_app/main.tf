@@ -30,7 +30,6 @@ resource "azurerm_linux_function_app" "function" {
     FUNCTIONS_WORKER_RUNTIME = "python"
     APPINSIGHTS_INSTRUMENTATIONKEY = var.instrumentation_key
     AzureWebJobsStorage = var.storage_connection_string
-    FUNCTION_KEY = var.function_key
     ENV = var.env
   }
 
