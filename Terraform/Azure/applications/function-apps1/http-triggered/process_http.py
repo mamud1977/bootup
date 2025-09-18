@@ -4,6 +4,9 @@ from rapidfuzz import fuzz, process
 import pandas as pd
 from azure.storage.blob import BlobServiceClient
 import os
+import io
+
+
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     
@@ -44,5 +47,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     
     except Exception as e:
         return func.HttpResponse(f"Exception: {e}", status_code=500) 
+
 
 
