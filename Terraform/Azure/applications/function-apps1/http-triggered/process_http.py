@@ -40,11 +40,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             print(match)
             logging.info(f"match:{m}")
 
-        return func.HttpResponse("Request processed.", status_code=200)
+        return func.HttpResponse(f"Parquet file '{blob_name}' has {len(df)} rows and {len(df.columns)} columns.", status_code=200)
     
     except Exception as e:
         return func.HttpResponse(f"Exception: {e}", status_code=500) 
-
-
 
 
