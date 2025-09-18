@@ -27,21 +27,21 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         # Read Parquet into DataFrame
         df = pd.read_parquet(io.BytesIO(parquet_bytes))
 
-        # Log and return summary
-        logging.info(f"Read {len(df)} rows from {blob_name}")
+        # # Log and return summary
+        # logging.info(f"Read {len(df)} rows from {blob_name}")
         
-        input_po_num = req.params.get("po_number")
+        # input_po_num = req.params.get("po_number")
 
-        choices = ["PO 12345", "POx 83n333", "PO 383838302"]
+        # choices = ["PO 12345", "POx 83n333", "PO 383838302"]
 
-        #Find top 3 matches
-        matches = process.extract(input_po_num, choices, limit=3)
-        print("Top matches:")
-        logging.info(f"Top matches:")
-        for match in matches:
-            m = (input_po_num, match)
-            print(match)
-            logging.info(f"match:{m}")
+        # #Find top 3 matches
+        # matches = process.extract(input_po_num, choices, limit=3)
+        # print("Top matches:")
+        # logging.info(f"Top matches:")
+        # for match in matches:
+        #     m = (input_po_num, match)
+        #     print(match)
+        #     logging.info(f"match:{m}")
 
         return func.HttpResponse(f"Parquet file '{blob_name}' has {len(df)} rows and {len(df.columns)} columns.", status_code=200)
     
