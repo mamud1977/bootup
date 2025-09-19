@@ -64,3 +64,7 @@ output "eventgrid_subscription_id" {
   value = module.eventgrid.eventgrid_subscription_id
 }
 
+output "azure_function_endpoint" {
+  value = module.eventgrid.azure_function_endpoint
+}
+
