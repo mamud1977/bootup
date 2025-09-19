@@ -21,11 +21,12 @@ output "resource_group_location" {
 ################### Storage related outputs
 
 output "storage_account_name" {
-  value = azurerm_storage_account.storage_account.name
+  value = module.storage.storage_account_name
 }
 
+
 output "storage_account_id" {
-  value = azurerm_storage_account.storage_account.id
+  value = module.storage.storage_account_id
 }
 
 output "primary_access_key" {
@@ -38,11 +39,11 @@ output "primary_connection_string" {
 }
 
 output "container_name" {
-  value = module.storage.container.name
+  value = module.storage.container_name
 }
 
 output "container_id" {
-  value = module.storage.container.id
+  value = module.storage.container_id
 }
 
 output "parquet_container_name" {
