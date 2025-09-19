@@ -28,9 +28,12 @@ jobs:
 
         -   name: Terraform Init
             run: terraform init
+        
+        -   name: Terraform Init
+            run: terraform plan -out=tfplan -destroy -var-file="dev.tfvars" 
 
         -   name: Terraform Destroy
-            run: terraform destroy -auto-approve
+            run: terraform apply tfplan
 
 
 
