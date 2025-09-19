@@ -9,7 +9,7 @@ resource "azurerm_eventgrid_event_subscription" "blob_created" {
   }
 
   azure_function_endpoint {
-    function_id = "${var.function_app_id}/functions/${var.function_name-blob-triggered}"
+    function_id = "${var.function_app_id}/functions/${var.function_name-eventgrid-triggered}"
   }
 
   labels = var.labels

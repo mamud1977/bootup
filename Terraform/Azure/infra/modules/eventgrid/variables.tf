@@ -2,10 +2,10 @@ variable "subscription_name" {}
 variable "storage_account_id" {}
 variable "function_app_id" {}
 
-variable "function_name-blob-triggered" {
+variable "function_name-eventgrid-triggered" {
   description = "Name of azure function"
   type        = string
-  default     = "blob-triggered"
+  default     = "eventgrid-triggered"
 }
 
 variable "labels" {}
