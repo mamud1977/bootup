@@ -13,7 +13,7 @@
       "name": "$return"
     }
   ],
-  "scriptFile": "process_http.py",
+  "scriptFile": "triggered_by_http.py",
   "entryPoint": "main"
 }
 
