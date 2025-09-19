@@ -99,14 +99,17 @@ module "function_app" {
 }
 
 
-# module "eventgrid" {
-#   source              = "./modules/eventgrid"
-#   subscription_name   = "BlobCreatedTrigger"
-#   storage_account_id  = module.storage.storage_account_id
-#   function_app_id     = module.function_app.function_app_id
-#   labels              = ["parquet", "blob", "trigger"]
-#   depends_on          = [
-#                           module.storage, 
-#                           module.function_app
-#                         ]
-# }
+module "eventgrid" {
+  source              = "./modules/eventgrid"
+  subscription_name   = "BlobCreated"
+  storage_account_id  = module.storage.storage_account_id
+  function_app_id     = module.function_app.function_app_id
+  function_name       = "blob_triggered"
+  labels              = ["txt/parquet", "blob", "trigger"]
+  tags                = var.tags
+  depends_on          = [
+                          module.storage, 
+                          module.function_app
+                        ]
+        
+}
