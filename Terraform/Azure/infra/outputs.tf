@@ -36,6 +36,7 @@ output "primary_access_key" {
 
 output "primary_connection_string" {
   value = module.storage.primary_connection_string
+  sensitive = true
 }
 
 output "container_name" {
