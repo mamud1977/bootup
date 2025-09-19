@@ -4,18 +4,15 @@ resource "azurerm_eventgrid_event_subscription" "blob_created" {
   included_event_types = ["Microsoft.Storage.BlobCreated"]
   event_delivery_schema = "EventGridSchema"
 
-  advanced_filter {
-    key          = "subject"
-    operator_type = "StringEndsWith"
-    values       = [".txt", ".parquet"]
+  subject_filter {
+    subject_ends_with = ".txt"
   }
 
   azure_function_endpoint {
-    function_id = "${var.function_app_id}/functions/${var.function_name}"
+    function_id = "${var.function_app_id}/functions/${var.function_name-blob-triggered}"
   }
 
   labels = var.labels
-  tags   = var.tags
 
 }
 
