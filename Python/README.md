@@ -8,14 +8,19 @@ python3 -m venv .venv
 source .venv/bin/activate
 deactivate
 
+cd c:\MyWork
+python3 -m venv .venv
+.venv\Scripts\activate
+
 =======================================
 
-cd 
+cd /mnt/c/Users/mamud/Downloads
 cd /mnt/c/MyWork/gitlocal/bootup/Azure/
 cd /mnt/c/MyWork/gitlocal/bootup/Python/
 cd /mnt/c/MyWork/gitlocal/bootup/Python/Flask
 cd /mnt/c/MyWork/gitlocal/bootup/Apache/PySpark
 cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure
+cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure/applications/function-apps1
 cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure/infra
 cd /mnt/c/MyWork/gitlocal/bootup/Terraform/snowflake
 

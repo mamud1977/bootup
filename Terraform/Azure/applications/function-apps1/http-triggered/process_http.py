@@ -27,8 +27,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         # Read Parquet into DataFrame
         df = pd.read_parquet(io.BytesIO(parquet_bytes))
 
-        # # Log and return summary
-        # logging.info(f"Read {len(df)} rows from {blob_name}")
+        # Log and return summary
+        logging.info(f"Read {len(df)} rows from {blob_name}")
         
         # input_po_num = req.params.get("po_number")
 
