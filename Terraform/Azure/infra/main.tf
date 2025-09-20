@@ -125,19 +125,16 @@ module "function_app_v2" {
 }
 
 
-
-module "eventgrid" {
+module "eventgrid_v1" {
   source              = "./modules/eventgrid"
   subscription_name   = "BlobCreated"
   storage_account_id  = module.storage.storage_account_id
-  function_app_id     = module.function_app.function_app_id
+  function_app_id     = module.function_app_v1.function_app_id
   labels              = ["txt/parquet", "blob", "trigger"]
   depends_on          = [
                           module.storage, 
                           module.function_app
                         ]
-        
 }
-
 
 
