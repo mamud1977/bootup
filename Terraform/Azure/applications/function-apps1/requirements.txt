@@ -1,6 +1,0 @@
-azure-functions
-azure-storage-blob
-pyarrow
-pandas
-rapidfuzz==3.6.1
-

@@ -1,4 +1,4 @@
-name: Deploy Azure Functions
+name: Deploy Azure Functions in v model
 
 on:
   push:
@@ -6,11 +6,11 @@ on:
       - main
       - branch1
     paths:
-      - 'Terraform/Azure/applications/**'
+      - 'Terraform/Azure/apps/func-app-v1/**'
 
 defaults:
   run:
-    working-directory: ./Terraform/Azure/applications/function-apps1
+    working-directory: ./Terraform/Azure/apps/func-app-v1
 
 jobs:
   build-and-deploy:
@@ -19,7 +19,7 @@ jobs:
     env:
       AZURE_CREDENTIALS     : ${{ secrets.AZURE_CREDENTIALS }}
       FUNCTIONAPP_NAME      : ${{ secrets.FUNCTIONAPP_NAME }}
-      FUNCTIONAPP_PATH      : ./Terraform/Azure/applications/function-apps1
+      FUNCTIONAPP_PATH      : ./Terraform/Azure/apps/func-app-v1
       AZURE_RG              : ${{ secrets.AZURE_RG }}
       AZURE_SUBSCRIPTION_ID : ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
