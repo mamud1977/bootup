@@ -60,3 +60,4 @@ rsa_key.pub
 *.pvt
 .venv
 .vscode
+*.code-workspace

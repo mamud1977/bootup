@@ -20,7 +20,8 @@ cd /mnt/c/MyWork/gitlocal/bootup/Python/
 cd /mnt/c/MyWork/gitlocal/bootup/Python/Flask
 cd /mnt/c/MyWork/gitlocal/bootup/Apache/PySpark
 cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure
-cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure/applications/function-apps1
+cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure/apps/func-apps-v1
+cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure/apps/func-apps-v2
 cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure/infra
 cd /mnt/c/MyWork/gitlocal/bootup/Terraform/snowflake
 
