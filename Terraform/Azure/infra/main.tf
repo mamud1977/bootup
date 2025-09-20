@@ -81,7 +81,6 @@ module "function_app_v1" {
   resource_group_location    = local.resource_group_location
   
   function_app_name          = local.function_app_v1_name
-  plan_name                  = local.plan_name
 
   storage_account_name       = module.storage.storage_account_name
   storage_connection_string  = module.storage.primary_connection_string
@@ -106,7 +105,6 @@ module "function_app_v2" {
   resource_group_location    = local.resource_group_location
   
   function_app_name          = local.function_app_v2_name
-  plan_name                  = local.plan_name
 
   storage_account_name       = module.storage.storage_account_name
   storage_connection_string  = module.storage.primary_connection_string
