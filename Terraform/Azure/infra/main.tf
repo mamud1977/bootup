@@ -133,7 +133,7 @@ module "eventgrid_v1" {
   labels              = ["txt/parquet", "blob", "trigger"]
   depends_on          = [
                           module.storage, 
-                          module.function_app
+                          module.function_app_v1
                         ]
 }
 

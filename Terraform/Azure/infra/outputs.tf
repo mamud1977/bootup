@@ -61,10 +61,10 @@ output "function_app_id" {
 ################### Event Grid related outputs
 
 output "eventgrid_subscription_id" {
-  value = module.eventgrid.eventgrid_subscription_id
+  value = module.eventgrid_v1.eventgrid_subscription_id
 }
 
 output "azure_function_endpoint" {
-  value = module.eventgrid.azure_function_endpoint
+  value = module.eventgrid_v1.azure_function_endpoint
 }
 
