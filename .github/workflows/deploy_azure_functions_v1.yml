@@ -1,4 +1,4 @@
-name: Deploy Azure Functions in v model
+name: Deploy Azure Functions in v1 model
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./Terraform/Azure/apps/func-app-v1
+    working-directory: ./Terraform/Azure/apps/func-apps-v1
 
 jobs:
   build-and-deploy:
