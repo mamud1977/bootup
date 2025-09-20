@@ -2,7 +2,7 @@
 
 
 resource "azurerm_service_plan" "plan" {
-  name                = "plan-"${var.function_app_name}
+  name                = "plan-${var.function_app_name}"
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
   os_type             = "Linux"
