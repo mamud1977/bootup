@@ -74,7 +74,7 @@ module "storage" {
   depends_on = [azurerm_resource_group.resource_group]
 }
 
-module "function_app" {
+module "function_app_v1" {
   source                     = "./modules/function_app"
   env                        = local.env
   resource_group_name        = local.resource_group_name
@@ -99,7 +99,7 @@ module "function_app" {
                                   ]
 }
 
-module "function_app" {
+module "function_app_v2" {
   source                     = "./modules/function_app"
   env                        = local.env
   resource_group_name        = local.resource_group_name
