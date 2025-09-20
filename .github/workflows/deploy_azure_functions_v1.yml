@@ -6,7 +6,7 @@ on:
       - main
       - branch1
     paths:
-      - 'Terraform/Azure/apps/func-app-v1/**'
+      - 'Terraform/Azure/apps/func-apps-v1/**'
 
 defaults:
   run:
