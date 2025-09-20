@@ -7,7 +7,6 @@ import os
 import io
 
 
-
 def main(req: func.HttpRequest) -> func.HttpResponse:
     
     try:
