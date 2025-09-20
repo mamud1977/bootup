@@ -53,8 +53,8 @@ output "parquet_container_name" {
 
 ################### Function App related outputs
 
-output "function_app_id" {
-  value = module.function_app.function_app_id
+output "function_app_id_v1" {
+  value = module.function_app_v1.function_app_id
 
 }
 
