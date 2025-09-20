@@ -40,8 +40,9 @@ locals {
   storage_account_name    = "${var.storage_account_name}${var.env}"
   container_name          = "${var.container_name}-${var.env}"
   
-  function_app_name       = "function-app-${var.env}-${random_string.storage_suffix.result}"
-  plan_name               = "function-app-plan-${var.env}"
+  function_app_v1_name       = "function-app-v1-${var.env}-${random_string.storage_suffix.result}"
+  function_app_v2_name       = "function-app-v2-${var.env}-${random_string.storage_suffix.result}"
+  plan_name                  = "function-app-plan-${var.env}"
 
 }
 
@@ -79,7 +80,7 @@ module "function_app" {
   resource_group_name        = local.resource_group_name
   resource_group_location    = local.resource_group_location
   
-  function_app_name          = local.function_app_name
+  function_app_name          = local.function_app_v1_name
   plan_name                  = local.plan_name
 
   storage_account_name       = module.storage.storage_account_name
@@ -97,6 +98,32 @@ module "function_app" {
                                   module.storage
                                   ]
 }
+
+module "function_app" {
+  source                     = "./modules/function_app"
+  env                        = local.env
+  resource_group_name        = local.resource_group_name
+  resource_group_location    = local.resource_group_location
+  
+  function_app_name          = local.function_app_v2_name
+  plan_name                  = local.plan_name
+
+  storage_account_name       = module.storage.storage_account_name
+  storage_connection_string  = module.storage.primary_connection_string
+  storage_account_access_key = module.storage.primary_access_key
+  
+  tags                       = var.tags
+ 
+  application_insights_id    = module.monitoring.application_insights_id
+  instrumentation_key        = module.monitoring.instrumentation_key
+  
+  depends_on                    = [
+                                  azurerm_resource_group.resource_group,
+                                  module.monitoring,
+                                  module.storage
+                                  ]
+}
+
 
 
 module "eventgrid" {
