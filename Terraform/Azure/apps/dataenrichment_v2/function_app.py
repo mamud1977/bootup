@@ -26,7 +26,7 @@ def getCustNum(req: func.HttpRequest) -> func.HttpResponse:
             # Return a bad request response (400) if JSON parsing fails
             return func.HttpResponse(
                 "Invalid JSON input",
-                status_code=401
+                status_code=500
             )
 
         try:
@@ -38,7 +38,7 @@ def getCustNum(req: func.HttpRequest) -> func.HttpResponse:
             logging.error(f"Invalid input JSON: {str(e)}")
             return func.HttpResponse(
                 body=json.dumps({"error": "Invalid input format"}),
-                status_code=402,
+                status_code=500,
                 mimetype="application/json"
             )
         
@@ -57,7 +57,7 @@ def getCustNum(req: func.HttpRequest) -> func.HttpResponse:
             
         except Exception as e:
             logging.error(f"Error: {e}")
-            return func.HttpResponse("Failed to connect to container", status_code=403)
+            return func.HttpResponse("Failed to connect to container", status_code=500)
 
 
 
@@ -69,5 +69,5 @@ def getCustNum(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         return func.HttpResponse(
         f"Exception: {e}",
-        status_code=404
+        status_code=500
         )
