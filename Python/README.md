@@ -1,16 +1,26 @@
 wsl
-=======================================
-Virtual Environment:
------------------------
+
+######  Virtual Environment:
 
 cd /mnt/c/MyWork/
 python3 -m venv .venv
 source .venv/bin/activate
 deactivate
 
-cd c:\MyWork
+###### env setup for Windows
+
+python -m venv .venv
+.venv\Scripts\activate.bat
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+
+
 python3 -m venv .venv
-.venv\Scripts\activate
+source .venv/bin/activate
+.venv/bin/python -m pip install --upgrapythde pip
+pip install -r requirements.txt
+
+
 
 =======================================
 
@@ -33,6 +43,7 @@ pip install -r /mnt/c/MyWork/gitlocal/bootup/Python/requirements.txt
 pip uninstall Flask
 pip freeze > requirements.txt
 
+python -c "import azure.functions as af; print('FunctionApp available'); import pkg_resources; print('Version:', pkg_resources.get_distribution('azure-functions').version)"
 
 ---------------------------------
 Steps to generate GitHub token:

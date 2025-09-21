@@ -1,27 +1,15 @@
-import azure.functions as func
-import datetime
+from azure.functions import FunctionApp, HttpRequest, HttpResponse
 import json
-import logging
 
-app = func.FunctionApp()
+# Create the FunctionApp instance
+app = FunctionApp(http_auth_level="anonymous")
 
-@app.route(route="getCustNumber", auth_level=func.AuthLevel.FUNCTION)
-def getCustNumber(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
+# Define the function name and HTTP trigger route
+@app.function_name(name="getCustnum")
+@app.route(route="getCustnum", methods=["POST"])
+def get_customer_num(req: HttpRequest) -> HttpResponse:
+    try:
+        return HttpResponse(f"Success", status_code=200)
 
-    name = req.params.get('name')
-    if not name:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            pass
-        else:
-            name = req_body.get('name')
-
-    if name:
-        return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
-    else:
-        return func.HttpResponse(
-             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
-             status_code=200
-        )
+    except Exception as e:
+        return HttpResponse(f"Exception:{e}", status_code=400)
