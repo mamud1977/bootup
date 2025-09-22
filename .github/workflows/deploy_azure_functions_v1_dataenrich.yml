@@ -1,4 +1,4 @@
-name: Deploy Azure Functions in v1 model
+name: Deploy Azure Dataenrich Function in v1 model
 
 on:
   push:
@@ -59,7 +59,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Deploy to Azure Function App
-      uses: azure/webapps-deploy@v2
+      uses: azure/functions-action@v1
       with:
         app-name: ${{ env.FUNCTIONAPP_NAME }}
         package: ${{ env.FUNCTIONAPP_PATH }}/function.zip
