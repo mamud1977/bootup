@@ -28,12 +28,16 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Load secrets
-      run: env | grep AZURE_
+      run: |
+        echo "FUNCTIONAPP_NAME      = $FUNCTIONAPP_NAME"
+        echo "FUNCTIONAPP_PATH      = $FUNCTIONAPP_PATH"
+        echo "AZURE_RG              = $AZURE_RG"
+        echo "AZURE_SUBSCRIPTION_ID = $AZURE_SUBSCRIPTION_ID"
 
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.12'
+        python-version: '3.9'
 
     - name: Install dependencies
       run: |
