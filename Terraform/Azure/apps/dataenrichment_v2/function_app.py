@@ -10,7 +10,6 @@ from helper import dump_json
 app = func.FunctionApp()
 
 
-
 @app.function_name(name="getCustNumber")
 @app.route(route="getCustNumber", auth_level=func.AuthLevel.FUNCTION)
 def getCustNumber(req: func.HttpRequest) -> func.HttpResponse:
