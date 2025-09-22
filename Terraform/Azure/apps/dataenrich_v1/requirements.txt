@@ -4,4 +4,6 @@
 
 azure-functions
 azure-storage-blob
-polars
+pandas
+fastparquet
+pyarrow

@@ -57,7 +57,7 @@ def getCustNumber(req: func.HttpRequest) -> func.HttpResponse:
 
             
             # Get a blob client to interact with a specific file (blob) within the container
-            blob_path = "iris.parquet"
+            blob_path = "mtcars.parquet"
             blob_client = container_client.get_blob_client(blob_path)
 
             # Download the blob's content (file) as a stream
@@ -79,8 +79,13 @@ def getCustNumber(req: func.HttpRequest) -> func.HttpResponse:
 
             #temp_df = pl.read_parquet(blob_data) 
             temp_df = pd.read_parquet(blob_data) 
+
             del blob_data
             gc.collect()  # Explicitly trigger garbage collection to free memory
+
+            logging.info(f"temp_df dimension = {temp_df.shape}")
+            for index, row in temp_df.iterrows():
+                logging.info(f"Row {index}: {row.to_dict()}")
 
         except Exception as e:
             logging.error(f"Error: {e}")
