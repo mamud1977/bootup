@@ -42,6 +42,12 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+    
+    - name: Validate function_app.py discovery
+      run: |
+        python -c "import function_app"
+        grep '@app.function_name' function_app.py || (echo 'Missing @function_name decorator!' && exit 1)
+
 
     - name: Zip function app
       run: zip -r dataenrichment_v2.zip .
