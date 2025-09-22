@@ -19,7 +19,7 @@ jobs:
     env:
       AZURE_CREDENTIALS     : ${{ secrets.AZURE_CREDENTIALS }}
       FUNCTIONAPP_NAME      : ${{ secrets.AZURE_FUNCTION_APP_V2 }}
-      FUNCTIONAPP_PATH      : ./Terraform/Azure/apps/Terraform/Azure/apps/dataenrichment_v2
+      FUNCTIONAPP_PATH      : ./Terraform/Azure/apps/dataenrichment_v2
       AZURE_RG              : ${{ secrets.AZURE_RG }}
       AZURE_SUBSCRIPTION_ID : ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
