@@ -4,8 +4,12 @@ import datetime
 import json
 import logging
 import os
+import polars as pl
+import pandas as pd
 
 from helper import dump_json
+from io import BytesIO
+import gc
 
 
 def getCustNumber(req: func.HttpRequest) -> func.HttpResponse:
@@ -51,10 +55,35 @@ def getCustNumber(req: func.HttpRequest) -> func.HttpResponse:
             logging.info(f"blob_list: {blob_list}")
 
             
+            # Get a blob client to interact with a specific file (blob) within the container
+            blob_path = "iris.parquet"
+            blob_client = container_client.get_blob_client(blob_path)
+
+            # Download the blob's content (file) as a stream
+            stream_downloader = blob_client.download_blob()
+            logging.info("Blob downloaded successfully")
+
+            # Convert the downloaded blob content into an in-memory byte stream
+            blob_data = BytesIO(stream_downloader.readall())
+            size_bytes = blob_data.getbuffer().nbytes
+            
+            logging.info(f"Blob content loaded into memory as a byte stream, and size = {size_bytes}")
+
         except Exception as e:
             logging.error(f"Error: {e}")
             return func.HttpResponse("Failed to connect to container", status_code=500)
 
+
+        try:
+
+            #temp_df = pl.read_parquet(blob_data) 
+            temp_df = pd.read_parquet(blob_data) 
+            del blob_data
+            gc.collect()  # Explicitly trigger garbage collection to free memory
+
+        except Exception as e:
+            logging.error(f"Error: {e}")
+            return func.HttpResponse(f"Parquet loading failed: {str(e)}", status_code=500)
 
 
         return func.HttpResponse(
