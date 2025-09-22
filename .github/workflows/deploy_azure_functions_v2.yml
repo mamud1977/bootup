@@ -73,3 +73,7 @@ jobs:
         app-name: ${{ env.FUNCTIONAPP_NAME }}
         package: ${{ env.FUNCTIONAPP_PATH }}/dataenrichment_v2.zip
         slot-name: 'production'
+
+    - name: Smoke test function endpoint
+      run: |
+        curl -s -o /dev/null -w "%{http_code}" https://${{ env.FUNCTIONAPP_NAME }}.azurewebsites.net/api/getCustNumber
