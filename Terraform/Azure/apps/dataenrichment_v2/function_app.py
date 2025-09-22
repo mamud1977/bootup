@@ -13,8 +13,6 @@ app = func.FunctionApp()
 @app.route(route="getCustNum", auth_level=func.AuthLevel.FUNCTION)
 def getCustNum(req: func.HttpRequest) -> func.HttpResponse:
 
-
-
     try:
 
         logging.info("Start processing to get customers")
