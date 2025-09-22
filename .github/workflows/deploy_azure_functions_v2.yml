@@ -6,11 +6,11 @@ on:
       - main
       - branch1
     paths:
-      - 'Terraform/Azure/apps/Terraform/Azure/apps/dataenrichment_v2/**'
+      - 'Terraform/Azure/apps/dataenrichment_v2/**'
 
 defaults:
   run:
-    working-directory: ./Terraform/Azure/apps/Terraform/Azure/apps/dataenrichment_v2
+    working-directory: ./Terraform/Azure/apps/dataenrichment_v2
 
 jobs:
   build-and-deploy:
