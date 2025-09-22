@@ -62,5 +62,5 @@ jobs:
       uses: azure/functions-action@v1
       with:
         app-name: ${{ env.FUNCTIONAPP_NAME }}
-        package: dataenrichment_v2.zip
+        package: ${{ env.FUNCTIONAPP_PATH }}/dataenrichment_v2.zip
         slot-name: 'production'
