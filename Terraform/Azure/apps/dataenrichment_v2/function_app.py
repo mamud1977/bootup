@@ -13,6 +13,7 @@ app = func.FunctionApp()
 def getCustNum(req: func.HttpRequest) -> func.HttpResponse:
 
 
+
     try:
 
         logging.info("Start processing to get customers")
