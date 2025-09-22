@@ -55,9 +55,22 @@ def getCustNumber(req: func.HttpRequest) -> func.HttpResponse:
             logging.info(f"blob_list: {blob_list}")
 
             
+
         except Exception as e:
             logging.error(f"Error: {e}")
             return func.HttpResponse("Failed to connect to container", status_code=500)
+
+
+        try:
+            file =  "iris.parquet"
+            blob_data = download_blob_as_stream(container_name, blob_path) 
+
+
+        except Exception as e:
+            logging.error(f"Error: {e}")
+            return func.HttpResponse("Failed to connect to container", status_code=500)
+
+        
 
 
 
