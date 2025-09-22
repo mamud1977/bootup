@@ -4,12 +4,13 @@ import datetime
 import json
 import logging
 import os
-import polars as pl
+#import polars as pl
 import pandas as pd
 
 from helper import dump_json
 from io import BytesIO
 import gc
+
 
 
 def getCustNumber(req: func.HttpRequest) -> func.HttpResponse:
