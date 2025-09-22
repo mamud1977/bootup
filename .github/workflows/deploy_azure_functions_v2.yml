@@ -52,6 +52,9 @@ jobs:
         ls -la
         echo "Searching for function.zip recursively:"
         find . -name "function.zip"
+    
+    - name: Inspect contents of zip
+      run: unzip -l dataenrichment_v2.zip
 
     - name: Login to Azure
       uses: azure/login@v1
