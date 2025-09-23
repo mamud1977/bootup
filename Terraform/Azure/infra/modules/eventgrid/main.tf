@@ -22,7 +22,7 @@ resource "azurerm_eventgrid_event_subscription" "event_subscription" {
   dead_letter_destination {
     storage_blob {
       resource_id       = var.storage_account_id
-      container_name    = azurerm_storage_container.dead_letter_container.name
+      container_name    = var.dead_letter_container_name
     }
   }
 

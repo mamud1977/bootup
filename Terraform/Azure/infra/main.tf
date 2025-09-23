@@ -4,7 +4,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 3.50.0"
+      version = "~> 3.80.0"
     }
   }
 
@@ -127,7 +127,9 @@ module "eventgrid_v1" {
   source              = "./modules/eventgrid"
   subscription_name   = "BlobCreated"
   storage_account_id  = module.storage.storage_account_id
+  dead_letter_container_name = module.storage.dead_letter_container_name
   function_app_id     = module.function_app_v1.function_app_id
+  
   labels              = ["txt/parquet", "blob", "trigger"]
   depends_on          = [
                           module.storage, 

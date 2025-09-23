@@ -8,5 +8,7 @@ variable "function_name_eventgrid_triggered" {
   default     = "eventgrid-triggered"
 }
 
+variable "dead_letter_container_name" {}
+
 variable "labels" {}
 

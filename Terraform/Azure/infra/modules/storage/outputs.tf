@@ -2,6 +2,8 @@ output "storage_account_name" {
   value = azurerm_storage_account.storage_account.name
 }
 
+
+
 output "storage_account_id" {
   value = azurerm_storage_account.storage_account.id
 }
@@ -25,4 +27,8 @@ output "container_id" {
 
 output "parquet_container_name" {
   value = azurerm_storage_container.parquet_files.name
+}
+
+output "dead_letter_container_name" {
+  value = azurerm_storage_container.dead_letter_container.name
 }

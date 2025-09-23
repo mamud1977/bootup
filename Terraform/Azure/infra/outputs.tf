@@ -51,6 +51,12 @@ output "parquet_container_name" {
   value = module.storage.parquet_container_name
 }
 
+output "dead_letter_container_name" {
+  value = module.storage.dead_letter_container_name
+}
+
+
+
 ################### Function App related outputs
 
 output "function_app_id_v1" {

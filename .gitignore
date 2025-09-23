@@ -21,6 +21,7 @@ project.lock.json
 .secrets
 appsettings.json
 local.settings.json
+settings.json
 
 node_modules
 dist
@@ -61,3 +62,4 @@ rsa_key.pub
 .venv
 
 *.code-workspace
+.vscode
