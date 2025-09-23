@@ -17,16 +17,6 @@ resource "azurerm_eventgrid_event_subscription" "event_subscription" {
     function_id = "${var.function_app_id}/functions/${var.function_name_eventgrid_triggered}"
   }
 
-
-  # Dead-lettering configuration
-  dead_letter_destination {
-    storage_blob {
-      resource_id       = var.storage_account_id
-      container_name    = var.dead_letter_container_name
-    }
-  }
-
-
   labels = var.labels
 
 }
