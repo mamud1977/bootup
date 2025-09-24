@@ -8,7 +8,7 @@ import os
 from helper import dump_json
 
 #app = func.FunctionApp()
-app = func.blueprint(http_auth_level = func.AuthLevel.FUNCTION)
+app = func.Blueprint(http_auth_level = func.AuthLevel.FUNCTION)
 
 #@app.function_name(name="getCustNumber")
 app.route(route="getCustNumber",methods=['post'])
