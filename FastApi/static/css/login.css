@@ -1,0 +1,24 @@
+label {
+    display: block;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.input-box {
+    border: 3px solid #444;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    background: #d4ecd3;
+    max-width: 600px;
+}
+
+.btn {
+    padding: 8px 14px;
+    background: #1f6feb;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
