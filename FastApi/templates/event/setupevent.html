@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Show Events</title>
+</head>
+
+<body>
+    <h1>Show Events ... </h1>
+
+    <select id="profileSelect">
+        {% for profile in profiles %}
+        <option value="{{ profile.name }}" data-template="{{ profile.template }}"
+            data-datafile="{{ profile['data-file'] }}">
+            {{ profile.name }}
+        </option>
+        {% endfor %}
+    </select>
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Edit Event{% endblock %}
+
+{% block content %}
+<h2>Edit / Extend Event</h2>
+
+{% if not event_structure %}
+<form method="get" action="/event/edit_event">
+    <label>Enter event name to edit:</label>
+    <input type="text" name="eventname" placeholder="Event name" required>
+    <button type="submit">Load Event</button>
+</form>
+{% endif %}
+
+{% if event_structure %}
+{% include "event/event_builder.html" %}
+<script>
+    const existingEvent = {{ event_structure | tojson }};
+    document.getElementById("eventname").value = existingEvent.eventname;
+
+    if (existingEvent.roots && existingEvent.roots.length > 0) {
+        const rootContainer = document.getElementById("rootNode");
+        existingEvent.roots
+            .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0))
+            .forEach(root => buildExistingNode(rootContainer, root));
+    }
+</script>
+{% endif %}
+{% endblock %}

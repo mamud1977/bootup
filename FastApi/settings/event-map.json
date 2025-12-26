@@ -1,0 +1,14 @@
+{
+    "profiles": [
+        {
+            "name": "Group View",
+            "template": "event/group-event-template.html",
+            "data-file": "data/group-event-template.json"
+        },
+        {
+            "name": "Event View",
+            "template": "event/event-group-template.html",
+            "data-file": "data/event-group-template.json"
+        }
+    ]
+}

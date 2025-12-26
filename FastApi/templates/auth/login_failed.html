@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Login Failed{% endblock %}
+
+{% block content %}
+<h2>Login Failed</h2>
+<ul>
+    {% for error in errors %}
+    <li style="color:red;">{{ error }}</li>
+    {% endfor %}
+</ul>
+<a href="/login">Try again</a>
+{% endblock %}

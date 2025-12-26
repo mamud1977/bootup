@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Test Page{% endblock %}
+
+{% block content %}
+
+<h2>Roman to Bengali (বাংলা) Transliteration</h2>
+<p>Type Romanized words (e.g., "amar", "sonar", "bangla") below:</p>
+
+<textarea 
+    id="textInput" 
+    rows="5" 
+    placeholder="Start typing here..." 
+    style="width: 80%; padding: 10px; font-size: 18px;">
+</textarea>
+
+<p>Automatically transliterated Bengali output:</p>
+
+<div class="info">
+  <strong>Tip:</strong> Press <kbd>Ctrl+M</kbd> to toggle between English and Bengali.
+</div>
+
+
+
+<script>
+window.onload = function() {
+
+	console.log("pramukhIME:", typeof pramukhIME);
+	console.log("pramukhIME.setLanguage:", typeof pramukhIME.setLanguage);
+	console.log("pramukhIME.enable:", typeof pramukhIME.enable);
+
+    if (typeof pramukhIME === 'object') {
+        pramukhIME.setLanguage("bengali", "pramukhindic"); // set target language & keyboard
+        pramukhIME.enable("textInput"); // enable IME on the textarea
+
+        
+		const textInput = document.getElementById("textInput")
+		
+		textInput.addEventListener("focus", function() {
+			console.log("Textarea focused, IME should be active");
+			});
+			
+		textInput.addEventListener("input", function() {
+			console.log("Current value:", textInput.value);
+			});
+		
+        console.log("PramukhIME is ready:", pramukhIME.getLanguage());
+		
+		
+    } else {
+        console.warn("pramukhIME is not loaded!");
+    }
+};
+</script>
+
+{% endblock %}

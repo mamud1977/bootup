@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Show Event Page</title>
+</head>
+
+<body>
+    <h1>Available event setup templates ... </h1>
+
+    <form action="/event/setupevent" method="post">
+
+        <select name="profile_index" id="profileSelect">
+            {% for profile in profiles %}
+            <option value="{{ loop.index0 }}">
+                {{ profile.name }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <br><br>
+
+        <button type="submit">Load</button>
+    </form>
+
+</body>
+
+</html>
