@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventua</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: grid;
+            grid-template-rows: 60px 1fr 40px;
+            /* header, content, footer */
+            grid-template-columns: 200px 1fr;
+            /* sidebar, workpage */
+            grid-template-areas:
+                "header header"
+                "sidebar workpage"
+                "footer footer";
+            height: 100vh;
+        }
+
+        header {
+            grid-area: header;
+            background: #2c3e50;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        nav {
+            grid-area: sidebar;
+            background: #34495e;
+            color: white;
+            padding: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 10px 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        main {
+            grid-area: workpage;
+            padding: 20px;
+            background: #ecf0f1;
+        }
+
+        footer {
+            grid-area: footer;
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>My Dashboard</h1>
+    </header>
+
+
+
+    <nav>
+        <ul>
+            <li><a onclick="loadPage('Home')">Home</a></li>
+            <li><a onclick="loadHTML('/login')">/login</a></li>
+            <li><a onclick="loadPage('Settings')">Settings</a></li>
+            <li><a onclick="loadPage('Reports')">Reports</a></li>
+            <li><a onclick="loadHTML('/event/create_event')">/event/create_event</a></li>
+            <li><a onclick="loadHTML('/event/get_event')">/event/get_event</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Subscriptions</a></li>
+        </ul>
+    </nav>
+
+    <main id="workpage">
+        <h2>Welcome</h2>
+        <p>Select an item from the navigation bar.</p>
+    </main>
+
+    <footer>
+        Contact: mail2mamu@gmail.com
+    </footer>
+
+    <script>
+        function loadPage(pageName) {
+            const workpage = document.getElementById('workpage');
+            // Simulate refreshing content
+            workpage.innerHTML = `
+                <h2>${pageName} Page</h2>
+                <p>Content for ${pageName} goes here...</p>
+            `;
+        }
+
+        function loadHTML(pageFile) {
+            const workpage = document.getElementById('workpage');
+            fetch(pageFile)                // fetch the HTML file
+                .then(response => response.text())
+                .then(html => {
+                    workpage.innerHTML = html;  // inject into workpage
+                })
+                .catch(err => {
+                    workpage.innerHTML = `<p style="color:red;">Error loading ${pageFile}</p>`;
+                    console.error(err);
+                });
+        }
+
+    </script>
+</body>
+
+</html>
