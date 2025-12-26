@@ -14,7 +14,7 @@ python -m venv .venv
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 
-
+cd C:\MyWork\gitlocal\bootup\
 python3 -m venv .venv
 source .venv/bin/activate
 .venv/bin/python -m pip install --upgrapythde pip
@@ -28,6 +28,7 @@ cd /mnt/c/Users/mamud/Downloads
 cd /mnt/c/MyWork/gitlocal/bootup/Azure/
 cd /mnt/c/MyWork/gitlocal/bootup/Python/
 cd /mnt/c/MyWork/gitlocal/bootup/Python/Flask
+cd /mnt/c/MyWork/gitlocal/bootup/FastApi
 cd /mnt/c/MyWork/gitlocal/bootup/Apache/PySpark
 cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure
 cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure/apps/func-apps-v1

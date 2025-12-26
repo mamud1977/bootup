@@ -11,3 +11,4 @@ pyarrow
 fastparquet
 azure-storage-blob
 requests
+PyMuPDF
