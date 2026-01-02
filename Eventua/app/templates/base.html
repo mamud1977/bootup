@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventua-{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/common.css') }}?v=1.0">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <header>
+        <h3>Eventua</h3>
+        {% if current_user and current_user.username %}
+        <h6>Welcome, {{ current_user.username }}</h6>
+        {% else %}
+        <h6>You are currently not logged in</h6>
+        {% endif %}
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/auth/login">Login</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+
+            <li><a href="/user/adduser">Add User</a></li>
+
+            <li><a href="/eventbuilder/create_event">Create Event</a></li>
+            <li><a href="/eventbuilder/edit_event">Edit Event</a></li>
+
+            <li><a href="/about">About</a></li>
+            <li><a href="/test/pramukhime">pramukhime</a></li>
+            <li><a href="/test/easyocr">easyocr</a></li>
+        </ul>
+    </nav>
+
+
+    <main id="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        Contact: mail2mamud@gmail.com
+    </footer>
+
+    <script src="{{ url_for('static', path='js/common.js') }}"></script>
+    <script src="{{ url_for('static', path='js/pramukhime/pramukhime.js') }}"></script>
+    <script src="{{ url_for('static', path='js/pramukhime/pramukhime-common.js') }}"></script>
+    <script src="{{ url_for('static', path='js/pramukhime/pramukhindic-i18n.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+
+</body>
+
+</html>

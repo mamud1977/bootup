@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Create Event{% endblock %}
+
+{% block content %}
+
+<h1>Create Event</h1>
+
+<div id="createevent">
+<form id="eventForm" onsubmit="return false;"> 
+  
+  <label for="eventLeaflet">Upload Event Leaflet:</label>
+  <input type="file" id="eventLeaflet" name="eventLeaflet" accept=".pdf,.jpg,.jpeg,.png">
+  <div id="leafletPreview" style="margin-top:20px;"></div>
+
+  <label for="eventname">Event Name:</label> 
+  <input  type="text" id="eventname" name="eventName" 
+          value="{{ form_data.get('eventName', '') }}" 
+          placeholder="Enter event name" required> 
+
+  <label for="eventyear">Event Year:</label> 
+  <input  type="number" id="eventyear" name="eventYear" 
+          value="{{ form_data.get('eventYear', '') }}" 
+          placeholder="YYYY"
+          min="2025" max="2040" required> 
+
+  <label for="eventcountry">Event Country:</label> 
+  <input  type="text" id="eventcountry" name="eventCountry" 
+          value="{{ form_data.get('eventCountry', '') }}" 
+          placeholder="Country"> 
+
+  <label for="eventarea">Event Area:</label> 
+  <input  type="text" id="eventarea" name="eventArea" 
+          value="{{ form_data.get('eventArea', '') }}" 
+          placeholder="City / Area"> 
+
+  <label for="eventareapin">Event Area Pin:</label> 
+  <input  type="number" id="eventareapin" name="eventAreaPin" 
+          value="{{ form_data.get('eventAreaPin', '') }}" 
+          placeholder="Postal Code"> 
+
+  <hr>
+  <label>Event Structure:</label>
+
+  <div id="rootNode"></div>
+
+  <div>
+    <button type="button" onclick="addNode('rootNode')">Add Root Node</button>
+  </div>
+
+  <input type="hidden" id="eventstruct" name="eventStruct">
+
+  </form>
+</div>
+
+  <h3>Complete Event Preview</h3>
+  <pre id="eventPreview"></pre>
+
+  <div>
+    <button type="button" id="saveButton" class="btn">Save</button>
+    <div id="eventStatus" aria-live="polite"></div>
+  </div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script>
+    window.INIT_EVENT_STRUCT = {{ form_data.get('eventStruct', []) | tojson }};
+</script>
+
+<script src="{{ url_for('static', path='js/eventbuilder.js') }}"></script>
+{% endblock %}

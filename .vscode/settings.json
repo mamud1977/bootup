@@ -7,7 +7,7 @@
     "debug.internalConsoleOptions": "neverOpen",
     "azureFunctions.projectSubpath": "Terraform\\Azure\\apps\\dataenrich_v1",
     "editor.formatOnSave": true,
-    "editor.wordWrap": "on",
+    "editor.wordWrap": "off",
     "editor.allowVariableFonts": false,
     "editor.allowVariableLineHeights": false,
     "azureFunctions.projectLanguageModel": 2,
