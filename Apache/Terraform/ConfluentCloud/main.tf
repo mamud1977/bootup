@@ -115,6 +115,38 @@ resource "confluent_kafka_topic" "topic" {
 }
 
 ############################
+# SCHEMA REGISTRY
+############################
+
+data "confluent_schema_registry_cluster" "sr" {
+  environment {
+    id = confluent_environment.env.id
+  }
+}
+
+resource "confluent_api_key" "sr_api_key" {
+  display_name = "schema-registry-api-key"
+  description  = "Schema Registry API Key"
+
+  owner {
+    id          = confluent_service_account.sa.id
+    api_version = confluent_service_account.sa.api_version
+    kind        = confluent_service_account.sa.kind
+  }
+
+  managed_resource {
+    id          = data.confluent_schema_registry_cluster.sr.id
+    api_version = data.confluent_schema_registry_cluster.sr.api_version
+    kind        = data.confluent_schema_registry_cluster.sr.kind
+
+    environment {
+      id = confluent_environment.env.id
+    }
+  }
+}
+
+
+############################
 # FLINK COMPUTE POOL
 ############################
 
@@ -155,4 +187,20 @@ output "topic_name" {
 
 output "flink_compute_pool_id" {
   value = confluent_flink_compute_pool.compute_pool.id
+}
+
+# schema_registry
+
+output "schema_registry_endpoint" {
+  value = data.confluent_schema_registry_cluster.sr.rest_endpoint
+}
+
+output "schema_registry_api_key" {
+  value     = confluent_api_key.sr_api_key.id
+  sensitive = true
+}
+
+output "schema_registry_api_secret" {
+  value     = confluent_api_key.sr_api_key.secret
+  sensitive = true
 }
