@@ -1,0 +1,59 @@
+name: Deploy Snowflake Infrastructure
+
+on:
+  push:
+    branches:
+      - main
+      - branch1
+    paths:
+      - 'Terraform/snowflake/**'
+  
+    
+
+defaults:
+  run:
+    working-directory: ./Terraform/snowflake
+    
+jobs:
+  terraform:
+    name: Terraform Apply
+    runs-on: ubuntu-latest
+
+    env:
+      TF_VAR_snowflake_account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      TF_VAR_snowflake_username: ${{ secrets.SNOWFLAKE_USERNAME }}
+      TF_VAR_snowflake_role: ${{ secrets.SNOWFLAKE_ROLE }}
+      TF_VAR_snowflake_private_key: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: List files in repository
+        run: ls -la ${{ github.workspace }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Check if secrets are set
+        run: |
+          if [ -z "${snowflake_account}" ]; then echo "❌ SNOWFLAKE_ACCOUNT is not set"; else echo "✅ SNOWFLAKE_ACCOUNT is set"; fi
+          if [ -z "${snowflake_username}" ]; then echo "❌ SNOWFLAKE_USERNAME is not set"; else echo "✅ SNOWFLAKE_USERNAME is set"; fi
+          if [ -z "${snowflake_role}" ]; then echo "❌ SNOWFLAKE_ROLE is not set"; else echo "✅ SNOWFLAKE_ROLE is set"; fi
+          if [ -z "${snowflake_private_key}" ]; then echo "❌ SNOWFLAKE_PRIVATE_KEY_PATH is not set"; else echo "✅ SNOWFLAKE_PRIVATE_KEY_PATH is set"; fi
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+        env:   
+          TF_VAR_snowflake_account: ${{ secrets.snowflake_account }}
+          TF_VAR_snowflake_username: ${{ secrets.snowflake_username }}
+          TF_VAR_snowflake_role: ${{ secrets.snowflake_role }}
+          TF_VAR_snowflake_private_key: ${{ secrets.snowflake_private_key }}
+          
+      - name: Terraform Apply
+        run: terraform apply -auto-approve

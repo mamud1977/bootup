@@ -1,0 +1,66 @@
+name: Deploy Azure Functions in v1 model
+
+on:
+  push:
+    branches:
+      - main
+      - branch1
+    paths:
+      - 'Terraform/Azure/apps/func-apps-v1/**'
+
+defaults:
+  run:
+    working-directory: ./Terraform/Azure/apps/func-apps-v1
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      AZURE_CREDENTIALS     : ${{ secrets.AZURE_CREDENTIALS }}
+      FUNCTIONAPP_NAME      : ${{ secrets.AZURE_FUNCTION_APP_V1 }}
+      FUNCTIONAPP_PATH      : ./Terraform/Azure/apps/func-apps-v1
+      AZURE_RG              : ${{ secrets.AZURE_RG }}
+      AZURE_SUBSCRIPTION_ID : ${{ secrets.ARM_SUBSCRIPTION_ID }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Show Environment Variables
+      run: |
+        echo "FUNCTIONAPP_NAME      = $FUNCTIONAPP_NAME"
+        echo "FUNCTIONAPP_PATH      = $FUNCTIONAPP_PATH"
+        echo "AZURE_RG              = $AZURE_RG"
+        echo "AZURE_SUBSCRIPTION_ID = $AZURE_SUBSCRIPTION_ID"
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Zip function app
+      run: zip -r function.zip .
+
+    - name: Verify zip location
+      run: |
+        echo "Listing contents of current directory:"
+        ls -la
+        echo "Searching for function.zip recursively:"
+        find . -name "function.zip"
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy to Azure Function App
+      uses: azure/functions-action@v1
+      with:
+        app-name: ${{ env.FUNCTIONAPP_NAME }}
+        package: ${{ env.FUNCTIONAPP_PATH }}/function.zip
+        slot-name: 'production'

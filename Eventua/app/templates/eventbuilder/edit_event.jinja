@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Event{% endblock %}
+
+{% block content %}
+
+<h1>Edit Event</h1>
+
+<div id="editEventForm">
+    <form id="eventForm">
+
+        <!-- Event selection dropdown -->
+        <label for="eventSelect">Select Event:</label>
+        <select id="eventSelect">
+            <option value="">-- Select Event --</option>
+            <!-- Options populated by JS -->
+        </select>
+
+        <hr>
+        <label for="eventLeaflet">Leaflet (optional):</label>
+        <input type="file" id="eventLeaflet" name="eventLeaflet" accept=".pdf,.jpg,.jpeg,.png">
+        <div id="leafletPreview" style="margin-top:20px;"></div>
+
+        <!-- Event details form -->
+        <label>Event Name:</label>
+        <input type="text" id="eventname" name="eventName" required>
+
+        <label>Event Year:</label>
+        <input type="number" id="eventyear" name="eventYear" required>
+
+        <label>Country:</label>
+        <input type="text" id="eventcountry" name="eventCountry">
+
+        <label>Area:</label>
+        <input type="text" id="eventarea" name="eventArea">
+
+        <label>Area Pin:</label>
+        <input type="number" id="eventareapin" name="eventAreaPin">
+
+        <hr>
+        <label>Event Structure:</label>
+
+        <!-- Event structure nodes -->
+        <div id="rootNode"></div>
+        <button type="button" onclick="addNode('rootNode')">Add Root Node</button>
+
+        <input type="hidden" id="eventstruct" name="eventStruct">
+
+        <h3>Complete Event Preview</h3>
+        <pre id="eventPreview"></pre>
+
+
+        <button type="submit" id="saveButton" class="btn">Save</button>
+        <p id="eventStatus"></p>
+    </form>
+</div>
+
+<script>
+    let allUserEvents = [];
+
+    // --- Fetch all events for current user ---
+    async function fetchUserEvents() {
+        try {
+            const res = await fetch("/eventbuilder/user_events");
+            if (!res.ok) throw new Error("Failed to fetch user events");
+            allUserEvents = await res.json();
+            populateEventDropdown();
+        } catch (err) {
+            console.error(err);
+            alert("Could not load your events");
+        }
+    }
+
+    // --- Populate event dropdown with "year : name" ---
+    function populateEventDropdown() {
+        const select = document.getElementById("eventSelect");
+        // sort by year descending
+        allUserEvents.sort((a, b) => b.eventYear - a.eventYear);
+
+        allUserEvents.forEach(e => {
+            const opt = document.createElement("option");
+            opt.value = e.eventYear + "|" + e.eventName; // value encodes year+name
+            opt.text = `${e.eventYear} : ${e.eventName}`;
+            select.appendChild(opt);
+        });
+    }
+
+    // --- Fetch selected event details ---
+    async function fetchEventDetails(encodedValue) {
+        console.log("fetchEventDetails ... getting executed");
+        if (!encodedValue) return;
+        const [year, name] = encodedValue.split("|");
+
+        try {
+            const res = await fetch(`/eventbuilder/get_event?eventName=${encodeURIComponent(name)}`);
+            if (!res.ok) throw new Error("Failed to fetch event details");
+            const eventData = await res.json();
+
+            // populate form
+            document.getElementById("eventname").value = eventData.eventName || "";
+            document.getElementById("eventyear").value = eventData.eventYear || "";
+            document.getElementById("eventcountry").value = eventData.eventCountry || "";
+            document.getElementById("eventarea").value = eventData.eventArea || "";
+            document.getElementById("eventareapin").value = eventData.eventAreaPin || "";
+
+            const rootNode = document.getElementById("rootNode");
+            rootNode.innerHTML = "";
+            (eventData.eventStruct || []).forEach(node => buildExistingNode(rootNode, node));
+
+            console.log("Leaflet info will be processed...");
+            // ✅ Show existing leaflet thumbnail if present 
+            const previewDiv = document.getElementById("leafletPreview"); 
+            previewDiv.innerHTML = ""; 
+
+            if (eventData.storageKey) { 
+                // normalize Windows-style backslashes to forward slashes 
+                const normalizedKey = eventData.storageKey.replace(/\\/g, "/"); 
+                // build URL assuming /uploads is mounted as static 
+                const fileUrl = "/uploads/" + normalizedKey; 
+                const ext = normalizedKey.split(".").pop().toLowerCase();
+
+                if (["jpg","jpeg","png","gif"].includes(ext)) { 
+                    // Show image thumbnail 
+                    const img = document.createElement("img"); 
+                    img.src = fileUrl; 
+                    img.style.width = "120px"; 
+                    img.style.height = "160px"; 
+                    img.style.objectFit = "cover"; 
+                    img.style.border = "1px solid #ccc"; 
+                    previewDiv.appendChild(img); 
+            } 
+            else if (ext === "pdf") { 
+                // Show inline PDF viewer 
+                const embed = document.createElement("embed"); 
+                embed.src = fileUrl; 
+                embed.type = "application/pdf"; 
+                embed.width = "200"; 
+                // adjust size as needed 
+                embed.height = "250"; 
+                embed.style.border = "1px solid #ccc"; 
+                previewDiv.appendChild(embed); 
+            }
+
+
+            }
+
+            updatePreview();
+        } catch (err) {
+            console.error(err);
+            alert("Could not load event details");
+        }
+    }
+
+    // --- Event listeners ---
+    document.addEventListener("DOMContentLoaded", () => {
+        fetchUserEvents();
+
+        const select = document.getElementById("eventSelect");
+        select.addEventListener("change", () => {
+            fetchEventDetails(select.value);
+        });
+
+
+        // make event-level fields live
+        const liveFields = [
+            "eventname",
+            "eventyear",
+            "eventcountry",
+            "eventarea",
+            "eventareapin"
+        ];
+
+        liveFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener("input", () => {
+                    markDirty();      // optional but recommended
+                    updatePreview();  // 🔑 THIS is the fix
+                });
+            }
+        });
+
+        document.getElementById("eventForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+            saveform(); // reuse your create_event saveform()
+        });
+
+    });
+
+    // --- Reuse all your create_event JS functions here (addNode, addProperty, addChild, buildNode, buildExistingNode, updatePreview, markDirty, markClean, etc.) ---
+</script>
+<script src="{{ url_for('static', path='js/eventbuilder.js') }}"></script>
+{% endblock %}

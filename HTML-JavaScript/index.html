@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Eventua</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1 id="top">Eventua Home Page</h1>
+
+
+    <form>
+        <label class="identity" for="firstname">First name:</label>
+        <input type="text" name="firstname" required placeholder="FirstName">
+        <br>
+        <label class="identity" for="lastname">Last name: </label>
+        <input type="text" name="lastname" required placeholder="LastName">
+        <br>
+        <label class="identity" for="email">Email: </label>
+        <input type="email" name="email" required placeholder="Email">
+        <br>
+        <label class="identity" for="password">Password: </label>
+        <input type="password" name="password" required placeholder="Password">
+
+        <br><br>
+
+        <label for="gender">Gender:</label>
+        <input type="radio" name="gender" id="male" value="male">
+        <label for="male">Male</label>
+        <input type="radio" name="gender" id="female" value="female">
+        <label for="female">Female</label>
+
+        <br><br>
+
+        <select name="country" id="country">
+            <option>Select an option</option>
+            <option value="india">India</option>
+            <option value="bangladesh">Bangladesh</option>
+        </select>
+
+        <br><br>
+
+        <label for="message">Message:</label><br>
+        <textarea name="message" id="message" cols="30" rows="4"></textarea><br><br>
+        <input type="checkbox" name="newsletter" id="newsletter">
+        <label for="newsletter">Subscribe?</label>
+        <input type="submit" value="Login!">
+
+        <br><br>
+
+        <h2>Click to Add Timestamp</h2>
+        <button onclick="addTimestamp()">Add Timestamp</button>
+        <ol id="timestampList"></ol>
+
+        <p id="text-text">
+            This is the default serif font. It is commonly used in
+            printed media for better readability, since letters
+            are more distinct in serif fonts.
+            <br><br>
+        </p>
+
+        <br><br>
+        <a href="#top">Go to the top</a>
+
+    </form>
+
+</body>
+<script type="text/javascript" src="myjs.js"></script>
+
+</html>

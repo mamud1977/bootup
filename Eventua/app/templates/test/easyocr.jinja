@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Easy OCR{% endblock %}
+
+{% block content %}
+<h2>Easy OCR </h2>
+
+<div id="fileinput">
+
+    <form method="post" action="/test/easyocr">
+      <label for="filename">Enter filename:</label>
+      <input id="filename" name="filename" type="text" placeholder="example.jpeg" />
+      <button type="submit" class="btn">Fetch</button>
+    </form>
+</div>
+
+{% if response %}
+<div id="result"> {{ response }} </div>
+{% endif %}
+
+{% if result %}
+<div id="result"> {{ result }} </div>
+{% endif %}
+
+{% if error_message %}
+<div id="error_message"> {{ error_message }} </div>
+{% endif %}
+
+{% endblock %}

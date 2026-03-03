@@ -1,20 +1,41 @@
 wsl
-=======================================
-Virtual Environment:
------------------------
+
+######  Virtual Environment:
 
 cd /mnt/c/MyWork/
 python3 -m venv .venv
 source .venv/bin/activate
 deactivate
 
+###### env setup for Windows
+
+python -m venv .venv
+.venv\Scripts\activate.bat
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+
+cd C:\MyWork\gitlocal\bootup\
+python3 -m venv .venv
+source .venv/bin/activate
+.venv/bin/python -m pip install --upgrapythde pip
+pip install -r requirements.txt
+
+
+
 =======================================
 
-cd 
+cd /mnt/c/Users/mamud/Downloads
 cd /mnt/c/MyWork/gitlocal/bootup/Azure/
 cd /mnt/c/MyWork/gitlocal/bootup/Python/
 cd /mnt/c/MyWork/gitlocal/bootup/Python/Flask
+cd /mnt/c/MyWork/gitlocal/bootup/FastApi
 cd /mnt/c/MyWork/gitlocal/bootup/Apache/PySpark
+cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure
+cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure/apps/func-apps-v1
+cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure/apps/func-apps-v2
+cd /mnt/c/MyWork/gitlocal/bootup/Terraform/Azure/infra
+cd /mnt/c/MyWork/gitlocal/bootup/Terraform/snowflake
+
 
 =======================================
 
@@ -23,6 +44,7 @@ pip install -r /mnt/c/MyWork/gitlocal/bootup/Python/requirements.txt
 pip uninstall Flask
 pip freeze > requirements.txt
 
+python -c "import azure.functions as af; print('FunctionApp available'); import pkg_resources; print('Version:', pkg_resources.get_distribution('azure-functions').version)"
 
 ---------------------------------
 Steps to generate GitHub token:

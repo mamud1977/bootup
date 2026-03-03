@@ -1,0 +1,79 @@
+name: Deploy Azure Functions in v2 model
+
+on:
+  push:
+    branches:
+      - main
+      - branch1
+    paths:
+      - 'Terraform/Azure/apps/dataenrichment_v2/**'
+
+defaults:
+  run:
+    working-directory: ./Terraform/Azure/apps/dataenrichment_v2
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      AZURE_CREDENTIALS     : ${{ secrets.AZURE_CREDENTIALS }}
+      FUNCTIONAPP_NAME      : ${{ secrets.AZURE_FUNCTION_APP_V2 }}
+      FUNCTIONAPP_PATH      : ./Terraform/Azure/apps/dataenrichment_v2
+      AZURE_RG              : ${{ secrets.AZURE_RG }}
+      AZURE_SUBSCRIPTION_ID : ${{ secrets.ARM_SUBSCRIPTION_ID }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Load secrets
+      run: |
+        echo "FUNCTIONAPP_NAME      = $FUNCTIONAPP_NAME"
+        echo "FUNCTIONAPP_PATH      = $FUNCTIONAPP_PATH"
+        echo "AZURE_RG              = $AZURE_RG"
+        echo "AZURE_SUBSCRIPTION_ID = $AZURE_SUBSCRIPTION_ID"
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    
+    - name: Validate function_app.py discovery
+      run: |
+        python -c "import function_app"
+        grep '@app.function_name' function_app.py || (echo 'Missing @function_name decorator!' && exit 1)
+
+
+    - name: Zip function app
+      run: zip -r dataenrichment_v2.zip .
+
+    - name: Verify zip location
+      run: |
+        echo "Listing contents of current directory:"
+        ls -la
+        echo "Searching for function.zip recursively:"
+        find . -name "function.zip"
+    
+    - name: Inspect contents of zip
+      run: unzip -l dataenrichment_v2.zip
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy to Azure Function App
+      uses: azure/functions-action@v1
+      with:
+        app-name: ${{ env.FUNCTIONAPP_NAME }}
+        package: ${{ env.FUNCTIONAPP_PATH }}/dataenrichment_v2.zip
+        slot-name: 'production'
+
+    - name: Smoke test function endpoint
+      run: |
+        curl -s -o /dev/null -w "%{http_code}" https://${{ env.FUNCTIONAPP_NAME }}.azurewebsites.net/api/getCustNumber

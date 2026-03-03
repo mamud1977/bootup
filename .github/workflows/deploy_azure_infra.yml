@@ -1,0 +1,56 @@
+name: Deploy Azure Infra
+
+on:
+  push:
+    branches:
+      - main
+      - branch1
+    paths:
+      - 'Terraform/Azure/infra/**'
+
+defaults:
+  run:
+    working-directory: ./Terraform/Azure/infra
+
+
+jobs:
+  terraform:
+    name: Terraform Apply
+    runs-on: ubuntu-latest
+
+    env:
+      ARM_TENANT_ID:       ${{ secrets.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_CLIENT_ID:       ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET:   ${{ secrets.ARM_CLIENT_SECRET }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Azure Auth Details
+        run: env | grep ARM_
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Terraform Init
+        run: terraform init -upgrade
+
+      - name: Show Terraform Providers
+        run: terraform providers
+
+      - name: Terraform Plan
+        run: terraform plan -var-file="dev.tfvars" -out=tfplan
+      
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
+      
+      - name: Terraform Outputs
+        run: terraform output
+
+
+        
+        

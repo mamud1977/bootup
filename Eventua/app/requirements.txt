@@ -1,0 +1,13 @@
+fastapi
+sqlalchemy
+uvicorn[standard]
+httptools
+pydantic
+pydantic[email]
+bcrypt==4.0.1
+passlib
+python-jose
+python-multipart
+Jinja2
+python-magic
+pytest

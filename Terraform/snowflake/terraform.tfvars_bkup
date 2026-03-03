@@ -1,0 +1,4 @@
+snowflake_account           = "nknjudu-pv34592"
+snowflake_username          = "Githubaction"
+snowflake_role              = "SYSADMIN"
+snowflake_private_key_path  = "/mnt/c/MyWork/gitlocal/bootup/terraform/snowflake/rsa_key.pvt"

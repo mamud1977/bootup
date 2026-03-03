@@ -1,0 +1,52 @@
+name: Deploy Azure Web App
+
+on:
+  push:
+    branches:
+      - main
+      - branch1
+    paths:
+      - 'Terraform/Azure/sandbox/app-service/**'
+
+defaults:
+  run:
+    working-directory: ./Terraform/Azure/sandbox/app-service
+    
+jobs:
+  terraform:
+    name: Terraform Apply
+    runs-on: ubuntu-latest
+
+    env:
+      subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      tenant_id:       ${{ secrets.ARM_TENANT_ID }}
+      client_id:       ${{ secrets.ARM_CLIENT_ID }}
+      client_secret:   ${{ secrets.ARM_CLIENT_SECRET }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: List files in repository
+        run: ls -la ${{ github.workspace }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+        env:   
+          subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          tenant_id:       ${{ secrets.ARM_TENANT_ID }}
+          client_id:       ${{ secrets.ARM_CLIENT_ID }}
+          client_secret:   ${{ secrets.ARM_CLIENT_SECRET }}
+       
+          
+      - name: Terraform Apply
+        run: terraform apply -auto-approve

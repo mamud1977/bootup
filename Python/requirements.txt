@@ -7,4 +7,8 @@ pytest==8.3.5
 pytest-xdist
 mock
 pydantic[email,timezone]
-pydantic_settings
+pyarrow
+fastparquet
+azure-storage-blob
+requests
+PyMuPDF
