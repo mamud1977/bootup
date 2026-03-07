@@ -54,3 +54,29 @@ variable "max_cfu" {
   type    = number
   default = 5
 }
+
+########################################################
+# Snowflake Source Connector for Apache Kafka:
+########################################################
+
+variable "snowflake_private_key" {
+  type      = string
+  sensitive = true
+}
+
+variable "snowflake_user" {
+  type = string
+}
+
+variable "snowflake_url" {
+  type = string
+}
+
+variable "aws_access_key" {
+  type = string
+}
+
+variable "aws_secret_access_key" {
+  type = string
+}
+
