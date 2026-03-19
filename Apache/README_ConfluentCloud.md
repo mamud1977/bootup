@@ -1,9 +1,9 @@
 cd C:\Users\Mamud\Downloads\confluent
 confluent login
 
->confluent version
+confluent version
 
->confluent login --prompt --save
+confluent login --prompt --save
 
 >confluent plugin install confluent-flink-quickstart
 
@@ -15,10 +15,10 @@ confluent environment create my-flink-env
 confluent environment list
 
 #Use the environment
-confluent environment use env-8d752r
+confluent environment use env-1y35pv
 
 #Delete an environment
-confluent environment delete env-3dk9nw
+confluent environment delete env-7d7rdj
 
 ####### Kafka Cluster ##############
 #Create a Kafka cluster
@@ -40,7 +40,7 @@ confluent kafka cluster create sql-cluster --cloud aws --region us-east-1 --type
 confluent kafka cluster list
 
 #Use a specific cluster
-confluent kafka cluster use lkc-o05dzx
+confluent kafka cluster use lkc-5k266n
 
 #Describe the Schema Registry cluster for your environment:
 confluent schema-registry cluster describe
@@ -126,6 +126,17 @@ describe extended events;
 
 
 
+####### Confluent Kafka Topic ##############
+
+JZIXWXS6MUTJCVU4
+
+cfltQqdNQ2KMcoRLzkT7b07lEwOE/Xcn12GGUKoIZwgg1u6UOn5qC7JninriexPg
+
+confluent api-key store JZIXWXS6MUTJCVU4 cfltQqdNQ2KMcoRLzkT7b07lEwOE/Xcn12GGUKoIZwgg1u6UOn5qC7JninriexPg 
+
+confluent api-key use JZIXWXS6MUTJCVU4
+
+confluent kafka topic consume --from-beginning inventories
 
 
 

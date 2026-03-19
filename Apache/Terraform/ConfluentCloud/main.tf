@@ -297,7 +297,7 @@ resource "confluent_connector" "s3_sink" {
 
     "connector.class" = "S3_SINK"
 
-    "topics.regex" = "snowflake-.*"
+    "topics.regex" = "snowflake-TESTDB.TESTSCHEMA1.EVENTS"
 
     "s3.bucket.name" = "my-kafka-s3-bucket-1234512345"
     "s3.region"      = var.region
