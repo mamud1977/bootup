@@ -1,0 +1,37 @@
+{
+  "type": "record",
+  "name": "orders",
+  "namespace": "com.testdb",
+  "doc": "Schema for the orders table in the unified event topic",
+  "fields": [
+    {
+      "name": "order_id",
+      "type": "string",
+      "doc": "Unique identifier for the order"
+    },
+    {
+      "name": "customer_id",
+      "type": "int",
+      "doc": "ID of the customer placing the order"
+    },
+    {
+      "name": "total_amount",
+      "type": "double",
+      "doc": "Total price of the transaction"
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "default": "INR",
+      "doc": "Currency code for the transaction"
+    },
+    {
+      "name": "updated_at",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Timestamp for Snowflake change tracking"
+    }
+  ]
+}
