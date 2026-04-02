@@ -1,1 +1,11 @@
 
+name: Practice Workflow
+on: push
+jobs:
+  builds:
+    name: Hello World Action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ./action-a
+        MY_NAME: "Mamud"
