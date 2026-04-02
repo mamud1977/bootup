@@ -2,7 +2,7 @@
 name: Practice Workflow
 on: push
 jobs:
-  builds:
+  build:
     name: Hello World Action
     runs-on: ubuntu-latest
     steps:
