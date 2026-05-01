@@ -1,0 +1,5 @@
+fastapi
+uvicorn[standard]
+confluent-kafka
+confluent-kafka[avro]>=2.3
+certifi
