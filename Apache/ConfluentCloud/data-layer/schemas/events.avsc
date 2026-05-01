@@ -1,0 +1,18 @@
+{
+  "type": "record",
+  "name": "events",
+  "namespace": "com.testdb",
+  "doc": "Schema for the events table in the unified event topic",
+  "fields": [
+    {
+      "name": "event_id",
+      "type": "string",
+      "doc": "Unique identifier for the event"
+    },
+    {
+      "name": "event_name",
+      "type": "string",
+      "doc": "identifier for the event name"
+    }
+  ]
+}
