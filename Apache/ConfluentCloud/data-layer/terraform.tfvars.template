@@ -1,0 +1,23 @@
+############################################
+# data : terraform.tfvars
+############################################
+
+environment_name = "dev"
+
+# Confluent Cloud credentials (sensitive)
+confluent_api_key    = <>
+confluent_api_secret = <>
+
+
+########################################################
+# Snowflake Source Connector for Apache Kafka:
+########################################################
+
+snowflake_user = "root1"
+
+snowflake_url = "https://zdycsie-xh82314.snowflakecomputing.com"
+
+snowflake_private_key = <>
+
+aws_access_key = <>
+aws_secret_access_key = <>

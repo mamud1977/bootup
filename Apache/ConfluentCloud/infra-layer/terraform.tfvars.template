@@ -1,0 +1,17 @@
+############################################
+# infra : terraform.tfvars
+############################################
+
+# Confluent Cloud credentials (sensitive)
+confluent_api_key    = <>
+confluent_api_secret = <>
+
+# Environment & Kafka cluster
+environment_name = "dev"
+cluster_name     = "dev-cluster"
+cloud            = "AWS"
+region           = "us-east-1"
+
+# Flink compute pool
+flink_compute_pool_name = "my-flink-pool"
+max_cfu                 = 5
