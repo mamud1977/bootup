@@ -1,3 +1,7 @@
+############################################
+# infra : variables.tf
+############################################
+
 variable "confluent_api_key" {
   description = "Confluent Cloud API Key"
   type        = string
@@ -30,20 +34,6 @@ variable "region" {
   default = "us-east-1"
 }
 
-variable "topic_name" {
-  type    = string
-  default = "orders-topic"
-}
-
-variable "topic_partitions" {
-  type    = number
-  default = 3
-}
-
-variable "topic_retention_ms" {
-  type    = string
-  default = "604800000"
-}
 
 variable "flink_compute_pool_name" {
   type    = string
@@ -53,30 +43,5 @@ variable "flink_compute_pool_name" {
 variable "max_cfu" {
   type    = number
   default = 5
-}
-
-########################################################
-# Snowflake Source Connector for Apache Kafka:
-########################################################
-
-variable "snowflake_private_key" {
-  type      = string
-  sensitive = true
-}
-
-variable "snowflake_user" {
-  type = string
-}
-
-variable "snowflake_url" {
-  type = string
-}
-
-variable "aws_access_key" {
-  type = string
-}
-
-variable "aws_secret_access_key" {
-  type = string
 }
 
