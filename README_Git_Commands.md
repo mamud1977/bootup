@@ -11,6 +11,11 @@ git config --global user.email "mail2mamud.com"
 
 code .
 
----------------
+# Git Commit
+
 git add .
+git status
+git commit -m "Added README_Git_Commands.md"
+git push
+
 
