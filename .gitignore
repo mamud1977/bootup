@@ -48,18 +48,18 @@ __blobstorage__
 __queuestorage__
 __azurite_db*__.json
 
-.env
 .terraform/
 .terraform.*
 terraform.tfstate
 terraform.tfstate.*
 tfplan
+.tfvars
 .private
 .public
 rsa_key
 rsa_key.pub
 *.pvt
-.venv
+
 
 *.code-workspace
 .vscode

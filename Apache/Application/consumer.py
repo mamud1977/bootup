@@ -1,6 +1,13 @@
 from confluent_kafka import Consumer
+from confluent_kafka.schema_registry import SchemaRegistryClient
+from confluent_kafka.schema_registry.avro import AvroDeserializer
+from confluent_kafka.serialization import SerializationContext, MessageField
+
 import os
-import json
+
+# ============================================================
+# Kafka configuration
+# ============================================================
 
 conf = {
     'bootstrap.servers': os.getenv("KAFKA_BOOTSTRAP_SERVERS"),
@@ -11,6 +18,31 @@ conf = {
     'group.id': 'orders-consumer-group',
     'auto.offset.reset': 'earliest'
 }
+
+# ============================================================
+# Schema Registry configuration
+# ============================================================
+
+sr_conf = {
+    "url": os.getenv("SCHEMA_REGISTRY_URL"),
+    "basic.auth.user.info": (
+        f"{os.getenv('SCHEMA_REGISTRY_API_KEY')}:"
+        f"{os.getenv('SCHEMA_REGISTRY_API_SECRET')}"
+    )
+}
+
+sr_client = SchemaRegistryClient(sr_conf)
+
+# ============================================================
+# Avro Deserializer
+# ============================================================
+
+avro_deserializer = AvroDeserializer(sr_client)
+
+
+# ============================================================
+# Kafka Consumer
+# ============================================================
 
 consumer = Consumer(conf)
 topic = "orders-topic"
@@ -30,8 +62,17 @@ try:
             print("Error:", msg.error())
             continue
 
-        value = msg.value().decode("utf-8")
-        order = json.loads(value)
+        # ====================================================
+        # Deserialize Avro message
+        # ====================================================
+
+        order = avro_deserializer(
+            msg.value(),
+            SerializationContext(
+                msg.topic(),
+                MessageField.VALUE
+            )
+        )
 
         print("Received:", order)
 

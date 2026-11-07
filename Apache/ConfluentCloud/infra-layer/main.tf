@@ -16,9 +16,9 @@ provider "confluent" {
   cloud_api_secret = var.confluent_api_secret
 
   # Explicitly unset Kafka credentials to satisfy Terraform
-  kafka_api_key       = null
-  kafka_api_secret    = null
-  kafka_rest_endpoint = null
+#  kafka_api_key       = null
+#  kafka_api_secret    = null
+#  kafka_rest_endpoint = null
 }
 
 ###########################################################
@@ -79,8 +79,8 @@ resource "confluent_service_account" "sa" {
 # SERVICE ACCOUNTS - API KEYS
 ###########################################################
 
-resource "confluent_api_key" "kafka_cluster_key_sa" {
-  display_name = "${var.environment_name}-kafka-key"
+resource "confluent_api_key" "sa_api_key" {
+  display_name = "${var.environment_name}-sa_api_key"
 
   owner {
     id          = confluent_service_account.sa.id
@@ -103,11 +103,18 @@ resource "confluent_api_key" "kafka_cluster_key_sa" {
 # SERVICE ACCOUNTS - ROLE BINDINGS
 ###########################################################
 
-resource "confluent_role_binding" "cluster_writer" {
+resource "confluent_role_binding" "developer_write" {
   principal   = "User:${confluent_service_account.sa.id}"
   role_name   = "DeveloperWrite"
-  crn_pattern = "${confluent_kafka_cluster.cluster.rbac_crn}/kafka=${confluent_kafka_cluster.cluster.id}"
+  crn_pattern = "${confluent_kafka_cluster.cluster.rbac_crn}/kafka=${confluent_kafka_cluster.cluster.id}/topic=*"
 }
+
+resource "confluent_role_binding" "developer_read" {
+  principal   = "User:${confluent_service_account.sa.id}"
+  role_name   = "DeveloperRead"
+  crn_pattern = "${confluent_kafka_cluster.cluster.rbac_crn}/kafka=${confluent_kafka_cluster.cluster.id}/topic=*"
+}
+
 
 resource "confluent_role_binding" "topic_manager" {
   principal = "User:${confluent_service_account.sa.id}"
@@ -119,6 +126,12 @@ resource "confluent_role_binding" "schema_registry_resource_owner" {
   principal   = "User:${confluent_service_account.sa.id}"
   role_name   = "ResourceOwner"
   crn_pattern = "${data.confluent_schema_registry_cluster.sr.resource_name}/subject=*"
+}
+
+resource "confluent_role_binding" "consumer_group" {
+  principal   = "User:${confluent_service_account.sa.id}"
+  role_name   = "DeveloperRead"
+  crn_pattern = "${confluent_kafka_cluster.cluster.rbac_crn}/kafka=${confluent_kafka_cluster.cluster.id}/group=*"
 }
 
 # Grant the SA permission to manage all snowflake topics
@@ -147,8 +160,8 @@ resource "confluent_service_account" "sa_cluster_admin" {
 # SERVICE ACCOUNTS for CLUSTER ADMIN - API KEYS
 ###########################################################
 
-resource "confluent_api_key" "kafka_cluster_key_admin_sa" {
-  display_name = "${var.environment_name}-cluster-admin-key"
+resource "confluent_api_key" "sa_cluster_admin_api_key" {
+  display_name = "${var.environment_name}-sa_cluster_admin_api_key"
 
   owner {
     id          = confluent_service_account.sa_cluster_admin.id
@@ -195,7 +208,7 @@ data "confluent_schema_registry_cluster" "sr" {
 # SCHEMA REGISTRY - API KEY
 ###########################################################
 
-resource "confluent_api_key" "sr_key" {
+resource "confluent_api_key" "schema_registry_key" {
   display_name = "${var.environment_name}-sr-key"
 
   owner {
@@ -250,41 +263,44 @@ output "kafka_rest_endpoint" {
   value = confluent_kafka_cluster.cluster.rest_endpoint
 }
 
+
+################ Credentials (Sensitive)
+output "sa_api_key" {
+  value     = confluent_api_key.sa_api_key.id
+  sensitive = true
+}
+
+output "sa_api_secret" {
+  value     = confluent_api_key.sa_api_key.secret
+  sensitive = true
+}
+
+output "sa_cluster_admin_api_key" {
+  value     = confluent_api_key.sa_cluster_admin_api_key.id
+  sensitive = true
+}
+
+output "sa_cluster_admin_api_secret" {
+  value     = confluent_api_key.sa_cluster_admin_api_key.secret
+  sensitive = true
+}
+
+################ Schema Registry
+
 output "schema_registry_endpoint" {
   description = "The URL for the Schema Registry"
   value       = data.confluent_schema_registry_cluster.sr.rest_endpoint
 }
 
-################ Credentials (Sensitive)
-output "kafka_api_key" {
-  value     = confluent_api_key.kafka_cluster_key_sa.id
-  sensitive = true
-}
-
-output "kafka_api_secret" {
-  value     = confluent_api_key.kafka_cluster_key_sa.secret
-  sensitive = true
-}
-
-output "kafka_admin_api_key" {
-  value     = confluent_api_key.kafka_cluster_key_admin_sa.id
-  sensitive = true
-}
-
-output "kafka_admin_api_secret" {
-  value     = confluent_api_key.kafka_cluster_key_admin_sa.secret
-  sensitive = true
-}
-
 output "schema_registry_api_key" {
   description = "SR API Key for the Service Account"
-  value       = confluent_api_key.sr_key.id
+  value       = confluent_api_key.schema_registry_key.id
   sensitive   = true
 }
 
 output "schema_registry_api_secret" {
   description = "SR API Secret for the Service Account"
-  value       = confluent_api_key.sr_key.secret
+  value       = confluent_api_key.schema_registry_key.secret
   sensitive   = true
 }
 

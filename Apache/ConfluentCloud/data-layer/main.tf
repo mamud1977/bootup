@@ -16,8 +16,8 @@ provider "confluent" {
   cloud_api_key    = var.confluent_api_key
   cloud_api_secret = var.confluent_api_secret
 
-  kafka_api_key       = data.terraform_remote_state.infra.outputs.kafka_api_key
-  kafka_api_secret    = data.terraform_remote_state.infra.outputs.kafka_api_secret
+  kafka_api_key       = data.terraform_remote_state.infra.outputs.sa_api_key
+  kafka_api_secret    = data.terraform_remote_state.infra.outputs.sa_api_secret
   kafka_rest_endpoint = data.terraform_remote_state.infra.outputs.kafka_rest_endpoint
 }
 
@@ -36,7 +36,7 @@ data "terraform_remote_state" "infra" {
 ############# 1:1 topic
 
 resource "confluent_kafka_topic" "topic-orders" {
-  topic_name       = "topic-orders"
+  topic_name       = "orders-topic"
   partitions_count = 3
 
   config = {
@@ -110,11 +110,10 @@ resource "confluent_schema" "events" {
 
 }
 
-
 ############################################
 # SNOWFLAKE SOURCE CONNECTOR
 ############################################
-
+/*
 resource "confluent_connector" "snowflake_source" {
 
   environment {
@@ -178,3 +177,4 @@ resource "confluent_connector" "snowflake_source" {
   }
 }
 
+*/
