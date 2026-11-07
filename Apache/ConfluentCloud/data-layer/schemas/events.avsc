@@ -13,14 +13,6 @@
       "name": "event_name",
       "type": "string",
       "doc": "identifier for the event name"
-    },
-    {
-      "name": "updated_at",
-      "type": {
-        "type": "long",
-        "logicalType": "timestamp-millis"
-      },
-      "doc": "Timestamp for Snowflake change tracking"
     }
   ]
 }

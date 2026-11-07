@@ -22,7 +22,7 @@ variable "confluent_api_secret" {
 ########################################################
 # Snowflake Source Connector for Apache Kafka:
 ########################################################
-
+/*
 variable "snowflake_private_key" {
   type      = string
   sensitive = true
@@ -44,3 +44,4 @@ variable "aws_secret_access_key" {
   type = string
 }
 
+*/
